@@ -1,0 +1,24 @@
+.main {
+}
+.main > ul {
+  display: flex;
+  list-style: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: cyan;
+}
+.main > ul > li {
+  padding: 2vh;
+  color: white;
+  text-align: center;
+  font-size: 1.7rem;
+  max-height: initial;
+  background-color: rgb(206, 128, 27);
+  width: 100%;
+}
+.main > ul > li:hover,
+.main > ul > li:active {
+  cursor: pointer;
+  color: rgb(93, 110, 13);
+}

@@ -1,0 +1,21 @@
+.main {
+  background: url("/public/wood.jpg");
+  height: 100vh;
+  color: white;
+  display: flex;
+
+  flex-direction: column;
+}
+.messagesdiv {
+  padding: 0 1vw;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Mobile Styles */
+.mobchatroom {
+  display: none;
+}

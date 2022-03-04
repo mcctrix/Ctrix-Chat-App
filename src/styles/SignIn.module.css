@@ -1,0 +1,106 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url("/public/nature.jpg");
+  background-size: 100% 100%;
+  background-position: top left;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+.formdiv {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+  align-items: center;
+  padding: 10vh 6vw 12vh;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.form > h1 {
+  color: white;
+  font-weight: 400;
+}
+.inputfield {
+  width: 35vw;
+  height: 2rem;
+  font-size: 6vh;
+  font-weight: 450;
+  padding: 2vh 10px;
+  background-color: transparent;
+  border: none;
+  color: white;
+  border-bottom: 1px solid white;
+  margin-top: 3vh;
+  margin-bottom: 2vh;
+  outline: none;
+}
+.inputfield::placeholder {
+  color: white;
+}
+.inputfield:hover,
+.inputfield:focus {
+  border: 1px solid white;
+}
+.subbtn,
+.googlelogin {
+  margin-bottom: 20px;
+  height: 3rem;
+  font-size: 1.5rem;
+  width: 100%;
+  border: none;
+  border-radius: 25px;
+  padding: 2px 3vw;
+  outline: none;
+  color: rgba(255, 255, 255, 1);
+  background: rgb(211, 124, 16);
+  background: linear-gradient(
+    90deg,
+    rgba(211, 124, 16, 1) 86%,
+    rgba(211, 127, 16, 0.9220063025210083) 79%
+  );
+}
+
+.subbtn:hover,
+.googlelogin:hover,
+.subbtn:focus,
+.googlelogin:focus {
+  cursor: pointer;
+  font-size: 1.7rem;
+}
+.googlelogin {
+  color: rgb(6, 114, 156);
+  background: none;
+  background-color: white;
+}
+
+/* Media Query */
+@media only screen and (min-width: 601px) {
+  .main {
+    padding: 15vh 0;
+  }
+}
+
+/* Mobile Media Query */
+@media only screen and (max-width: 600px) {
+  .main {
+    padding-top: 10px;
+    height: 100vh;
+  }
+  .form > input {
+    width: 70vw;
+  }
+}
+
+/* Sign up page */
+
+.warning {
+  color: white;
+  position: relative;
+  margin: 0;
+}

@@ -1,0 +1,44 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 100vh;
+  width: 25vw;
+}
+.addbutton {
+  position: absolute;
+  bottom: 2vh;
+  right: 2vw;
+  border: none;
+  background-color: white;
+}
+.addbutton:hover,
+.addbutton:active {
+  cursor: pointer;
+  border: 1px solid rgb(211, 127, 16);
+}
+.addchatdiv {
+  position: relative;
+}
+.addchat {
+  position: fixed;
+  right: 10vw;
+}
+
+/* Media Query */
+@media only screen and (max-width: 830px) {
+  .addbutton {
+    display: none;
+  }
+  .main {
+    width: auto;
+  }
+}
+
+/* Mobile Styles */
+.mobSidebar {
+  width: 100vw;
+}
+.mobchatopen {
+  display: none;
+}

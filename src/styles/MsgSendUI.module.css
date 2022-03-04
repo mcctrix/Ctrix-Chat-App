@@ -1,0 +1,43 @@
+.sentmsgform {
+  display: flex;
+  height: 7%;
+  background-color: rgb(141, 86, 14);
+  align-items: center;
+  padding: 5px;
+}
+.sentmsgform > input {
+  padding: 1vh 1vw;
+  font-size: 4vh;
+  width: 90%;
+  border-radius: 20px;
+  outline: none;
+}
+
+.sentmsgform > button {
+  /* width: 10vw; */
+  border-radius: 20px;
+  font-size: 4vh;
+  padding: 1vh 2vw;
+  background-color: chocolate;
+  color: white;
+  border: none;
+  z-index: 4;
+}
+.sentmsgform > button:hover {
+  cursor: pointer;
+  background-color: cadetblue;
+}
+
+/* Media query */
+
+@media only screen and (max-width: 600px) {
+  .sentmsgform > button {
+    font-size: 1.7rem;
+  }
+  .sentmsgform > input {
+    padding-left: 1rem;
+  }
+  .sentmsgform > input {
+    width: 85%;
+  }
+}

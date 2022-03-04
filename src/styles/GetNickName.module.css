@@ -1,0 +1,43 @@
+.main {
+  z-index: 10;
+  position: fixed;
+  width: 50vw;
+  background-color: rgb(141, 86, 14);
+  top: 30vh;
+  left: 20vw;
+  padding: 2vh 4vw 4vh;
+  border-radius: 60px;
+}
+.main > h1 {
+  color: white;
+  text-align: center;
+  font-size: 1.6rem;
+}
+.main > form {
+  display: flex;
+  flex-direction: column;
+}
+.main > form > label {
+  color: white;
+  font-size: 5vh;
+  margin-bottom: 2vh;
+}
+.main > form > input {
+  padding: 4px 5px;
+  width: 70%;
+  height: 4vh;
+  outline: none;
+  font-size: 4vh;
+}
+.main > form > button {
+  border-radius: 25px;
+  border: none;
+  font-size: 1.7rem;
+  outline: none;
+  width: 12vw;
+  margin-top: 3vh;
+}
+.main > form > button:active,
+.main > form > button:focus {
+  cursor: pointer;
+}

@@ -1,0 +1,78 @@
+.main {
+  background-color: rgb(141, 86, 14);
+  /* background-color: aqua; */
+  /* height: 10vh; */
+  /* width: 100%; */
+  border-right: 1px dashed white;
+  display: flex;
+  padding: 12px 5px 10px 15px;
+  justify-content: space-between;
+  align-items: center;
+}
+.imgnamediv {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 1vw;
+}
+.userimage {
+  width: auto;
+  border-radius: 30px;
+  height: 7vh;
+}
+.title {
+  color: white;
+  margin: 0;
+  font-size: 4vh;
+}
+.backbuttondiv {
+  border: none;
+  background: none;
+}
+.backbuttondiv:hover,
+.backbuttondiv:active {
+  cursor: pointer;
+}
+.dropdown {
+  display: none;
+  background-color: white;
+  position: absolute;
+  right: 15px;
+  box-shadow: 0px 0.3px 2.8px rgba(0, 0, 0, 0.031),
+    0px 0.8px 6.5px rgba(0, 0, 0, 0.044), 0px 1.5px 11.6px rgba(0, 0, 0, 0.054),
+    0px 2.4px 19.3px rgba(0, 0, 0, 0.063), 0px 4px 31.7px rgba(0, 0, 0, 0.074),
+    0px 6.9px 55.5px rgba(0, 0, 0, 0.088), 0px 15px 120px rgba(0, 0, 0, 0.12);
+}
+.dropdownlist {
+  right: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.dropdownlist > li {
+  padding: 5px 15px;
+  cursor: default;
+  border-top: 1px solid black;
+}
+.dropdownlist > li:hover,
+.dropdownlist > li:active {
+  background-color: burlywood;
+}
+.showmenu {
+  display: block;
+}
+
+/* .options {
+  color: rgb(0, 0, 0);
+} */
+@media only screen and (min-width: 601px) and (max-width: 830px) {
+  /* .title {
+    display: none;
+  }
+  .userimage {
+    display: none;
+  } */
+  .main {
+    display: none;
+  }
+}

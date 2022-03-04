@@ -1,0 +1,20 @@
+.message {
+  width: max-content;
+  margin: 2vh 0;
+  padding: 1vh 1vw;
+  font-size: 1.1rem;
+  background-color: white;
+  color: black;
+  border-radius: 25px;
+}
+.msgalignright {
+  align-self: flex-end;
+  background-color: rgb(141, 86, 14);
+  color: white;
+}
+/* Media query */
+@media only screen and (max-width: 600px) {
+  .message {
+    font-size: 1.2rem;
+  }
+}

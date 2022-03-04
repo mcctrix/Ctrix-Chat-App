@@ -1,0 +1,23 @@
+.header {
+  display: flex;
+  background-color: rgb(141, 86, 14);
+  color: white;
+  align-items: center;
+}
+.backbtn {
+  margin-left: 2vw;
+}
+.username {
+  font-size: 1.2rem;
+}
+.userimage {
+  width: auto;
+  height: 6vh;
+  margin: 0 8px;
+  border-radius: 30px;
+}
+/* @media only screen and (max-width: 830px) {
+  .header {
+    display: none;
+  }
+} */
