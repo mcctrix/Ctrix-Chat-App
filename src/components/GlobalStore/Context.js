@@ -2,8 +2,6 @@ import { createContext, useState } from "react";
 
 const AppContext = createContext();
 
-const GF = "1usEj0XmGBRlfUKnkYaHaBCgbqCpJgmM";
-
 export const ContextWrapper = (props) => {
   // Current User Data
   const [Current_UserID, setCurrent_UserID] = useState("");

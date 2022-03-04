@@ -1,6 +1,5 @@
 import { useEffect, useContext, useRef } from "react";
 
-import { getFirestore, setDoc, doc, serverTimestamp } from "firebase/firestore";
 import useDevice from "./Custom_hooks/useDevice";
 
 // UI and styles

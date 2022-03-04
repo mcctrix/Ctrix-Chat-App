@@ -3,7 +3,7 @@ import { v4 as uuid } from "uuid";
 
 import AppContext from "../../../GlobalStore/Context";
 
-import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
 
 export default function AddChatPerson(props) {
   const context = useContext(AppContext);

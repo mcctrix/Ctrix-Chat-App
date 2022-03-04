@@ -58,7 +58,6 @@ export default function SignUp() {
               type="password"
               ref={passwordRef}
               minlength="6"
-              required
               className={styles.inputfield}
             />
             {wrongPasswd && (

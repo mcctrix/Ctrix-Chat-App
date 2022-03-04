@@ -13,7 +13,7 @@ export default function GetNickName() {
   const [UserID, setUserID] = useState("");
   const NameRef = useRef();
 
-  if (UserID == "") {
+  if (UserID === "") {
     onAuthStateChanged(getAuth(), (user) => {
       if (user) {
         setUserID(user.uid);

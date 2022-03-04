@@ -23,6 +23,7 @@ export default function Signin() {
         Navigate("/main");
       }
     });
+    // eslint-disable-next-line
   }, [auth]);
   const NavToSignUp = () => {
     Navigate("/signup");

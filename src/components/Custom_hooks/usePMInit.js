@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useContext } from "react";
 
 import {
   onSnapshot,
@@ -15,10 +15,10 @@ function usePMInit() {
   const context = useContext(AppContext);
   // const [PMInit, setPMInit] = useState([]);
 
-  // Ref
-  const colref = collection(db, "Private_Chat_init");
-
   useEffect(() => {
+    // Ref
+    const colref = collection(db, "Private_Chat_init");
+
     // Retrieving Private Chatroom details related to current user
     if (context.Current_UserName) {
       onSnapshot(
@@ -46,6 +46,7 @@ function usePMInit() {
         }
       );
     }
+    // eslint-disable-next-line
   }, [db, context.Current_UserName]);
   return null;
 }

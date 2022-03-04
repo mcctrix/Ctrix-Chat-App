@@ -52,8 +52,8 @@ export default function useInitialiseContextData() {
       }
     }
 
-    //
-  }, [loading, db, Current_UserID]);
+    // eslint-disable-next-line
+  }, [loading, db, Current_UserID, allUsersData, error]);
 
   return null;
 }
