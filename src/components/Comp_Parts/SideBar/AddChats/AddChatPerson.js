@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { v4 as uuid } from "uuid";
+import { isMobile } from "react-device-detect";
 
 import AppContext from "../../../GlobalStore/Context";
 
@@ -27,9 +28,11 @@ export default function AddChatPerson(props) {
         if (el[0] === props.user.User_ID) {
           return el[1];
         }
+        return false;
       });
-
-      context.setopenChat(true);
+      if (isMobile) {
+        context.setopenChat(true);
+      }
       context.setuserNameActiveChat(props.user.NickName);
       context.setnewPersonaddbtn(false);
       context.setactiveChat(ChatID[1]);
@@ -42,8 +45,10 @@ export default function AddChatPerson(props) {
       User1: { Name: props.user.NickName, ID: props.user.User_ID },
       User2: { Name: context.Current_UserName, ID: context.Current_UserID },
     });
+    if (isMobile) {
+      context.setopenChat(true);
+    }
     context.setnewPersonaddbtn(false);
-    context.setopenChat(true);
     context.setuserNameActiveChat(props.user.NickName);
     context.setactiveChat(ID);
   };

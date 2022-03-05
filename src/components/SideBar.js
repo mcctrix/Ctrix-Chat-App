@@ -30,7 +30,7 @@ export default function SideBar() {
 
   const CloseOptionsInSideBarHeader = (event) => {
     window.addEventListener("mouseup", () => {
-      if (event.target != "dropdownmenu") {
+      if (event.target !== "dropdownmenu") {
         context.setsideBarOptions(false);
       }
     });

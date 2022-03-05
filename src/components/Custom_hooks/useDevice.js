@@ -8,6 +8,9 @@ const useDeivce = () => {
   // const handleResize = () => {
   //   setWidth(window.innerWidth);
   // };
+  const setDevice = (val) => {
+    setIsMobile(val);
+  };
 
   useEffect(() => {
     // window.addEventListener("resize", handleResize);
@@ -15,10 +18,11 @@ const useDeivce = () => {
     //   window.addEventListener("resize", handleResize);
     // };
     if (isMobile) {
-      setIsMobile("Mobile");
+      setDevice("Mobile");
+      return;
     }
-    setIsMobile("Desktop");
-  });
+    setDevice("Desktop");
+  }, []);
   // if (width >= 600) {
   //   return "Desktop";
   // }
