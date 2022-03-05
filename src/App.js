@@ -21,7 +21,6 @@ const app = initializeApp(Cred);
 getAuth(app);
 
 export default function App() {
-  console.log();
   return (
     <div>
       <Routes>
