@@ -29,6 +29,7 @@ export default function AddChatPerson(props) {
         }
       });
 
+      context.setopenChat(true);
       context.setuserNameActiveChat(props.user.NickName);
       context.setnewPersonaddbtn(false);
       context.setactiveChat(ChatID[1]);
@@ -42,6 +43,7 @@ export default function AddChatPerson(props) {
       User2: { Name: context.Current_UserName, ID: context.Current_UserID },
     });
     context.setnewPersonaddbtn(false);
+    context.setopenChat(true);
     context.setuserNameActiveChat(props.user.NickName);
     context.setactiveChat(ID);
   };

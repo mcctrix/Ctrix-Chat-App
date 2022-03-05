@@ -1,11 +1,15 @@
 .main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   z-index: 10;
   position: fixed;
   width: 50vw;
   background-color: rgb(141, 86, 14);
   top: 30vh;
   left: 20vw;
-  padding: 2vh 4vw 4vh;
+  padding: 1rem;
   border-radius: 60px;
 }
 .main > h1 {
@@ -16,6 +20,7 @@
 .main > form {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 .main > form > label {
   color: white;
@@ -40,4 +45,16 @@
 .main > form > button:active,
 .main > form > button:focus {
   cursor: pointer;
+}
+@media screen and (max-width: 600px) {
+  .main {
+    width: 100vw;
+    left: 0;
+    top: 0;
+    border-radius: 0;
+    height: 100vh;
+  }
+  .main > form > button {
+    width: 7rem;
+  }
 }
