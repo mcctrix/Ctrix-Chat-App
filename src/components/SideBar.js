@@ -61,7 +61,7 @@ export default function SideBar() {
       </div>
 
       <div className={styles.chatroom}>
-        {context.privateChatInit ? (
+        {context.privateChatInit &&
           context.privateChatInit.map((data) => (
             <ChatModal
               key={
@@ -71,10 +71,7 @@ export default function SideBar() {
               }
               data={data}
             />
-          ))
-        ) : (
-          <p>Loading...</p>
-        )}
+          ))}
       </div>
 
       <button
