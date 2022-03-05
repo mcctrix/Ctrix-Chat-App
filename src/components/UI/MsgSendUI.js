@@ -44,7 +44,7 @@ export default function MsgSendUI(props) {
     <form onSubmit={SendMsg} className={styles.sentmsgform}>
       <div onClick={OpenGif}>
         <div className={styles.GifContainer}></div>
-        {openGif && <GiffsDiv />}
+        {/* {openGif && <GiffsDiv />} */}
         <GiffIcon />
       </div>
       <input placeholder="Type your message.." ref={NewMsgRef} />

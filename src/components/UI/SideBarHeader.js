@@ -14,11 +14,8 @@ export default function SideBarHeader(props) {
   const context = useContext(AppContext);
   const auth = getAuth();
 
-  // Hooks
-  const [dropDownShow, setdropDownShow] = useState(false);
-
   const showDropDown = () => {
-    setdropDownShow((snap) => !snap);
+    context.setsideBarOptions((snap) => !snap);
   };
 
   const SignOut = () => {
@@ -35,7 +32,7 @@ export default function SideBarHeader(props) {
     <div className={styles.main}>
       {props.id === "new" && (
         <button
-          onClick={() => props.setaddBtnClicked(false)}
+          onClick={() => context.setnewPersonaddbtn(false)}
           className={styles.backbuttondiv}
         >
           {props.id === "new" ? <BackIcon /> : null}
@@ -53,14 +50,14 @@ export default function SideBarHeader(props) {
         <DotIcon />
         <div
           className={`${styles.dropdown} ${
-            dropDownShow ? styles.showmenu : null
+            context.sideBarOptions ? styles.showmenu : null
           }`}
         >
-          <ul className={styles.dropdownlist}>
+          <ul className={styles.dropdownlist} id="dropdownmenu">
             <li onClick={SignOut}>Logout</li>
-            <li>Themes</li>
+            {/* <li>Themes</li>
             <li>Settings</li>
-            <li>Help</li>
+            <li>Help</li> */}
           </ul>
         </div>
       </div>

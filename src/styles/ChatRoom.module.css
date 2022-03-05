@@ -13,6 +13,10 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  scrollbar-width: none;
+}
+.messagesdiv::-webkit-scrollbar {
+  display: none;
 }
 
 /* Mobile Styles */

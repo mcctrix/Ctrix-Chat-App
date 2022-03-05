@@ -1,6 +1,6 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 
-// import usePMInit from "./Custom_hooks/usePMInit";
+import usePMInit from "./Custom_hooks/usePMInit";
 
 import AddIcon from "./UI/AddIcon";
 import styles from "../styles/SideBar.module.css";
@@ -15,12 +15,9 @@ import AppContext from "./GlobalStore/Context";
 
 export default function SideBar() {
   // Inits
-  // usePMInit();
+  usePMInit();
   const DEVICE = useDevice();
   const context = useContext(AppContext);
-
-  // Hooks
-  const [addBtnClicked, setaddBtnClicked] = useState(false);
 
   if (!context.activeChat && context.privateChatInit.length > 0) {
     context.setactiveChat(context.privateChatInit[0].ID);
@@ -31,14 +28,23 @@ export default function SideBar() {
     );
   }
 
-  if (addBtnClicked) {
+  const CloseOptionsInSideBarHeader = (event) => {
+    window.addEventListener("mouseup", () => {
+      if (event.target != "dropdownmenu") {
+        context.setsideBarOptions(false);
+      }
+    });
+  };
+
+  if (context.newPersonaddbtn) {
     return (
-      <div className={styles.main}>
-        <SideBarHeader
-          id="new"
-          setaddBtnClicked={setaddBtnClicked}
-          title="Add People"
-        />
+      <div
+        onClick={CloseOptionsInSideBarHeader}
+        className={`${styles.main} ${
+          DEVICE === "Mobile" && styles.mobSidebar
+        } ${context.openChat && styles.mobchatopen}`}
+      >
+        <SideBarHeader id="new" title="Add People" />
         <AddChats />
       </div>
     );
@@ -48,8 +54,11 @@ export default function SideBar() {
       className={`${styles.main} ${DEVICE === "Mobile" && styles.mobSidebar} ${
         context.openChat && styles.mobchatopen
       }`}
+      onClick={CloseOptionsInSideBarHeader}
     >
-      <SideBarHeader title={context.Current_UserName} />
+      <div className={styles.headerdiv}>
+        <SideBarHeader title={context.Current_UserName} />
+      </div>
 
       <div className={styles.chatroom}>
         {context.privateChatInit ? (
@@ -69,8 +78,10 @@ export default function SideBar() {
       </div>
 
       <button
-        onClick={() => setaddBtnClicked(true)}
-        className={styles.addbutton}
+        onClick={() => context.setnewPersonaddbtn(true)}
+        className={`${styles.addbutton} ${
+          context.newPersonaddbtn && styles.disnoneaddbtn
+        } `}
       >
         <AddIcon />
       </button>

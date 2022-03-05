@@ -1,24 +1,22 @@
-.main {
-}
 .main > ul {
   display: flex;
   list-style: none;
   width: 100%;
+  flex-direction: column;
   margin: 0;
   padding: 0;
   background-color: cyan;
 }
 .main > ul > li {
+  border-top: 1px solid white;
   padding: 2vh;
   color: white;
   text-align: center;
   font-size: 1.7rem;
-  max-height: initial;
   background-color: rgb(206, 128, 27);
-  width: 100%;
 }
 .main > ul > li:hover,
 .main > ul > li:active {
   cursor: pointer;
-  color: rgb(93, 110, 13);
+  background-color: rgb(175, 114, 34);
 }

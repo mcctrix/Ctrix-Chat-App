@@ -20,6 +20,12 @@ export const ContextWrapper = (props) => {
   // Current Acive chat 2nd username
   const [userNameActiveChat, setuserNameActiveChat] = useState();
 
+  // Add button clicked in side bar
+  const [newPersonaddbtn, setnewPersonaddbtn] = useState(false);
+
+  // Sidebar Header Options display
+  const [sideBarOptions, setsideBarOptions] = useState(false);
+
   // All User Data
   const [allUsersData, setallUserData] = useState();
 
@@ -58,6 +64,12 @@ export const ContextWrapper = (props) => {
 
         openChat,
         setopenChat,
+
+        sideBarOptions,
+        setsideBarOptions,
+
+        newPersonaddbtn,
+        setnewPersonaddbtn,
 
         privateChatInit,
         setprivateChatInit,

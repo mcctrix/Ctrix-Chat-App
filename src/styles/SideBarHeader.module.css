@@ -1,8 +1,5 @@
 .main {
   background-color: rgb(141, 86, 14);
-  /* background-color: aqua; */
-  /* height: 10vh; */
-  /* width: 100%; */
   border-right: 1px dashed white;
   display: flex;
   padding: 12px 5px 10px 15px;
@@ -10,6 +7,7 @@
   align-items: center;
 }
 .imgnamediv {
+  position: relative;
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -62,16 +60,7 @@
   display: block;
 }
 
-/* .options {
-  color: rgb(0, 0, 0);
-} */
 @media only screen and (min-width: 601px) and (max-width: 830px) {
-  /* .title {
-    display: none;
-  }
-  .userimage {
-    display: none;
-  } */
   .main {
     display: none;
   }

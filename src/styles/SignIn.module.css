@@ -89,11 +89,10 @@
 /* Mobile Media Query */
 @media only screen and (max-width: 600px) {
   .main {
-    padding-top: 10px;
     height: 100vh;
   }
-  .form > input {
-    width: 70vw;
+  .inputfield {
+    width: 100%;
   }
 }
 
