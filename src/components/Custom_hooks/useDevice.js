@@ -17,7 +17,7 @@ const useDeivce = () => {
     // return () => {
     //   window.addEventListener("resize", handleResize);
     // };
-    if (!false) {
+    if (isMobile) {
       setDevice("Mobile");
       return;
     }
