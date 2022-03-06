@@ -2,10 +2,11 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  height: 100vh;
-  width: 25vw;
+  min-height: 100vh;
+  min-width: 25vw;
   overflow: scroll;
   scrollbar-width: none;
+  /* background-color: white; */
 }
 .main::-webkit-scrollbar {
   display: none;
