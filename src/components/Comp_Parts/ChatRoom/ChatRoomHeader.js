@@ -13,6 +13,7 @@ export default function ChatRoomHeader() {
 
   const closeCurrentChat = () => {
     context.setopenChat(false);
+    context.setactiveChat("");
   };
 
   return (
