@@ -2,7 +2,6 @@
   display: flex;
   position: sticky;
   bottom: 0;
-  /* height: 7%; */
   background-color: rgb(141, 86, 14);
   align-items: center;
   padding: 5px;
@@ -18,7 +17,6 @@
 }
 
 .sentmsgform > button {
-  /* width: 10vw; */
   border-radius: 20px;
   font-size: 1.7rem;
   padding: 1vh 2vw;
@@ -27,7 +25,7 @@
   border: none;
   z-index: 4;
 }
-.sentmsgform > button:hover {
+.sentmsgform > button:active {
   cursor: pointer;
   background-color: cadetblue;
 }
