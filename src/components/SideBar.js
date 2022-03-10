@@ -52,6 +52,7 @@ export default function SideBar() {
     });
   };
   const makeGroupChat = () => {
+    if (context.groupChatList.length === 0) return;
     setnameGroupChat(true);
   };
 

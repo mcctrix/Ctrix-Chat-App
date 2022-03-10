@@ -13,6 +13,7 @@ export default function GetNameForGroup(prop) {
 
   const SendData = (e) => {
     e.preventDefault();
+    if (NameRef.current.value === "") return;
     const ID = uuid();
     const MsgRef = doc(db, "Group_Chat_init", ID);
     if (context.groupChatList.length === 0) {
