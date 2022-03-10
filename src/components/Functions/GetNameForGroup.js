@@ -44,6 +44,7 @@ export default function GetNameForGroup(prop) {
 
     setDoc(MsgRef, Data);
     prop.togglevis(false);
+    context.setuserNameActiveChat(NameRef.current.value);
     context.setactiveChat(Data);
     context.setnewPersonaddbtn(false);
   };
