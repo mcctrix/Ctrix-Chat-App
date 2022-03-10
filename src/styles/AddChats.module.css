@@ -5,18 +5,15 @@
   flex-direction: column;
   margin: 0;
   padding: 0;
-  background-color: cyan;
 }
-.main > ul > li {
-  border-top: 1px solid white;
-  padding: 2vh;
-  color: white;
-  text-align: center;
+.groupChatBtn {
   font-size: 1.7rem;
-  background-color: rgb(206, 128, 27);
+  width: 100%;
+  padding: 2vh;
+  outline: none;
+  border: none;
 }
-.main > ul > li:hover,
-.main > ul > li:active {
+.groupChatBtn:active,
+.groupChatBtn:hover {
   cursor: pointer;
-  background-color: rgb(175, 114, 34);
 }

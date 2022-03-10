@@ -1,57 +1,120 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { v4 as uuid } from "uuid";
 import { isMobile } from "react-device-detect";
 
 import AppContext from "../../../GlobalStore/Context";
+import styles from "../../../../styles/AddChatPerson.module.css";
 
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 
 export default function AddChatPerson(props) {
+  // Inits
   const context = useContext(AppContext);
   const db = getFirestore();
 
+  // Hooks
+  const [isChecked, setisChecked] = useState(false);
+
+  const RemoveCurrentUser = () => {
+    context.setgroupChatList((list) =>
+      list.filter((val) => {
+        if (val.ID === props.user.User_ID) {
+          return false;
+        }
+        return true;
+      })
+    );
+  };
+
+  useEffect(() => {
+    if (isChecked) {
+      context.setgroupChatList((list) => {
+        if (list?.length > 0) {
+          return [
+            ...list,
+            {
+              ID: props.user.User_ID,
+            },
+          ];
+        }
+        return [
+          {
+            ID: props.user.User_ID,
+          },
+        ];
+      });
+    }
+    if (!isChecked) {
+      if (context.groupChatList.length > 0) {
+        RemoveCurrentUser();
+      }
+    }
+  }, [isChecked]);
+
   const ClickEvent = async () => {
+    if (props.GroupMode) return;
     const ID = uuid();
     const MsgRef = doc(db, "Private_Chat_init", ID);
 
-    // People's ID with which we already have a chat
-    const SecPersonNames = context.privateChatInit.map((data) => {
-      if (data.User1.ID === context.Current_UserID) {
-        return [data.User2.ID, data.ID];
-      }
-      return [data.User1.ID, data.ID];
-    });
+    // We filter all the group chat inits
+    const SecPersonNames = context.privateChatInit.filter(
+      (data) => data.ChatType === "DM"
+    );
 
     // Check if Chat with other person already exists
-    if (SecPersonNames.some((data) => data.includes(props.user.User_ID))) {
-      const ChatID = SecPersonNames.find((el) => {
-        if (el[0] === props.user.User_ID) {
-          return el[1];
-        }
-        return false;
-      });
+
+    const IfChatExist = SecPersonNames.findIndex(
+      (data) =>
+        data.User1.ID === props.user.User_ID ||
+        data.User2.ID === props.user.User_ID
+    );
+
+    if (
+      SecPersonNames.some(
+        (data) =>
+          data.User1.ID === props.user.User_ID ||
+          data.User2.ID === props.user.User_ID
+      )
+    ) {
+      const Chat = SecPersonNames[IfChatExist];
+
       if (isMobile) {
         context.setopenChat(true);
       }
+
       context.setuserNameActiveChat(props.user.NickName);
       context.setnewPersonaddbtn(false);
-      context.setactiveChat(ChatID[1]);
+      context.setactiveChat(Chat);
       return;
     }
 
     // Adding new chat
-    setDoc(MsgRef, {
-      ID: ID,
-      User1: { Name: props.user.NickName, ID: props.user.User_ID },
-      User2: { Name: context.Current_UserName, ID: context.Current_UserID },
-    });
+    const DATA = {
+      ChatID: ID,
+      ChatType: "DM",
+      User1: { ID: props.user.User_ID },
+      User2: { ID: context.Current_UserID },
+    };
+    setDoc(MsgRef, DATA);
     if (isMobile) {
       context.setopenChat(true);
     }
     context.setnewPersonaddbtn(false);
     context.setuserNameActiveChat(props.user.NickName);
-    context.setactiveChat(ID);
+    context.setactiveChat(DATA);
   };
 
-  return <li onClick={ClickEvent}>{props.user.NickName}</li>;
+  return (
+    <li className={styles.item} onClick={ClickEvent}>
+      {props.GroupMode && (
+        <input
+          checked={isChecked}
+          onChange={() => setisChecked((val) => !val)}
+          className={styles.chkbox}
+          type="checkbox"
+        />
+      )}
+      {props.user.NickName}
+    </li>
+  );
 }

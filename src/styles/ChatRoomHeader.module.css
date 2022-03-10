@@ -2,9 +2,8 @@
   display: flex;
   position: sticky;
   top: 0;
-  background-color: rgb(141, 86, 14);
-  color: white;
   align-items: center;
+  z-index: 20;
 }
 .backbtn {
   margin-left: 2vw;

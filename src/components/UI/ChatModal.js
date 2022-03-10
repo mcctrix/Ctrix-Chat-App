@@ -1,37 +1,62 @@
-import React, { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import AppContext from "../GlobalStore/Context";
 import useDevice from "../Custom_hooks/useDevice";
 
 import styles from "../../styles/ChatModal.module.css";
+import classes from "../GlobalStore/GlobalStyles.module.css";
 
 export default function ChatModal(props) {
   // inits
   const DEVICE = useDevice();
   const context = useContext(AppContext);
 
+  // Hooks
+  const [ChatName, setChatName] = useState("");
+
   const makeChatActive = () => {
     if (DEVICE === "Mobile") {
       context.setopenChat(true);
     }
     context.setuserNameActiveChat(() => {
-      return props.data.User1.Name === context.Current_UserName
-        ? props.data.User2.Name
-        : props.data.User1.Name;
+      if (props.data.ChatType === "Group") {
+        return props.data.ChatName;
+      }
+      return props.data.User1.ID === context.Current_UserID
+        ? context.UsersData.find((val) => val.User_ID === props.data.User2.ID)
+            .NickName
+        : context.UsersData.find((val) => val.User_ID === props.data.User1.ID)
+            .NickName;
     });
-    context.setactiveChat(props.data.ID);
+    context.setactiveChat(props.data);
   };
+  useEffect(() => {
+    if (props.data.ChatType === "DM") {
+      setChatName(
+        props.data.User1.ID === context.Current_UserID
+          ? context.UsersData.find((val) => val.User_ID === props.data.User2.ID)
+              .NickName
+          : context.UsersData.find((val) => val.User_ID === props.data.User1.ID)
+              .NickName
+      );
+    }
+    if (props.data.ChatType === "Group") {
+      setChatName(props.data.ChatName);
+    }
+  }, []);
 
   return (
     <div
       className={`${styles.main} ${
-        context.activeChat === props.data.ID ? styles.activechat : null
+        context.activeChat.ChatID === props.data.ChatID && classes.activechat
       }`}
       onClick={makeChatActive}
     >
       <div className={styles.image}>
         <div
           className={`${
-            context.activeChat === props.data.ID ? styles.activeimg : null
+            context.activeChat.ChatID === props.data.ChatID
+              ? classes.activeChatHeader
+              : null
           }`}
         ></div>
         <img
@@ -41,11 +66,7 @@ export default function ChatModal(props) {
         ></img>
       </div>
       <div className={styles.detail}>
-        <h1 className={styles.chatname}>
-          {props.data.User1.Name === context.Current_UserName
-            ? props.data.User2.Name
-            : props.data.User1.Name}
-        </h1>
+        <h1 className={styles.chatname}>{ChatName}</h1>
         {/* <p>Last message</p> */}
       </div>
       <div className={styles.emptydiv}></div>

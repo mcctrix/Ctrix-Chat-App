@@ -3,6 +3,7 @@ import AppContext from "../../GlobalStore/Context";
 import useDevice from "../../Custom_hooks/useDevice";
 
 import styles from "../../../styles/ChatRoomHeader.module.css";
+import classes from "../../GlobalStore/GlobalStyles.module.css";
 
 import BackIcon from "../../UI/BackIcon";
 
@@ -17,7 +18,9 @@ export default function ChatRoomHeader() {
   };
 
   return (
-    <header className={styles.header}>
+    <header
+      className={`${classes.textcolor} ${classes.darkerbgcolor} ${styles.header}`}
+    >
       {DEVICE === "Desktop" ? null : (
         <div onClick={closeCurrentChat} className={styles.backbtn}>
           <BackIcon />

@@ -24,18 +24,34 @@ const useMsgFetch = () => {
       setMessages([]);
       return;
     }
-    // Collection Reference
-    const colref = query(
-      collection(db, "Messages", "Private_Chats", context.activeChat),
-      orderBy("createdAt"),
-      limitToLast(20)
-    );
-    onSnapshot(colref, (snapshot) => {
-      setMessages([]);
-      snapshot.docs.forEach((msg) => {
-        setMessages((data) => [...data, msg.data()]);
+    if (context.activeChat.ChatType === "DM") {
+      // Private Chat Fetch
+      const DMref = query(
+        collection(db, "Messages", "Private_Chats", context.activeChat.ChatID),
+        orderBy("createdAt"),
+        limitToLast(20)
+      );
+      onSnapshot(DMref, (snapshot) => {
+        setMessages([]);
+        snapshot.docs.forEach((msg) => {
+          setMessages((data) => [...data, msg.data()]);
+        });
       });
-    });
+    }
+
+    if (context.activeChat.ChatType === "Group") {
+      // Group Chat Fetch
+      const DMref = query(
+        collection(db, "Messages", "Group_Chats", context.activeChat.ChatID),
+        orderBy("createdAt")
+      );
+      onSnapshot(DMref, (snapshot) => {
+        setMessages([]);
+        snapshot.docs.forEach((msg) => {
+          setMessages((data) => [...data, msg.data()]);
+        });
+      });
+    }
 
     // End
   }, [db, context.activeChat]);

@@ -30,19 +30,7 @@
 }
 
 /* Active chat styles */
-.activechat {
-  background-color: rgb(141, 86, 14);
-  color: white;
-}
-.activeimg {
-  background-color: rgb(200, 6, 6);
-  width: 20px;
-  height: 20px;
-  border-radius: 10px;
-  margin-left: 35px;
-  margin-bottom: -10px;
-  position: relative;
-}
+
 @media only screen and (min-width: 601px) and (max-width: 830px) {
   .emptydiv {
     display: none;
@@ -52,8 +40,5 @@
   }
   .main {
     justify-content: center;
-  }
-  .activechat {
-    border-top: 5px soilid white;
   }
 }

@@ -16,31 +16,58 @@ function usePMInit() {
 
   useEffect(() => {
     // Ref
-    const colref = collection(db, "Private_Chat_init");
+    const PMREF = collection(db, "Private_Chat_init");
 
     // Retrieving Private Chatroom details related to current user
 
     onSnapshot(
-      query(colref, where("User1.ID", "==", context.Current_UserID)),
+      query(PMREF, where("User1.ID", "==", context.Current_UserID)),
       (snapshot) => {
-        context.setprivateChatInit((data) =>
-          data.filter((arr) => arr.User1.ID !== context.Current_UserID)
-        );
+        // Filter Chat If User1 Of that chat is not our current user
+        // context.setprivateChatInit((data) =>
+        //   data.filter((arr) => arr.User1.ID !== context.Current_UserID)
+        // );
 
         snapshot.docs.forEach((doc) => {
-          context.setprivateChatInit((value) => [...value, doc.data()]);
+          const data = doc.data();
+          //  Filter Older Version of Chat
+          context.setprivateChatInit((chat) =>
+            chat.filter((arr) => arr.ChatID !== data.ChatID)
+          );
+          context.setprivateChatInit((value) => [...value, data]);
         });
       }
     );
     onSnapshot(
-      query(colref, where("User2.ID", "==", context.Current_UserID)),
+      query(PMREF, where("User2.ID", "==", context.Current_UserID)),
       (snapshot) => {
-        context.setprivateChatInit((data) =>
-          data.filter((arr) => arr.User2.ID !== context.Current_UserID)
-        );
-
         snapshot.docs.forEach((doc) => {
-          context.setprivateChatInit((value) => [...value, doc.data()]);
+          const data = doc.data();
+          context.setprivateChatInit((chat) =>
+            chat.filter((arr) => arr.ChatID !== data.ChatID)
+          );
+          context.setprivateChatInit((value) => [...value, data]);
+        });
+      }
+    );
+
+    // Group Chat
+
+    const GroupChatRef = collection(db, "Group_Chat_init");
+
+    onSnapshot(
+      query(
+        GroupChatRef,
+        where("ChatUserID", "array-contains", context.Current_UserID)
+      ),
+      (snapshot) => {
+        snapshot.docs.forEach((doc) => {
+          const data = doc.data();
+
+          context.setprivateChatInit((chat) =>
+            chat.filter((arr) => arr.ChatID !== data.ChatID)
+          );
+          context.setprivateChatInit((value) => [...value, data]);
         });
       }
     );

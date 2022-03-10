@@ -1,5 +1,4 @@
 .main {
-  background-color: rgb(141, 86, 14);
   border-right: 1px dashed white;
   display: flex;
   padding: 12px 5px 10px 15px;
@@ -19,7 +18,6 @@
   height: 7vh;
 }
 .title {
-  color: white;
   margin: 0;
   font-size: 4vh;
 }

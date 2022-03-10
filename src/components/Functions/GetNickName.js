@@ -35,7 +35,6 @@ export default function GetNickName() {
     });
     alert("Nickname set");
   };
-  console.log("Nickname component running");
   return (
     <div className={styles.main}>
       <h1>Welcome to the Ctrix Chats</h1>

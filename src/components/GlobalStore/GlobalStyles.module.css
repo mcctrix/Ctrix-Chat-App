@@ -1,0 +1,58 @@
+.bgcolor {
+  background-color: rgb(214, 118, 49);
+}
+.darkerbgcolor {
+  background-color: rgb(139, 88, 21);
+}
+.textcolor {
+  color: white;
+}
+.inputTextColor {
+  color: black;
+}
+.MsgSentBtnActive:active {
+  background-color: antiquewhite;
+  color: black;
+}
+/* Chat Modal */
+.activechat {
+  background-color: rgb(141, 86, 14);
+  color: white;
+}
+.activeChatHeader {
+  background-color: rgb(18, 153, 41);
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  margin-left: 35px;
+  margin-bottom: -10px;
+  position: relative;
+}
+.bgcolorGroupChat {
+  background-color: rgb(66, 117, 211);
+}
+.bgcolorGroupChat:active,
+.bgcolorGroupChat:hover {
+  background-color: rgb(9, 73, 192);
+}
+
+/* Chat room messages */
+/* Left Messages */
+.messageleft {
+  background-color: white;
+  color: black;
+}
+/* Right Messages */
+.msgalignright {
+  background-color: rgb(134, 80, 9);
+  color: white;
+}
+.alignright {
+  align-self: flex-end;
+}
+/* Media query */
+@media only screen and (min-width: 601px) and (max-width: 830px) {
+  .activeChatHeader {
+    border-top: 5px solid white;
+  }
+}
