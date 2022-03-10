@@ -29,11 +29,11 @@
   position: relative;
 }
 .bgcolorGroupChat {
-  background-color: rgb(66, 117, 211);
+  background-color: rgb(195, 34, 22);
 }
 .bgcolorGroupChat:active,
 .bgcolorGroupChat:hover {
-  background-color: rgb(9, 73, 192);
+  background-color: rgba(195, 34, 22, 0.418);
 }
 
 /* Chat room messages */
