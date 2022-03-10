@@ -15,18 +15,8 @@ export default function AddChatPerson(props) {
   // Hooks
   const [isChecked, setisChecked] = useState(false);
 
-  const RemoveCurrentUser = () => {
-    context.setgroupChatList((list) =>
-      list.filter((val) => {
-        if (val.ID === props.user.User_ID) {
-          return false;
-        }
-        return true;
-      })
-    );
-  };
-
   useEffect(() => {
+    // For group chat
     if (isChecked) {
       context.setgroupChatList((list) => {
         if (list?.length > 0) {
@@ -46,10 +36,17 @@ export default function AddChatPerson(props) {
     }
     if (!isChecked) {
       if (context.groupChatList.length > 0) {
-        RemoveCurrentUser();
+        context.setgroupChatList((list) =>
+          list.filter((val) => {
+            if (val.ID === props.user.User_ID) {
+              return false;
+            }
+            return true;
+          })
+        );
       }
     }
-  }, [isChecked]);
+  }, [isChecked, props, context]);
 
   const ClickEvent = async () => {
     if (props.GroupMode) return;
