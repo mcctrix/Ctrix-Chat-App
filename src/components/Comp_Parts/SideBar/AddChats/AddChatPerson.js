@@ -46,7 +46,8 @@ export default function AddChatPerson(props) {
         );
       }
     }
-  }, [isChecked, props, context]);
+    // eslint-disable-next-line
+  }, [isChecked]);
 
   const ClickEvent = async () => {
     if (props.GroupMode) return;

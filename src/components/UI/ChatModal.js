@@ -42,7 +42,8 @@ export default function ChatModal(props) {
     if (props.data.ChatType === "Group") {
       setChatName(props.data.ChatName);
     }
-  }, [props, context.Current_UserID, context.UsersData]);
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <div
