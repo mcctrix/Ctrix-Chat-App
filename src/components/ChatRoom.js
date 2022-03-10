@@ -27,7 +27,7 @@ export default function ChatRoom() {
     if (Messages) {
       setTimeout(() => {
         emptyDivRef.current.scrollIntoView({ smooth: true });
-      }, 1000);
+      }, 300);
     }
   }, [Messages]);
 

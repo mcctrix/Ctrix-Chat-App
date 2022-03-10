@@ -1,19 +1,11 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import AppContext from "../GlobalStore/Context";
 import styles from "../../styles/Message.module.css";
 import classes from "../GlobalStore/GlobalStyles.module.css";
 
 const Message = (props) => {
+  // Init
   const context = useContext(AppContext);
-
-  // useEffect(() => {
-  //   if (context.UsersData.length > 0) {
-  //     console.log(
-  //       context?.UsersData?.find?.((data) => data.User_ID === props.data.Sender)
-  //         ?.NickName
-  //     );
-  //   }
-  // });
 
   return (
     <div
