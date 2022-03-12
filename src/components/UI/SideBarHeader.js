@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { signOut, getAuth } from "firebase/auth";
 import AppContext from "../GlobalStore/Context";
 import { useNavigate } from "react-router-dom";
