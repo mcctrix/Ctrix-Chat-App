@@ -31,7 +31,9 @@ const Message = (props) => {
         ></img>
       )}
       <div>
-        <p className={styles.userName}>{UserObtain.NickName}</p>
+        {context.Current_UserID !== props.data.Sender && (
+          <p className={styles.userName}>{UserObtain.NickName}</p>
+        )}
         <div
           className={`${
             context.Current_UserID === props.data.Sender
@@ -51,7 +53,7 @@ const Message = (props) => {
           </div>
         </div>
       </div>
-      {context.Current_UserID === props.data.Sender && (
+      {/* {context.Current_UserID === props.data.Sender && (
         <img
           className={`${styles.senderPhoto} ${styles.rightphoto}`}
           alt="User profile"
@@ -61,7 +63,7 @@ const Message = (props) => {
               : Placeholder
           }
         ></img>
-      )}
+      )} */}
     </div>
   );
 };
