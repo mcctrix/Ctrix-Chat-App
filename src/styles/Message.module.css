@@ -35,17 +35,19 @@
   margin-left: 5px;
 }
 .senderPhoto {
-  height: auto;
-  width: 45px;
-  border-radius: 30px;
   align-self: flex-end;
+  width: 7vh;
+  height: 7vh;
+  border-radius: 50%;
+  margin-right: 5px;
 }
 .leftphoto {
   margin-right: 5px;
 }
 .userName {
   margin: 0 0 0 0.7rem;
-  font-size: 0.9rem;
+  font-size: 0.955rem;
+  font-weight: 500;
 }
 
 /* Media query */
