@@ -50,8 +50,8 @@ const useMsgFetch = () => {
       });
     }
 
-    // End
-  }, [db, context.activeChat]);
+    // end
+  }, [context.activeChat]);
 
   return [Messages];
 };

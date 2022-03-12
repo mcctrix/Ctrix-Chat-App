@@ -9,7 +9,6 @@ import classes from "../GlobalStore/GlobalStyles.module.css";
 
 import BackIcon from "./BackIcon";
 import DotIcon from "./DotIcon";
-import UserSettings from "./UserSettings";
 
 export default function SideBarHeader(props) {
   // init
@@ -17,7 +16,6 @@ export default function SideBarHeader(props) {
   const Navigate = useNavigate();
   const context = useContext(AppContext);
   const auth = getAuth();
-  const [ShowSetting, setShowSetting] = useState(false);
 
   const showDropDown = () => {
     context.setsideBarOptions((snap) => !snap);
