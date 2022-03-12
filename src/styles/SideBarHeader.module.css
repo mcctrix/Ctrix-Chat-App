@@ -13,9 +13,10 @@
   gap: 1vw;
 }
 .userimage {
-  width: 55px;
-  border-radius: 30px;
-  height: auto;
+  width: 9vh;
+  height: 9vh;
+  border-radius: 50%;
+  margin-right: 5px;
 }
 .title {
   margin: 0;

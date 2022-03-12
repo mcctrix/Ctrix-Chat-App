@@ -5,9 +5,10 @@
   align-items: center;
 }
 .image > img {
-  height: auto;
-  width: 55px;
-  border-radius: 30px;
+  width: 8vh;
+  height: 8vh;
+  border-radius: 50%;
+  margin-right: 5px;
 }
 .detail {
   display: flex;

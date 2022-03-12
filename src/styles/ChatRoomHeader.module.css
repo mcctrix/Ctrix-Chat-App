@@ -12,10 +12,11 @@
   font-size: 1.2rem;
 }
 .userimage {
-  width: auto;
-  height: 7vh;
   margin: 0 8px;
-  border-radius: 30px;
+  width: 7vh;
+  height: 7vh;
+  border-radius: 50%;
+  margin-right: 5px;
 }
 /* @media only screen and (max-width: 830px) {
   .header {
