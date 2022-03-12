@@ -1,14 +1,14 @@
 import { useEffect, useContext, useState } from "react";
 
-import { getFirestore, collection } from "firebase/firestore";
+import { collection } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import { db } from "../firebase/firebase";
 
 import { onAuthStateChanged, getAuth } from "firebase/auth";
 
 import AppContext from "../GlobalStore/Context";
 
 export default function useInitialiseContextData() {
-  const db = getFirestore();
   const context = useContext(AppContext);
 
   // States
@@ -51,6 +51,8 @@ export default function useInitialiseContextData() {
         context.setCurrent_UserData(CurrentUserData);
       }
     }
+
+    // context.setLoading(false);
 
     // eslint-disable-next-line
   }, [loading, db, Current_UserID, allUsersData, error]);

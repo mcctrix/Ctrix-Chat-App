@@ -3,19 +3,22 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: 10;
   position: fixed;
   width: 50vw;
-  background-color: rgb(141, 86, 14);
-  top: 30vh;
-  left: 20vw;
+  height: 70vh;
+  background-color: whitesmoke;
+  top: 50%;
+  left: 50%;
+  margin-top: -40vh;
+  margin-left: -25vw;
   padding: 1rem;
   border-radius: 60px;
 }
-.main > h1 {
-  color: white;
+
+.title {
+  color: black;
   text-align: center;
-  font-size: 1.6rem;
+  font-size: 2rem;
 }
 .main > form {
   display: flex;
@@ -23,18 +26,18 @@
   align-items: center;
 }
 .main > form > label {
-  color: white;
-  font-size: 5vh;
+  color: black;
+  font-size: 4vh;
   margin-bottom: 2vh;
 }
 .main > form > input {
   padding: 4px 5px;
   width: 70%;
-  height: 4vh;
+  min-height: 4vh;
   outline: none;
   font-size: 4vh;
 }
-.main > form > button {
+.btns {
   border-radius: 25px;
   border: none;
   font-size: 1.7rem;
@@ -42,19 +45,47 @@
   width: 12vw;
   margin-top: 3vh;
 }
-.main > form > button:active,
-.main > form > button:focus {
+.btns:hover,
+.btns:active,
+.btns:focus {
   cursor: pointer;
+  border: 1px solid black;
 }
-@media screen and (max-width: 600px) {
+
+.avatardiv {
+  display: flex;
+}
+.avatar {
+  min-height: 70px;
+  width: auto;
+}
+.avatarsection {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Media Query */
+@media screen and (max-width: 768px) {
   .main {
     width: 100vw;
     left: 0;
     top: 0;
     border-radius: 0;
     height: 100vh;
+    margin: 0;
+    padding: 0;
+    justify-content: flex-start;
   }
-  .main > form > button {
+  .title {
+    font-size: 2rem;
+  }
+  .main > form > label {
+    margin: 0.4rem 1rem;
+  }
+  .main > form > input {
+    width: auto;
+  }
+  .btns {
     width: 7rem;
   }
 }

@@ -1,13 +1,13 @@
 import { useRef, useContext } from "react";
 import { v4 as uuid } from "uuid";
-import { doc, setDoc, getFirestore } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import AppContext from "../GlobalStore/Context";
+import { db } from "../firebase/firebase";
 
 import styles from "../../styles/GetNickName.module.css";
 
 export default function GetNameForGroup(prop) {
   // Inits
-  const db = getFirestore();
   const context = useContext(AppContext);
   const NameRef = useRef();
 

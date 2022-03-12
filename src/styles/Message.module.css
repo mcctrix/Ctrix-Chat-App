@@ -43,6 +43,10 @@
 .leftphoto {
   margin-right: 5px;
 }
+.userName {
+  margin: 0 0 0 0.7rem;
+  font-size: 0.9rem;
+}
 
 /* Media query */
 /* @media only screen and (max-width: 600px) {

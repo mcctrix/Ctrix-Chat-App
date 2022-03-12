@@ -1,5 +1,6 @@
 import { useRef, useContext } from "react";
-import { getFirestore, setDoc, doc, serverTimestamp } from "firebase/firestore";
+import { setDoc, doc, serverTimestamp } from "firebase/firestore";
+import { db } from "../firebase/firebase";
 
 import AppContext from "../GlobalStore/Context";
 
@@ -16,9 +17,6 @@ export default function MsgSendUI(props) {
   // hooks
   // const [openGif, setopenGif] = useState(false);
   const NewMsgRef = useRef();
-
-  // Database
-  const db = getFirestore(); // Database
 
   // Function
   // const OpenGif = () => {

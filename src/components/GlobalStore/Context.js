@@ -4,8 +4,8 @@ const AppContext = createContext();
 
 export const ContextWrapper = (props) => {
   // Current User Data
-  const [Current_UserID, setCurrent_UserID] = useState("");
-  const [Current_UserName, setCurrent_UserName] = useState("");
+  const [Current_UserID, setCurrent_UserID] = useState(null);
+  const [Current_UserName, setCurrent_UserName] = useState(null);
   const [Current_UserData, setCurrent_UserData] = useState();
 
   // Chats Related to Current User
@@ -37,6 +37,13 @@ export const ContextWrapper = (props) => {
 
   // Private Chat Inits
   const [privateChatInit, setprivateChatInit] = useState([]);
+
+  //  Display User Settings
+
+  const [DisplayUserSettings, setDisplayUserSettings] = useState(false);
+
+  // App Loading
+  const [Loading, setLoading] = useState(true);
 
   return (
     <AppContext.Provider
@@ -79,6 +86,12 @@ export const ContextWrapper = (props) => {
 
         groupChatList,
         setgroupChatList,
+
+        DisplayUserSettings,
+        setDisplayUserSettings,
+
+        Loading,
+        setLoading,
       }}
     >
       {props.children}

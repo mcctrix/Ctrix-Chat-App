@@ -1,21 +1,18 @@
 import { useState, useEffect, useContext } from "react";
 import {
-  getFirestore,
   collection,
   onSnapshot,
   query,
   limitToLast,
   orderBy,
 } from "firebase/firestore";
+import { db } from "../firebase/firebase";
 
 import AppContext from "../GlobalStore/Context";
 
 const useMsgFetch = () => {
   // Hooks
   const [Messages, setMessages] = useState([]);
-
-  // Init
-  const db = getFirestore();
 
   const context = useContext(AppContext);
 

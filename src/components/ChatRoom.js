@@ -21,10 +21,10 @@ export default function ChatRoom() {
 
   // Ref Hooks
 
-  const emptyDivRef = useRef();
+  const emptyDivRef = useRef(null);
 
   useEffect(() => {
-    if (Messages) {
+    if (Messages && emptyDivRef) {
       setTimeout(() => {
         emptyDivRef.current.scrollIntoView({ smooth: true });
       }, 300);

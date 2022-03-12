@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { onAuthStateChanged, getAuth } from "firebase/auth";
-import { getFirestore, collection } from "firebase/firestore";
+import { collection } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import { db } from "../firebase/firebase";
 
 import GetNickName from "./GetNickName";
 
 export default function UserEntryCheck() {
-  const db = getFirestore();
   const colRef = collection(db, "User_Data");
   const [values] = useCollectionData(colRef);
   const [userExist, setuserExist] = useState(false);

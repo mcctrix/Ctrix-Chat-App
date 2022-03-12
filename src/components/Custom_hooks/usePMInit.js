@@ -1,17 +1,11 @@
 import { useEffect, useContext } from "react";
 
-import {
-  onSnapshot,
-  collection,
-  query,
-  where,
-  getFirestore,
-} from "firebase/firestore";
+import { onSnapshot, collection, query, where } from "firebase/firestore";
+import { db } from "../firebase/firebase";
 
 import AppContext from "../GlobalStore/Context";
 
 function usePMInit() {
-  const db = getFirestore();
   const context = useContext(AppContext);
 
   useEffect(() => {
@@ -61,6 +55,7 @@ function usePMInit() {
         where("ChatUserID", "array-contains", context.Current_UserID)
       ),
       (snapshot) => {
+        context.setLoading(false);
         snapshot.docs.forEach((doc) => {
           const data = doc.data();
 

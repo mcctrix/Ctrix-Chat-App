@@ -10,7 +10,7 @@ import { db, storage } from "../firebase/firebase";
 
 import styles from "../../styles/GetNickName.module.css";
 
-export default function GetNickName() {
+export default function UserSettings(props) {
   // Initialise
   const [, boy, boy2, girl, girl2] = usePictures();
 
@@ -50,6 +50,9 @@ export default function GetNickName() {
         });
       });
   };
+  const CancelSettings = () => {
+    context.setDisplayUserSettings(false);
+  };
 
   const SendData = (e) => {
     e.preventDefault();
@@ -63,7 +66,10 @@ export default function GetNickName() {
     if (NameRef) {
       setDoc(doc(db, "User_Data", UserID), {
         User_ID: UserID,
-        NickName: NameRef.current.value,
+        NickName:
+          NameRef.current.value === ""
+            ? context.Current_UserName
+            : NameRef.current.value,
         ProfilePicture:
           SelectedAvatar === "other" ? CustomPicture : SelectedAvatar,
       });
@@ -71,18 +77,27 @@ export default function GetNickName() {
     context.setCurrent_UserName(NameRef.current.value);
     context.setCurrent_UserData({
       User_ID: UserID,
-      NickName: NameRef.current.value,
+      NickName:
+        NameRef.current.value === ""
+          ? context.Current_UserName
+          : NameRef.current.value,
       ProfilePicture:
         SelectedAvatar === "other" ? CustomPicture : SelectedAvatar,
     });
-    alert("Nickname set");
+    context.setDisplayUserSettings(false);
   };
   return (
     <div className={styles.main}>
-      <h1 className={styles.title}>Welcome to the Ctrix Chats</h1>
+      {props.Firsttime && (
+        <h1 className={styles.title}>Welcome to the Ctrix Chats</h1>
+      )}
       <form onSubmit={SendData}>
-        <label>Enter Your nickname: </label>
-        <input min="4" ref={NameRef} required />
+        {props.Firsttime ? (
+          <label>Enter Your nickname: </label>
+        ) : (
+          <label>Enter Your nickname, if you want to change it: </label>
+        )}
+        <input min="4" ref={NameRef} required={props.Firsttime} />
         <label>Choose Avatar for your profile: </label>
         <div className={styles.avatardiv}>
           <section className={styles.avatarsection}>
@@ -94,8 +109,8 @@ export default function GetNickName() {
               value={boy}
               onChange={SelectAvatar}
             />
-            <label htmlfor="boy">
-              <img className={styles.avatar} alt="boy avatar" src={boy} />
+            <label htmlFor="boy">
+              <img className={styles.avatar} src={boy} alt="boy avatar" />
             </label>
           </section>
           <section className={styles.avatarsection}>
@@ -107,7 +122,7 @@ export default function GetNickName() {
               value={boy2}
               onChange={SelectAvatar}
             />
-            <label htmlfor="boy2">
+            <label htmlFor="boy2">
               <img className={styles.avatar} src={boy2} alt="boy2 avatar" />
             </label>
           </section>
@@ -120,7 +135,7 @@ export default function GetNickName() {
               value={girl}
               onChange={SelectAvatar}
             />
-            <label htmlfor="girl">
+            <label htmlFor="girl">
               <img className={styles.avatar} src={girl} alt="girl avatar" />
             </label>
           </section>
@@ -133,7 +148,7 @@ export default function GetNickName() {
               value={girl2}
               onChange={SelectAvatar}
             />
-            <label htmlfor="girl2">
+            <label htmlFor="girl2">
               <img className={styles.avatar} src={girl2} alt="girl2 avatar" />
             </label>
           </section>
@@ -146,7 +161,7 @@ export default function GetNickName() {
               value="other"
               onChange={SelectAvatar}
             />
-            <label htmlfor="other">Other</label>
+            <label htmlFor="other">Other</label>
           </section>
         </div>
         {SelectedAvatar === "other" && (
@@ -165,7 +180,14 @@ export default function GetNickName() {
             {uploadSuccess && <p>Uploaded Successfully</p>}
           </div>
         )}
-        <button>Submit</button>
+        <div>
+          <button className={styles.btns}>Submit</button>
+          {!props.Firsttime && (
+            <button className={styles.btns} onClick={CancelSettings}>
+              Cancel
+            </button>
+          )}
+        </div>
       </form>
     </div>
   );

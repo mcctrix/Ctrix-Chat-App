@@ -1,16 +1,18 @@
 import { useContext, useState, useEffect } from "react";
 import { v4 as uuid } from "uuid";
 import { isMobile } from "react-device-detect";
+import usePictures from "../../../Custom_hooks/usePictures";
 
 import AppContext from "../../../GlobalStore/Context";
 import styles from "../../../../styles/AddChatPerson.module.css";
 
-import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../../../firebase/firebase";
 
 export default function AddChatPerson(props) {
   // Inits
   const context = useContext(AppContext);
-  const db = getFirestore();
+  const [Placeholder] = usePictures();
 
   // Hooks
   const [isChecked, setisChecked] = useState(false);
@@ -112,6 +114,13 @@ export default function AddChatPerson(props) {
           type="checkbox"
         />
       )}
+      <img
+        className={styles.userpic}
+        src={
+          props.user.ProfilePicture ? props.user.ProfilePicture : Placeholder
+        }
+        alt="user profile"
+      />
       {props.user.NickName}
     </li>
   );

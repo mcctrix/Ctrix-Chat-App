@@ -4,8 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 import ChatComponent from "../components/ChatComponent";
 
-import UserEntryCheck from "../components/Functions/UserEntryCheck";
-
 import useInitialiseContextData from "../components/Functions/useInitialiseContextData";
 import Maintenance from "../components/UI/Maintenance";
 
@@ -28,7 +26,6 @@ export default function Home() {
   }
   return (
     <>
-      <UserEntryCheck />
       <ChatComponent />
     </>
   );
