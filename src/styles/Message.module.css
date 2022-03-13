@@ -11,7 +11,6 @@
   font-size: 1.1rem;
   word-wrap: break-word;
   position: relative;
-  /* min-width: 2vw; */
 }
 .msgtext {
   margin: 0;
@@ -53,14 +52,14 @@
 }
 
 /* Media query */
-/* @media only screen and (max-width: 600px) {
+@media only screen and (max-width: 600px) {
   .message {
-    font-size: 1.2rem;
+    max-width: 80%;
+    font-size: 1.15rem;
   }
-} */
+}
 /* @media only screen and (min-width: 700px) {
   .message {
-    width: fit-content;
-    max-width: 50%;
+    max-width: 70%;
   }
 } */
