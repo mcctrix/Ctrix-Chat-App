@@ -6,17 +6,18 @@
   position: fixed;
   width: 50vw;
   height: 70vh;
-  background-color: whitesmoke;
   top: 50%;
   left: 50%;
   margin-top: -40vh;
   margin-left: -25vw;
   padding: 1rem;
   border-radius: 60px;
+  background-color: #323436;
+  color: #e4e6eb;
 }
 
 .title {
-  color: black;
+  color: #e4e6eb;
   text-align: center;
   font-size: 2rem;
 }
@@ -26,7 +27,7 @@
   align-items: center;
 }
 .main > form > label {
-  color: black;
+  color: #e4e6eb;
   font-size: 4vh;
   margin-bottom: 2vh;
 }
