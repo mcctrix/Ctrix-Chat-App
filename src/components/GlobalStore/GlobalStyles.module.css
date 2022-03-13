@@ -1,8 +1,8 @@
 .bgcolor {
-  background-color: #4e4f50;
+  background-color: hsl(210, 1%, 28%);
 }
 .darkerbgcolor {
-  background-color: hsl(210, 1%, 28%);
+  background-color: #2e2f2f;
 }
 .textcolor {
   color: #e4e6eb;
@@ -11,12 +11,12 @@
   color: #e4e6eb;
 }
 .MsgSentBtnActive:active {
-  background-color: hsl(0, 0%, 28%);
+  background-color: hsl(0, 2%, 19%);
   color: #e4e6eb;
 }
 /* Chat Modal */
 .activechat {
-  background-color: rgb(53, 54, 56);
+  background-color: rgb(61, 63, 68);
   color: #2f3031;
 }
 .activeChatHeader {
@@ -40,8 +40,8 @@
 /* Left Messages */
 .messageleft {
   color: #e4e6eb;
-  background-color: hsla(0, 0%, 100%, 0.918);
-  background-color: hsl(0, 1%, 23%);
+
+  background-color: hsl(0, 3%, 26%);
 }
 /* Right Messages */
 .msgalignright {

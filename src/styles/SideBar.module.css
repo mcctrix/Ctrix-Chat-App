@@ -8,7 +8,7 @@
   min-width: 25vw;
   overflow: scroll;
   scrollbar-width: none;
-  background-color: #4e4f50;
+  background-color: #323436;
   border-right: 1px solid white;
 }
 .main::-webkit-scrollbar {

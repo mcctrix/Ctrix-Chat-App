@@ -5,7 +5,8 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #4e4f50;
+  background-color: hsl(0, 0%, 18%);
+  background-color: #323436;
 }
 .messagesdiv {
   padding: 0 1vw;
