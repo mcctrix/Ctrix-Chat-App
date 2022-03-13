@@ -1,9 +1,10 @@
 .main {
-  border-right: 1px dashed white;
+  border-right: 1px solid black;
   display: flex;
   padding: 5px 5px 5px 10px;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid black;
 }
 .imgnamediv {
   position: relative;

@@ -1,11 +1,11 @@
 .main {
-  background: url("/public/wood.jpg");
+  /* background: url("/public/wood.jpg"); */
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
-  color: white;
   display: flex;
   flex-direction: column;
+  background-color: #4e4f50;
 }
 .messagesdiv {
   padding: 0 1vw;

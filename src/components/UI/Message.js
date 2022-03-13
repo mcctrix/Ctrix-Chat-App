@@ -44,12 +44,12 @@ const Message = (props) => {
         >
           <div className={styles.msgtext}>
             {props.data.text}
-            <div className={styles.hovertext}>
+            {/* <div className={styles.hovertext}>
               {context.UsersData &&
                 context?.allUsersData?.find?.(
                   (data) => data.User_ID === props.data.Sender
                 )?.NickName}
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

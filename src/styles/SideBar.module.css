@@ -8,7 +8,8 @@
   min-width: 25vw;
   overflow: scroll;
   scrollbar-width: none;
-  /* background-color: white; */
+  background-color: #4e4f50;
+  border-right: 1px solid white;
 }
 .main::-webkit-scrollbar {
   display: none;
@@ -67,8 +68,12 @@
   border: none;
   font-size: 1.5rem;
   position: sticky;
+  padding: 10px;
   bottom: 0;
+  border: 1px solid rgb(192, 192, 124);
 }
-.makeGroupBtn:active {
+.makeGroupBtn:active,
+.makeGroupBtn:hover {
   cursor: pointer;
+  background-color: rgb(52, 52, 53);
 }

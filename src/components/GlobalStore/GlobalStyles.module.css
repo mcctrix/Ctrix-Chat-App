@@ -1,23 +1,23 @@
 .bgcolor {
-  background-color: rgb(214, 118, 49);
+  background-color: #4e4f50;
 }
 .darkerbgcolor {
-  background-color: rgb(139, 88, 21);
+  background-color: hsl(210, 1%, 28%);
 }
 .textcolor {
-  color: white;
+  color: #e4e6eb;
 }
 .inputTextColor {
-  color: black;
+  color: #e4e6eb;
 }
 .MsgSentBtnActive:active {
-  background-color: antiquewhite;
-  color: black;
+  background-color: hsl(0, 0%, 28%);
+  color: #e4e6eb;
 }
 /* Chat Modal */
 .activechat {
-  background-color: rgb(141, 86, 14);
-  color: white;
+  background-color: rgb(53, 54, 56);
+  color: #2f3031;
 }
 .activeChatHeader {
   background-color: rgb(18, 153, 41);
@@ -29,23 +29,25 @@
   position: relative;
 }
 .bgcolorGroupChat {
-  background-color: rgb(195, 34, 22);
+  background-color: #1776f1;
 }
 .bgcolorGroupChat:active,
 .bgcolorGroupChat:hover {
-  background-color: rgba(195, 34, 22, 0.418);
+  background-color: rgb(5, 125, 194);
 }
 
 /* Chat room messages */
 /* Left Messages */
 .messageleft {
-  background-color: white;
-  color: black;
+  color: #e4e6eb;
+  background-color: hsla(0, 0%, 100%, 0.918);
+  background-color: hsl(0, 1%, 23%);
 }
 /* Right Messages */
 .msgalignright {
-  background-color: rgb(134, 80, 9);
-  color: white;
+  background-color: #0e56b4;
+  color: #e4e6eb;
+  font-weight: 500;
 }
 .alignright {
   align-self: flex-end;

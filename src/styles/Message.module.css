@@ -11,6 +11,7 @@
   font-size: 1.1rem;
   word-wrap: break-word;
   position: relative;
+  /* min-width: 2vw; */
 }
 .msgtext {
   margin: 0;
@@ -48,6 +49,7 @@
   margin: 0 0 0 0.7rem;
   font-size: 0.955rem;
   font-weight: 500;
+  color: #e4e6eb;
 }
 
 /* Media query */

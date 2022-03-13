@@ -4,6 +4,9 @@
   top: 0;
   align-items: center;
   z-index: 20;
+  box-shadow: -6px 7px 11px -2px rgba(33, 25, 25, 0.37);
+  -webkit-box-shadow: -6px 7px 11px -2px rgba(33, 25, 25, 0.37);
+  -moz-box-shadow: -6px 7px 11px -2px rgba(33, 25, 25, 0.37);
 }
 .backbtn {
   margin-left: 2vw;
