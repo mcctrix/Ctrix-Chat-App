@@ -40,7 +40,8 @@ const useMsgFetch = () => {
       // Group Chat Fetch
       const DMref = query(
         collection(db, "Messages", "Group_Chats", context.activeChat.ChatID),
-        orderBy("createdAt")
+        orderBy("createdAt"),
+        limitToLast(25)
       );
       onSnapshot(DMref, (snapshot) => {
         setMessages([]);
