@@ -4,6 +4,7 @@
   gap: 1rem;
   align-items: center;
   color: #e4e6eb;
+  font-weight: 200;
 }
 .image > img {
   width: 8vh;
