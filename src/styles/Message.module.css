@@ -1,13 +1,13 @@
 .main {
   width: fit-content;
-  margin: 3px 0;
+  /* margin: 3px 0; */
   display: flex;
   align-items: center;
 }
 .message {
-  padding: 0.7rem 1.1rem;
+  padding: 0.7rem 1rem;
   border-radius: 25px;
-  max-width: 35vw;
+  max-width: 40vw;
   font-size: 1.1rem;
   word-wrap: break-word;
   position: relative;
@@ -54,7 +54,7 @@
 /* Media query */
 @media only screen and (max-width: 600px) {
   .message {
-    max-width: 80%;
+    /* max-width: 50%; */
     font-size: 1.15rem;
   }
 }

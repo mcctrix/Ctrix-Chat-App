@@ -16,20 +16,16 @@ export default function ChatRoom() {
   const context = useContext(AppContext);
   const DEVICE = useDevice();
 
-  // Fetching messages from firebase
-  const [Messages] = useMsgFetch();
-
   // Ref Hooks
-
   const emptyDivRef = useRef(null);
 
   useEffect(() => {
-    if (Messages && emptyDivRef) {
+    if (context.activeChatData && emptyDivRef) {
       setTimeout(() => {
         emptyDivRef.current.scrollIntoView({ smooth: true });
-      }, 300);
+      }, 200);
     }
-  }, [Messages]);
+  }, [context.activeChatData]);
 
   return (
     <div
@@ -40,8 +36,10 @@ export default function ChatRoom() {
       <ChatRoomHeader />
 
       <div className={styles.messagesdiv}>
-        {Messages &&
-          Messages.map((data) => <Message key={data.id} data={data} />)}
+        {context.activeChatData &&
+          context.activeChatData.map((data) => (
+            <Message key={data.id} data={data} />
+          ))}
         <div ref={emptyDivRef}></div>
       </div>
 

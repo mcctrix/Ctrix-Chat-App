@@ -9,7 +9,7 @@
 }
 .messagesdiv {
   padding: 0 1vw;
-  overflow-x: scroll;
+  overflow: scroll auto;
   scroll-behavior: smooth;
   height: 100%;
   display: flex;
@@ -23,4 +23,10 @@
 /* Mobile Styles */
 .mobchatroom {
   display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .main {
+    width: 100vw;
+  }
 }

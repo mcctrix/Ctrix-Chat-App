@@ -45,6 +45,9 @@ export const ContextWrapper = (props) => {
   // App Loading
   const [Loading, setLoading] = useState(true);
 
+  // Active Chat Data
+  const [activeChatData, setactiveChatData] = useState();
+
   return (
     <AppContext.Provider
       value={{
@@ -92,6 +95,9 @@ export const ContextWrapper = (props) => {
 
         Loading,
         setLoading,
+
+        activeChatData,
+        setactiveChatData,
       }}
     >
       {props.children}

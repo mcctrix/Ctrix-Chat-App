@@ -5,10 +5,12 @@ import usePictures from "../Custom_hooks/usePictures";
 
 import styles from "../../styles/ChatModal.module.css";
 import classes from "../GlobalStore/GlobalStyles.module.css";
+import useMsgFetch from "../Custom_hooks/useMsgFetch";
 
 export default function ChatModal(props) {
   // inits
   const [Placeholder] = usePictures();
+  const [Messages] = useMsgFetch(props.data);
   const DEVICE = useDevice();
   const context = useContext(AppContext);
 
@@ -39,6 +41,7 @@ export default function ChatModal(props) {
     context.setactiveChat(props.data);
   };
   useEffect(() => {
+    // Setting Name of Chat
     if (props.data.ChatType === "DM") {
       setChatName(
         props.data.User1.ID === context.Current_UserID
@@ -55,6 +58,13 @@ export default function ChatModal(props) {
     }
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    // Setting active chat messages in a global store
+    if (context.activeChat.ChatID === props.data.ChatID) {
+      context.setactiveChatData([...Messages]);
+    }
+  }, [context.activeChat.ChatID, Messages]);
 
   return (
     <div
@@ -78,7 +88,7 @@ export default function ChatModal(props) {
       </div>
       <div className={styles.detail}>
         <h1 className={styles.chatname}>{ChatName}</h1>
-        {/* <p>Last message</p> */}
+        <p>{Messages?.[Messages?.length - 1]?.text.substring(0, 25)}</p>
       </div>
       <div className={styles.emptydiv}></div>
     </div>

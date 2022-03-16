@@ -58,7 +58,7 @@ export default function MsgSendUI(props) {
       text: Message,
       createdAt: serverTimestamp(),
     });
-    props.emptydiv.current.scrollIntoView({ smooth: true });
+    // props.emptydiv.current.scrollIntoView({ smooth: true });
   };
   return (
     <form

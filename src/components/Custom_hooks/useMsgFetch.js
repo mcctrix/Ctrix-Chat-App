@@ -10,23 +10,23 @@ import { db } from "../firebase/firebase";
 
 import AppContext from "../GlobalStore/Context";
 
-const useMsgFetch = () => {
+const useMsgFetch = (props) => {
   // Hooks
   const [Messages, setMessages] = useState([]);
 
-  const context = useContext(AppContext);
+  // const context = useContext(AppContext);
 
   useEffect(() => {
-    if (!context.activeChat) {
-      setMessages([]);
-      return;
-    }
-    if (context.activeChat.ChatType === "DM") {
+    // if (!props?.ChatID) {
+    //   setMessages([]);
+    //   return;
+    // }
+    if (props?.ChatType === "DM") {
       // Private Chat Fetch
       const DMref = query(
-        collection(db, "Messages", "Private_Chats", context.activeChat.ChatID),
-        orderBy("createdAt"),
-        limitToLast(20)
+        collection(db, "Messages", "Private_Chats", props.ChatID),
+        orderBy("createdAt")
+        // ,limitToLast(20)
       );
       onSnapshot(DMref, (snapshot) => {
         setMessages([]);
@@ -36,12 +36,12 @@ const useMsgFetch = () => {
       });
     }
 
-    if (context.activeChat.ChatType === "Group") {
+    if (props?.ChatType === "Group") {
       // Group Chat Fetch
       const DMref = query(
-        collection(db, "Messages", "Group_Chats", context.activeChat.ChatID),
-        orderBy("createdAt"),
-        limitToLast(25)
+        collection(db, "Messages", "Group_Chats", props.ChatID),
+        orderBy("createdAt")
+        // ,limitToLast(25)
       );
       onSnapshot(DMref, (snapshot) => {
         setMessages([]);
@@ -52,7 +52,7 @@ const useMsgFetch = () => {
     }
 
     // end
-  }, [context.activeChat]);
+  }, []);
 
   return [Messages];
 };

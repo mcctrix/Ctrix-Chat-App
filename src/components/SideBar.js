@@ -22,6 +22,7 @@ export default function SideBar() {
   // Hooks
   const [nameGroupChat, setnameGroupChat] = useState(false);
 
+  // Setting first chat as Active Chat
   if (
     !context.activeChat &&
     context.privateChatInit.length > 0 &&
