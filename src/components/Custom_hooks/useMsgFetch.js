@@ -1,14 +1,6 @@
-import { useState, useEffect, useContext } from "react";
-import {
-  collection,
-  onSnapshot,
-  query,
-  limitToLast,
-  orderBy,
-} from "firebase/firestore";
+import { useState, useEffect } from "react";
+import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
 import { db } from "../firebase/firebase";
-
-import AppContext from "../GlobalStore/Context";
 
 const useMsgFetch = (props) => {
   // Hooks
@@ -52,7 +44,7 @@ const useMsgFetch = (props) => {
     }
 
     // end
-  }, []);
+  }, [props.ChatType, props.ChatID]);
 
   return [Messages];
 };

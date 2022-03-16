@@ -64,6 +64,7 @@ export default function ChatModal(props) {
     if (context.activeChat.ChatID === props.data.ChatID) {
       context.setactiveChatData([...Messages]);
     }
+    // eslint-disable-next-line
   }, [context.activeChat.ChatID, Messages]);
 
   return (

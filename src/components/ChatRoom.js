@@ -7,7 +7,6 @@ import ChatRoomHeader from "./Comp_Parts/ChatRoom/ChatRoomHeader";
 import styles from "../styles/ChatRoom.module.css";
 
 import AppContext from "./GlobalStore/Context";
-import useMsgFetch from "./Custom_hooks/useMsgFetch";
 import Message from "./UI/Message";
 import MsgSendUI from "./UI/MsgSendUI";
 
