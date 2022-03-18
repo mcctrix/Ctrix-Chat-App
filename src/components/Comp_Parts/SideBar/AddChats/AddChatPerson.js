@@ -92,6 +92,7 @@ export default function AddChatPerson(props) {
     const DATA = {
       ChatID: ID,
       ChatType: "DM",
+      ChatUserID: [props.user.User_ID, context.Current_UserID],
       User1: { ID: props.user.User_ID },
       User2: { ID: context.Current_UserID },
     };

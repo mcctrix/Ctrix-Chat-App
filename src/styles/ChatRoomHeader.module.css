@@ -3,10 +3,16 @@
   position: sticky;
   top: 0;
   align-items: center;
+  justify-content: space-between;
   z-index: 20;
   box-shadow: -6px 7px 11px -2px rgba(33, 25, 25, 0.37);
   -webkit-box-shadow: -6px 7px 11px -2px rgba(33, 25, 25, 0.37);
   -moz-box-shadow: -6px 7px 11px -2px rgba(33, 25, 25, 0.37);
+  padding: 0 0.75rem;
+}
+.leftDiv {
+  display: flex;
+  align-items: center;
 }
 .backbtn {
   margin-left: 2vw;
@@ -20,6 +26,14 @@
   height: 7vh;
   border-radius: 50%;
   margin-right: 5px;
+}
+.Optionsdiv {
+  display: none;
+  position: relative;
+  margin-right: 2rem;
+}
+.DisplayOptions {
+  display: flex;
 }
 /* @media only screen and (max-width: 830px) {
   .header {

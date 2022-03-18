@@ -11,6 +11,9 @@ export const ContextWrapper = (props) => {
   // Chats Related to Current User
   const [userChats, setuserChats] = useState(false);
 
+  // All User Data
+  const [allUsersData, setallUserData] = useState();
+
   // For Mobile open Chat or Panel
   const [openChat, setopenChat] = useState(false);
 
@@ -28,9 +31,6 @@ export const ContextWrapper = (props) => {
 
   // Sidebar Header Options display
   const [sideBarOptions, setsideBarOptions] = useState(false);
-
-  // All User Data
-  const [allUsersData, setallUserData] = useState();
 
   // User Data Except Current User
   const [UsersData, setUsersData] = useState();

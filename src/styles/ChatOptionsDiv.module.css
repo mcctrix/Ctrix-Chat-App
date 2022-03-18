@@ -1,0 +1,44 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  background-color: #2e2f2f;
+  height: 65vh;
+  width: 60vw;
+  position: fixed;
+  top: 5%;
+  right: 20%;
+}
+.head {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  justify-content: space-between;
+  background-color: hsl(210, 1%, 28%);
+  height: 2.5rem;
+  width: 100%;
+  padding: 5px 8px;
+}
+.head > h3 {
+  margin: 0;
+  padding: 0;
+}
+.UserListdiv {
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+}
+.UserListdiv::-webkit-scrollbar {
+  display: none;
+}
+.userdiv {
+  display: flex;
+  /* justify-content: space-between; */
+  gap: 1.5rem;
+  padding: 1rem;
+}
+.userdiv > img {
+  width: 9vh;
+  height: 9vh;
+  border-radius: 50%;
+  margin-right: 5px;
+}
