@@ -22,7 +22,7 @@ export default function ChatRoom() {
     if (context.activeChatData && emptyDivRef) {
       setTimeout(() => {
         emptyDivRef.current.scrollIntoView({ smooth: true });
-      }, 200);
+      }, 400);
     }
   }, [context.activeChatData]);
 
