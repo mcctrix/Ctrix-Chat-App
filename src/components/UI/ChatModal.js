@@ -28,6 +28,7 @@ export default function ChatModal(props) {
     if (DEVICE === "Mobile") {
       context.setopenChat(true);
     }
+    context.setshowGifDiv(false);
     context.setuserNameActiveChat(() => {
       if (props.data.ChatType === "Group") {
         return props.data.ChatName;
@@ -89,7 +90,11 @@ export default function ChatModal(props) {
       </div>
       <div className={styles.detail}>
         <h1 className={styles.chatname}>{ChatName}</h1>
-        <p>{Messages?.[Messages?.length - 1]?.text.substring(0, 25)}</p>
+        {Messages?.[Messages?.length - 1]?.Message === "Gif" ? (
+          <p>Gif</p>
+        ) : (
+          <p>{Messages?.[Messages?.length - 1]?.text.substring(0, 25)}</p>
+        )}
       </div>
       <div className={styles.emptydiv}></div>
     </div>

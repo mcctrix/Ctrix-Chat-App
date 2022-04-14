@@ -31,6 +31,12 @@
   cursor: pointer;
 }
 
+.GifContainer {
+  /* height: 10vh;
+  width: 10vw; */
+  /* border-radius: 2px solid white; */
+}
+
 /* Media query */
 
 /* @media only screen and (max-width: 600px) {

@@ -26,22 +26,32 @@ export default function ChatRoom() {
     }
   }, [context.activeChatData]);
 
+  const CloseGifDiv = () => {
+    if (context.setshowGifDiv) {
+      context.setshowGifDiv(false);
+    }
+  };
+
   return (
     <div
+      id="ChatRoom"
       className={`${styles.main} ${
         DEVICE === "Mobile" && !context.openChat && styles.mobchatroom
       }`}
     >
       <ChatRoomHeader />
 
-      <div className={styles.messagesdiv}>
+      <div
+        className={styles.messagesdiv}
+        id="MessagesDiv"
+        onClick={CloseGifDiv}
+      >
         {context.activeChatData &&
           context.activeChatData.map((data) => (
             <Message key={data.id} data={data} />
           ))}
         <div ref={emptyDivRef}></div>
       </div>
-
       <MsgSendUI emptydiv={emptyDivRef} />
     </div>
   );

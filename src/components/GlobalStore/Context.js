@@ -48,6 +48,9 @@ export const ContextWrapper = (props) => {
   // Active Chat Data
   const [activeChatData, setactiveChatData] = useState();
 
+  // Giff Div Show
+  const [showGifDiv, setshowGifDiv] = useState(false);
+
   return (
     <AppContext.Provider
       value={{
@@ -98,6 +101,9 @@ export const ContextWrapper = (props) => {
 
         activeChatData,
         setactiveChatData,
+
+        showGifDiv,
+        setshowGifDiv,
       }}
     >
       {props.children}

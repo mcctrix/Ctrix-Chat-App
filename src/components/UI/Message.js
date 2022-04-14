@@ -3,6 +3,7 @@ import AppContext from "../GlobalStore/Context";
 import styles from "../../styles/Message.module.css";
 import classes from "../GlobalStore/GlobalStyles.module.css";
 import usePictures from "../Custom_hooks/usePictures";
+import Gif from "./GifComp";
 
 const Message = (props) => {
   // Init
@@ -16,7 +17,6 @@ const Message = (props) => {
   const UserPic = UserObtain.ProfilePicture
     ? UserObtain.ProfilePicture
     : Placeholder;
-
   return (
     <div
       className={`${styles.main} ${
@@ -34,24 +34,28 @@ const Message = (props) => {
         {context.Current_UserID !== props.data.Sender && (
           <p className={styles.userName}>{UserObtain.NickName}</p>
         )}
-        <div
-          className={`${
-            context.Current_UserID === props.data.Sender
-              ? classes.msgalignright
-              : classes.messageleft
-          } ${styles.message}`}
-          key={props.data.id}
-        >
-          <div className={styles.msgtext}>
-            {props.data.text}
-            {/* <div className={styles.hovertext}>
+        {props.data.Message === "Gif" ? (
+          <Gif GIF={props.data.Gif} />
+        ) : (
+          <div
+            className={`${
+              context.Current_UserID === props.data.Sender
+                ? classes.msgalignright
+                : classes.messageleft
+            } ${styles.message}`}
+            key={props.data.id}
+          >
+            <div className={styles.msgtext}>
+              {props.data.text}
+              {/* <div className={styles.hovertext}>
               {context.UsersData &&
                 context?.allUsersData?.find?.(
                   (data) => data.User_ID === props.data.Sender
-                )?.NickName}
-            </div> */}
+                  )?.NickName}
+                </div> */}
+            </div>
           </div>
-        </div>
+        )}
       </div>
       {/* {context.Current_UserID === props.data.Sender && (
         <img

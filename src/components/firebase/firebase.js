@@ -20,10 +20,13 @@ const Production_Backend = {
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
 };
 
+
 export const app =
   process.env.NODE_ENV === "development"
     ? initializeApp(Development_Backend)
     : initializeApp(Production_Backend);
+
+// export const app = initializeApp(Production_Backend);
 
 export const storage = getStorage(app);
 export const db = getFirestore(app);

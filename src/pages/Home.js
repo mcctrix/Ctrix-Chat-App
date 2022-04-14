@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import ChatComponent from "../components/ChatComponent";
 
 import useInitialiseContextData from "../components/Functions/useInitialiseContextData";
-import Maintenance from "../components/UI/Maintenance";
 
 export default function Home() {
   // init
@@ -21,9 +20,6 @@ export default function Home() {
       }
     });
   });
-  if (process.env.Maintenance) {
-    return <Maintenance />;
-  }
   return (
     <>
       <ChatComponent />

@@ -1,4 +1,4 @@
-import { useRef, useContext } from "react";
+import { useRef, useContext, useCallback } from "react";
 import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 
@@ -7,28 +7,30 @@ import AppContext from "../GlobalStore/Context";
 import styles from "../../styles/MsgSendUI.module.css";
 import classes from "../GlobalStore/GlobalStyles.module.css";
 
-// import GiffIcon from "./GiffIcon";
-// import GiffsDiv from "../Comp_Parts/ChatRoom/MsgSendUI/GiffsDiv";
+import GiffIcon from "./GiffIcon";
+import GiffsDiv from "../Comp_Parts/ChatRoom/MsgSendUI/GiffsDiv";
 
 export default function MsgSendUI(props) {
   // init
   const context = useContext(AppContext);
 
   // hooks
-  // const [openGif, setopenGif] = useState(false);
   const NewMsgRef = useRef();
 
   // Function
-  // const OpenGif = () => {
-  //   setopenGif((value) => !value);
-  // };
+  const OpenGif = () => {
+    context.setshowGifDiv((state) => !state);
+  };
 
-  const SendMsg = async (event) => {
-    const Message = NewMsgRef.current.value;
-    NewMsgRef.current.value = "";
-    event.preventDefault();
-    if (Message === "") {
-      return;
+  const SendMsg = (data) => {
+    let Message;
+    if (data.type === "text") {
+      data.event.preventDefault();
+      Message = NewMsgRef.current.value;
+      NewMsgRef.current.value = "";
+      if (Message === "") {
+        return;
+      }
     }
     const id = Date.now().toString();
     let LocRef;
@@ -50,26 +52,52 @@ export default function MsgSendUI(props) {
         id
       );
     }
+    //
 
-    await setDoc(LocRef, {
+    const MsgObj = {
       ChatID: context.activeChat.ChatID,
       id: id,
       Sender: context.Current_UserID,
-      text: Message,
       createdAt: serverTimestamp(),
-    });
+    };
+    if (data.type === "text") {
+      setDoc(LocRef, {
+        ...MsgObj,
+        text: Message,
+        Message: "Normal",
+      });
+    }
+    if (data.type === "Gif") {
+      setDoc(LocRef, {
+        ...MsgObj,
+        Message: "Gif",
+        Gif: data.GifID,
+      });
+    }
+
     // props.emptydiv.current.scrollIntoView({ smooth: true });
   };
   return (
     <form
-      onSubmit={SendMsg}
+      onSubmit={(event) => {
+        SendMsg({
+          type: "text",
+          event: event,
+        });
+      }}
+      id="MsgSendUI"
       className={`${styles.sentmsgform} ${classes.darkerbgcolor} `}
     >
-      {/* <div onClick={OpenGif}>
-        <div className={styles.GifContainer}></div>
-        {/* {openGif && <GiffsDiv />} */}
-      {/* <GiffIcon /> */}
-      {/* </div> */}
+      <div id="GifDiv">
+        {context.showGifDiv && (
+          <div className={styles.GifContainer}>
+            <GiffsDiv MsgSendHandler={SendMsg} />
+          </div>
+        )}
+        <div onClick={OpenGif}>
+          <GiffIcon />
+        </div>
+      </div>
       <input
         className={`${classes.inputTextColor} ${styles.sentForm}`}
         placeholder="Type your message.."

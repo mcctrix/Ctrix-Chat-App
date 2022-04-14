@@ -1,4 +1,23 @@
-.main {
+/* .main {
   position: absolute;
   margin-bottom: 20vh;
+} */
+.main {
+  position: fixed;
+  bottom: 8vh;
+  margin-left: 1vw;
+  height: 43vh;
+  /* width: 30vw; */
+  overflow-y: visible;
+  overflow-x: scroll;
+
+  z-index: 10;
+}
+.main::-webkit-scrollbar {
+  display: none;
+}
+.SBdiv {
+  position: sticky;
+  z-index: 20;
+  bottom: 0;
 }

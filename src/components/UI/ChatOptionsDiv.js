@@ -15,12 +15,14 @@ export default function ChatOptionsDiv(props) {
         return data.User_ID === ID ? true : false;
       })
     );
+
     setUserList(DATA);
     // eslint-disable-next-line
   }, [context.activeChat]);
   const BackButton = () => {
     props.setVisibility(false);
   };
+
   return (
     <div className={styles.container}>
       <header className={styles.head}>
@@ -32,7 +34,7 @@ export default function ChatOptionsDiv(props) {
       </header>
       <div className={styles.UserListdiv}>
         {UserList?.map((user) => (
-          <div className={styles.userdiv}>
+          <div key={user[0].User_ID} className={styles.userdiv}>
             <img
               alt="User Pic"
               src={
