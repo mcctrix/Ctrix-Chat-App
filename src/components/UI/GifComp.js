@@ -9,5 +9,5 @@ export default function GifComp({ GIF }) {
     const { data } = await giphyF.gif(GIF);
     setGif(data);
   }, [GIF]);
-  return gif && <Gif gif={gif} width={300} />;
+  return gif && <Gif gif={gif} width={340} />;
 }
