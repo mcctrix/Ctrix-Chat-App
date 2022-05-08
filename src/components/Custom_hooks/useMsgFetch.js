@@ -6,13 +6,7 @@ const useMsgFetch = (props) => {
   // Hooks
   const [Messages, setMessages] = useState([]);
 
-  // const context = useContext(AppContext);
-
   useEffect(() => {
-    // if (!props?.ChatID) {
-    //   setMessages([]);
-    //   return;
-    // }
     if (props?.ChatType === "DM") {
       // Private Chat Fetch
       const DMref = query(

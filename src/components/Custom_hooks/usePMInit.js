@@ -17,11 +17,6 @@ function usePMInit() {
     onSnapshot(
       query(PMREF, where("User1.ID", "==", context.Current_UserID)),
       (snapshot) => {
-        // Filter Chat If User1 Of that chat is not our current user
-        // context.setprivateChatInit((data) =>
-        //   data.filter((arr) => arr.User1.ID !== context.Current_UserID)
-        // );
-
         snapshot.docs.forEach((doc) => {
           const data = doc.data();
           //  Filter Older Version of Chat
