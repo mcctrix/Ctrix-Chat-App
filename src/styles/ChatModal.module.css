@@ -6,11 +6,15 @@
   color: #e4e6eb;
   font-weight: 200;
 }
-.image > img {
+.image {
+  display: flex;
+  justify-content: flex-start;
+}
+.userimage {
   width: 8vh;
   height: 8vh;
   border-radius: 50%;
-  margin-right: 5px;
+  /* margin-right: 5px; */
 }
 .detail {
   display: flex;

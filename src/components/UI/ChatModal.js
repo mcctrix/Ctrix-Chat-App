@@ -76,17 +76,18 @@ export default function ChatModal(props) {
       onClick={makeChatActive}
     >
       <div className={styles.image}>
-        <div
-          className={`${
-            context?.activeChat?.ChatID === props.data.ChatID &&
-            classes.activeChatHeader
-          }`}
-        ></div>
         <img
           className={styles.userimage}
           alt="User profile"
           src={UserPic}
         ></img>
+        {/* Active Chat Symbol */}
+        {/* <div
+          className={`${
+            context?.activeChat?.ChatID === props.data.ChatID &&
+            classes.activeChatHeader
+          }`}
+        ></div> */}
       </div>
       <div className={styles.detail}>
         <h1 className={styles.chatname}>{ChatName}</h1>

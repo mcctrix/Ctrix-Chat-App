@@ -24,9 +24,7 @@
   width: 20px;
   height: 20px;
   border-radius: 1vh;
-  margin-left: 35px;
-  margin-bottom: -10px;
-  position: relative;
+  margin-left: -1vw;
 }
 .bgcolorGroupChat {
   background-color: #1776f1;

@@ -5,9 +5,10 @@
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid black;
+  z-index: 0;
 }
 .imgnamediv {
-  position: relative;
+  /* position: relative; */
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -16,6 +17,7 @@
 .userimage {
   width: 9vh;
   height: 9vh;
+  z-index: 1;
   border-radius: 50%;
   margin-right: 5px;
 }
