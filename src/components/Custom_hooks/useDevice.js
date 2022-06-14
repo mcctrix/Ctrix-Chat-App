@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
-import { isMobile } from "react-device-detect";
+import { isMobileOnly } from "react-device-detect";
 
 const useDeivce = () => {
   // hooks
-  const [IsMobile, setIsMobile] = useState();
+  const [Mobile, setMobile] = useState();
 
   // const handleResize = () => {
   //   setWidth(window.innerWidth);
   // };
   const setDevice = (val) => {
-    setIsMobile(val);
+    setMobile(val);
   };
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const useDeivce = () => {
     // return () => {
     //   window.addEventListener("resize", handleResize);
     // };
-    if (isMobile) {
+    if (isMobileOnly) {
       setDevice("Mobile");
       return;
     }
@@ -29,6 +29,6 @@ const useDeivce = () => {
   // if (width < 600) {
   //   return "Mobile";
   // }
-  return IsMobile;
+  return Mobile;
 };
 export default useDeivce;

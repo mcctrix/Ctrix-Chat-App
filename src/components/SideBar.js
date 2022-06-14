@@ -1,7 +1,6 @@
 import { useContext, useState } from "react";
 import usePMInit from "./Custom_hooks/usePMInit";
 
-import AddIcon from "./UI/AddIcon";
 import styles from "../styles/SideBar.module.css";
 import classes from "./GlobalStore/GlobalStyles.module.css";
 
@@ -21,6 +20,7 @@ export default function SideBar() {
   const context = useContext(AppContext);
   // Hooks
   const [nameGroupChat, setnameGroupChat] = useState(false);
+  const [makeGroupChatToggler, setMakeGroupBtnToggler] = useState(false);
 
   // Setting first chat as Active Chat
   if (
@@ -57,28 +57,6 @@ export default function SideBar() {
     setnameGroupChat(true);
   };
 
-  if (context.newPersonaddbtn) {
-    return (
-      <div
-        onClick={CloseOptionsInSideBarHeader}
-        className={`${styles.main} ${
-          DEVICE === "Mobile" && styles.mobSidebar
-        } ${context.openChat && styles.mobchatopen}`}
-      >
-        <div>
-          <SideBarHeader id="new" title="Add People" />
-          <AddChats />
-        </div>
-        <button
-          className={`${classes.bgcolor} ${classes.textcolor} ${styles.makeGroupBtn}`}
-          onClick={makeGroupChat}
-        >
-          Make Group
-        </button>
-        {nameGroupChat && <GetNameForGroup togglevis={setnameGroupChat} />}
-      </div>
-    );
-  }
   return (
     <div
       className={`${styles.main} ${DEVICE === "Mobile" && styles.mobSidebar} ${
@@ -86,27 +64,66 @@ export default function SideBar() {
       }`}
       onClick={CloseOptionsInSideBarHeader}
     >
-      <div>
+      <div className={styles.chatListContainer}>
         <div className={styles.headerdiv}>
-          <SideBarHeader title={context.Current_UserName} />
+          {context.newPersonAddBtn ? (
+            <SideBarHeader id="new" title="Add People" />
+          ) : (
+            <SideBarHeader title={context.Current_UserName} />
+          )}
         </div>
-
-        <div className={styles.chatmodals}>
-          {context.privateChatInit &&
-            context.privateChatInit.map((data) => (
-              <ChatModal key={data.ChatID} data={data} />
-            ))}
-        </div>
+        <nav className={styles.navBar}>
+          <span
+            className={`${!context.newPersonAddBtn && styles.navItemActive} ${
+              styles.navItems
+            }`}
+            onClick={() => context.setnewPersonAddBtn(false)}
+          >
+            Chats
+          </span>
+          <span
+            className={`${context.newPersonAddBtn && styles.navItemActive} ${
+              styles.navItems
+            }`}
+            onClick={() => context.setnewPersonAddBtn(true)}
+          >
+            Contacts
+          </span>
+        </nav>
+        {context.newPersonAddBtn ? (
+          <AddChats groupBtnToggler={setMakeGroupBtnToggler} />
+        ) : (
+          <div className={styles.chatmodals}>
+            {context.privateChatInit &&
+              context.privateChatInit.map((data) => (
+                <ChatModal key={data.ChatID} data={data} />
+              ))}
+          </div>
+        )}
       </div>
-
-      <button
-        onClick={() => context.setnewPersonaddbtn(true)}
-        className={`${styles.addbutton} ${
-          context.newPersonaddbtn && styles.disnoneaddbtn
-        } `}
-      >
-        <AddIcon />
-      </button>
+      {
+        context.newPersonAddBtn && makeGroupChatToggler ? (
+          <>
+            <button
+              className={`${classes.bgcolor} ${classes.textcolor} ${styles.makeGroupBtn}`}
+              onClick={makeGroupChat}
+            >
+              Make Group
+            </button>
+            {nameGroupChat && <GetNameForGroup togglevis={setnameGroupChat} />}
+          </>
+        ) : null
+        // <div className={styles.addBtnDiv}>
+        //   <button
+        //     onClick={() => context.setnewPersonAddBtn(true)}
+        //     className={`${styles.addbutton} ${
+        //       context.newPersonAddBtn && styles.displayNoneAddBtn
+        //     } `}
+        //   >
+        //     <AddIcon />
+        //   </button>
+        // </div>
+      }
     </div>
   );
 }

@@ -7,7 +7,6 @@ import usePictures from "../Custom_hooks/usePictures";
 import styles from "../../styles/SideBarHeader.module.css";
 import classes from "../GlobalStore/GlobalStyles.module.css";
 
-import BackIcon from "./BackIcon";
 import DotIcon from "./DotIcon";
 
 export default function SideBarHeader(props) {
@@ -38,14 +37,14 @@ export default function SideBarHeader(props) {
   };
   return (
     <div className={`${classes.darkerbgcolor} ${styles.main}`}>
-      {props.id === "new" && (
+      {/* {props.id === "new" && (
         <button
-          onClick={() => context.setnewPersonaddbtn(false)}
+          onClick={() => context.setnewPersonAddBtn(false)}
           className={styles.backbuttondiv}
         >
-          {props.id === "new" ? <BackIcon /> : null}
+          <BackIcon />
         </button>
-      )}
+      )} */}
       <div className={styles.imgnamediv}>
         <img
           className={styles.userimage}

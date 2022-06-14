@@ -47,7 +47,7 @@ export default function GetNameForGroup(prop) {
     prop.togglevis(false);
     context.setuserNameActiveChat(NameRef.current.value);
     context.setactiveChat(Data);
-    context.setnewPersonaddbtn(false);
+    context.setnewPersonAddBtn(false);
   };
   return (
     <div className={styles.main}>

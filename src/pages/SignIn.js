@@ -51,7 +51,7 @@ export default function Signin() {
           <input
             className={styles.inputfield}
             name="name"
-            placeholder="username"
+            placeholder="Username"
             onChange={(e) => setuserName(e.target.value)}
             value={userName}
             required

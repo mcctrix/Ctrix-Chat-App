@@ -6,7 +6,7 @@ import styles from "../../styles/AddChats.module.css";
 import classes from "../GlobalStore/GlobalStyles.module.css";
 import AddChatPerson from "./SideBar/AddChats/AddChatPerson";
 
-export default function AddChats() {
+export default function AddChats({ groupBtnToggler }) {
   // Init
   const context = useContext(AppContext);
 
@@ -14,6 +14,7 @@ export default function AddChats() {
   const [groupAddMode, setgroupAddMode] = useState(false);
 
   const toggleGroupMode = () => {
+    groupBtnToggler((val) => !val);
     setgroupAddMode((val) => !val);
   };
 

@@ -83,7 +83,7 @@ export default function AddChatPerson(props) {
       }
 
       context.setuserNameActiveChat(props.user.NickName);
-      context.setnewPersonaddbtn(false);
+      context.setnewPersonAddBtn(false);
       context.setactiveChat(Chat);
       return;
     }
@@ -100,7 +100,7 @@ export default function AddChatPerson(props) {
     if (isMobile) {
       context.setopenChat(true);
     }
-    context.setnewPersonaddbtn(false);
+    context.setnewPersonAddBtn(false);
     context.setuserNameActiveChat(props.user.NickName);
     context.setactiveChat(DATA);
   };

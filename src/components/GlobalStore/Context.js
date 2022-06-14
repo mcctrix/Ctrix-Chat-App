@@ -24,7 +24,7 @@ export const ContextWrapper = (props) => {
   const [userNameActiveChat, setuserNameActiveChat] = useState();
 
   // Add button clicked in side bar
-  const [newPersonaddbtn, setnewPersonaddbtn] = useState(false);
+  const [newPersonAddBtn, setnewPersonAddBtn] = useState(false);
 
   // Group Chat User List
   const [groupChatList, setgroupChatList] = useState([]);
@@ -84,8 +84,8 @@ export const ContextWrapper = (props) => {
         sideBarOptions,
         setsideBarOptions,
 
-        newPersonaddbtn,
-        setnewPersonaddbtn,
+        newPersonAddBtn,
+        setnewPersonAddBtn,
 
         privateChatInit,
         setprivateChatInit,
