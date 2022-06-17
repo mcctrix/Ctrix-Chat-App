@@ -7,11 +7,10 @@ import AppContext from "../GlobalStore/Context";
 
 function usePMInit() {
   const context = useContext(AppContext);
+  // Ref
+  const PMREF = collection(db, "Private_Chat_init");
 
   useEffect(() => {
-    // Ref
-    const PMREF = collection(db, "Private_Chat_init");
-
     // Retrieving Private Chatroom details related to current user
 
     onSnapshot(

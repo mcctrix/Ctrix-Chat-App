@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { Grid, SearchBar, SearchContext } from "@giphy/react-components";
 import AppContext from "../../../GlobalStore/Context";
 
