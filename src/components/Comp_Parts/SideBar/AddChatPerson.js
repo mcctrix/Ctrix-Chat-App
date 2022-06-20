@@ -54,6 +54,7 @@ export default function AddChatPerson(props) {
 
   const ClickEvent = async () => {
     if (props.GroupMode) return;
+
     const ID = uuid();
     const MsgRef = doc(db, "Private_Chat_init", ID);
 

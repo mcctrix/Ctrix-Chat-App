@@ -20,13 +20,13 @@ import {
   Button,
   Heading,
   Text,
+  useColorMode,
 } from "@chakra-ui/react";
-
-// import styles from "../../styles/GetNickName.module.css";
 
 export default function UserSettings(props) {
   // Initialise
   const [, boy, boy2, girl, girl2] = usePictures();
+  const { colorMode } = useColorMode();
 
   const context = useContext(AppContext);
 
@@ -124,7 +124,7 @@ export default function UserSettings(props) {
         p="5"
         borderRadius="3xl"
         boxShadow="0 0 0 400vmax rgb(0 0 0 / 0.4)"
-        bgColor="teal.300"
+        bgColor={colorMode === "dark" ? "facebook.900" : "facebook.200"}
       >
         {props.Firsttime && <h1>Welcome to the Ctrix Chats</h1>}
 

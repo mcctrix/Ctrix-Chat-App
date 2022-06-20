@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { GiphyFetch } from "@giphy/js-fetch-api";
 import { Gif } from "@giphy/react-components";
 
+import { Container } from "@chakra-ui/react";
+
 export default function GifComp({ GIF }) {
   const [gif, setGif] = useState(null);
   useEffect(() => {
@@ -12,5 +14,9 @@ export default function GifComp({ GIF }) {
     };
     fetchFunction();
   }, [GIF]);
-  return gif && <Gif gif={gif} width={340} />;
+  return (
+    <Container p="0" width="64" h="36" bgColor="yellow.700">
+      {gif && <Gif gif={gif} overlay="true" />}
+    </Container>
+  );
 }

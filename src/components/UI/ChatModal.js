@@ -5,7 +5,14 @@ import usePictures from "../Custom_hooks/usePictures";
 
 import useMsgFetch from "../Custom_hooks/useMsgFetch";
 
-import { HStack, Image, Heading, Text, VStack } from "@chakra-ui/react";
+import {
+  HStack,
+  Image,
+  Heading,
+  Text,
+  VStack,
+  useColorMode,
+} from "@chakra-ui/react";
 
 export default function ChatModal(props) {
   // inits
@@ -13,6 +20,7 @@ export default function ChatModal(props) {
   const [Messages] = useMsgFetch(props.data);
   const DEVICE = useDevice();
   const context = useContext(AppContext);
+  const { colorMode } = useColorMode();
 
   // Hooks
   const [ChatName, setChatName] = useState("");
@@ -75,11 +83,14 @@ export default function ChatModal(props) {
       //   context?.activeChat?.ChatID === props.data.ChatID && classes.activechat
       // }`}
       onClick={makeChatActive}
-      // bgColor={
-      //   context?.activeChat?.ChatID === props.data.ChatID
-      //     ? "hsl(230, 21%, 21%)"
-      //     : "#171923"
-      // }
+      // bgColor="inherit"
+      bgColor={
+        context?.activeChat?.ChatID === props.data.ChatID
+          ? colorMode === "dark"
+            ? "hsl(230, 21%, 21%)"
+            : "blackAlpha.100"
+          : "inherit"
+      }
     >
       <HStack>
         <Image

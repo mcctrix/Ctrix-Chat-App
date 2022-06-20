@@ -24,6 +24,7 @@ export default function MsgSendUI(props) {
   const SendMsg = (data) => {
     let Message;
     if (data.type === "text") {
+      data?.event?.target.preventDefault();
       Message = NewMsgRef.current.value;
       NewMsgRef.current.value = "";
       if (Message === "") {
@@ -83,7 +84,18 @@ export default function MsgSendUI(props) {
           <GiffIcon />
         </Container>
       </Container>
-      <Input placeholder="Type your message.." ref={NewMsgRef} w="full" />
+      {/* <form
+        onSubmit={(e) => {
+          SendMsg({ type: "text", event: e });
+        }}
+      > */}
+      <Input
+        placeholder="Type your message.."
+        ref={NewMsgRef}
+        w="full"
+        // onSubmitCapture={() => SendMsg({ type: "text" })}
+      />
+      {/* </form> */}
       <Button onClick={() => SendMsg({ type: "text" })}>Send</Button>
     </HStack>
   );

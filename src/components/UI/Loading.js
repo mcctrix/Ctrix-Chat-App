@@ -12,7 +12,7 @@ const Loading = () => {
       centerContent
     >
       <CircularProgress isIndeterminate size="20" />
-      <Heading size="lg">Loading</Heading>
+      <Heading size="lg">Loading Messages</Heading>
     </Container>
   );
 };

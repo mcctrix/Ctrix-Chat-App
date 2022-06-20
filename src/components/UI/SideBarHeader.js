@@ -41,8 +41,11 @@ export default function SideBarHeader(props) {
   };
   const ShowSettingHandler = () => {
     context.setsideBarOptions((snap) => !snap);
-
     context.setDisplayUserSettings(true);
+  };
+  const changeTheme = () => {
+    context.setsideBarOptions((snap) => !snap);
+    toggleColorMode();
   };
   return (
     <HStack
@@ -52,6 +55,7 @@ export default function SideBarHeader(props) {
       top="0"
       zIndex="400"
       boxShadow="sm"
+      bgColor="Background"
     >
       <HStack>
         <Image
@@ -88,7 +92,7 @@ export default function SideBarHeader(props) {
               </Button>
             </ListItem>
             <ListItem>
-              <Button onClick={() => toggleColorMode()}>Theme mode</Button>
+              <Button onClick={changeTheme}>Theme mode</Button>
             </ListItem>
           </List>
         </Stack>
