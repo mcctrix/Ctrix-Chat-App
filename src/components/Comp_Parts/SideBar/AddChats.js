@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
 
-import AppContext from "../GlobalStore/Context";
+import AppContext from "../../GlobalStore/Context";
 
-import styles from "../../styles/AddChats.module.css";
-import classes from "../GlobalStore/GlobalStyles.module.css";
-import AddChatPerson from "./SideBar/AddChats/AddChatPerson";
+import AddChatPerson from "./AddChatPerson";
+
+import { Container, Button, VStack } from "@chakra-ui/react";
 
 export default function AddChats({ groupBtnToggler }) {
   // Init
@@ -19,14 +19,11 @@ export default function AddChats({ groupBtnToggler }) {
   };
 
   return (
-    <div className={`${classes.bgcolor} ${styles.main}`}>
-      <button
-        className={`${classes.bgcolorGroupChat} ${classes.textcolor} ${styles.groupChatBtn}`}
-        onClick={toggleGroupMode}
-      >
+    <Container padding="0">
+      <Button onClick={toggleGroupMode} w="full" size="lg">
         Make Group Chat
-      </button>
-      <ul>
+      </Button>
+      <VStack alignItems="flex-start" spacing="0">
         {context.UsersData.map((user) => (
           <AddChatPerson
             user={user}
@@ -34,7 +31,7 @@ export default function AddChats({ groupBtnToggler }) {
             GroupMode={groupAddMode}
           />
         ))}
-      </ul>
-    </div>
+      </VStack>
+    </Container>
   );
 }

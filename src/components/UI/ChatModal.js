@@ -3,9 +3,9 @@ import AppContext from "../GlobalStore/Context";
 import useDevice from "../Custom_hooks/useDevice";
 import usePictures from "../Custom_hooks/usePictures";
 
-import styles from "../../styles/ChatModal.module.css";
-import classes from "../GlobalStore/GlobalStyles.module.css";
 import useMsgFetch from "../Custom_hooks/useMsgFetch";
+
+import { HStack, Image, Heading, Text, VStack } from "@chakra-ui/react";
 
 export default function ChatModal(props) {
   // inits
@@ -69,18 +69,26 @@ export default function ChatModal(props) {
   }, [context.activeChat.ChatID, Messages]);
 
   return (
-    <div
-      className={`${styles.main} ${
-        context?.activeChat?.ChatID === props.data.ChatID && classes.activechat
-      }`}
+    <HStack
+      padding="1"
+      // className={`${styles.main} ${
+      //   context?.activeChat?.ChatID === props.data.ChatID && classes.activechat
+      // }`}
       onClick={makeChatActive}
+      bgColor={
+        context?.activeChat?.ChatID === props.data.ChatID
+          ? "hsl(230, 21%, 21%)"
+          : "#171923"
+      }
     >
-      <div className={styles.image}>
-        <img
-          className={styles.userimage}
+      <HStack>
+        <Image
           alt="User profile"
           src={UserPic}
-        ></img>
+          boxSize="14"
+          borderRadius="50%"
+          loading="lazy"
+        />
         {/* Active Chat Symbol */}
         {/* <div
           className={`${
@@ -88,16 +96,16 @@ export default function ChatModal(props) {
             classes.activeChatHeader
           }`}
         ></div> */}
-      </div>
-      <div className={styles.detail}>
-        <h1 className={styles.chatname}>{ChatName}</h1>
+      </HStack>
+      <VStack alignItems="flex-start">
+        <Heading size="md">{ChatName}</Heading>
         {Messages?.[Messages?.length - 1]?.Message === "Gif" ? (
-          <p>Gif</p>
+          <Text>Gif</Text>
         ) : (
-          <p>{Messages?.[Messages?.length - 1]?.text.substring(0, 25)}</p>
+          <Text>{Messages?.[Messages?.length - 1]?.text.substring(0, 25)}</Text>
         )}
-      </div>
-      <div className={styles.emptydiv}></div>
-    </div>
+      </VStack>
+      {/* <div className={styles.emptydiv}></div> */}
+    </HStack>
   );
 }

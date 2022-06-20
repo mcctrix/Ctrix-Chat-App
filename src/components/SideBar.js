@@ -1,17 +1,16 @@
 import { useContext, useState } from "react";
 import usePMInit from "./Custom_hooks/usePMInit";
 
-import styles from "../styles/SideBar.module.css";
-import classes from "./GlobalStore/GlobalStyles.module.css";
-
 import ChatModal from "./UI/ChatModal";
 import SideBarHeader from "./UI/SideBarHeader";
-import AddChats from "./Comp_Parts/AddChats";
+import AddChats from "./Comp_Parts/SideBar/AddChats";
 
 import useDevice from "./Custom_hooks/useDevice";
 
 import AppContext from "./GlobalStore/Context";
 import GetNameForGroup from "./Functions/GetNameForGroup";
+
+import { Container, HStack, Button } from "@chakra-ui/react";
 
 export default function SideBar() {
   // Inits
@@ -25,21 +24,21 @@ export default function SideBar() {
   // Setting first chat as Active Chat
   if (
     !context.activeChat &&
-    context.privateChatInit.length > 0 &&
+    context.chatInit.length > 0 &&
     context.UsersData.length > 0
   ) {
-    context.setactiveChat(context.privateChatInit[0]);
-    if (context.privateChatInit[0].ChatType === "Group") {
-      context.setuserNameActiveChat(context.privateChatInit[0].ChatName);
+    context.setactiveChat(context.chatInit[0]);
+    if (context.chatInit[0].ChatType === "Group") {
+      context.setuserNameActiveChat(context.chatInit[0].ChatName);
     }
-    if (context.privateChatInit[0].ChatType === "DM") {
+    if (context.chatInit[0].ChatType === "DM") {
       context.setuserNameActiveChat(
-        context.Current_UserID === context.privateChatInit[0].User1.ID
+        context.Current_UserID === context.chatInit[0].User1.ID
           ? context.UsersData?.find?.(
-              (val) => val.User_ID === context.privateChatInit[0].User2.ID
+              (val) => val.User_ID === context.chatInit[0].User2.ID
             ).NickName
           : context.UsersData?.find?.(
-              (val) => val.User_ID === context.privateChatInit[0].User1.ID
+              (val) => val.User_ID === context.chatInit[0].User1.ID
             ).NickName
       );
     }
@@ -58,72 +57,67 @@ export default function SideBar() {
   };
 
   return (
-    <div
-      className={`${styles.main} ${DEVICE === "Mobile" && styles.mobSidebar} ${
-        context.openChat && styles.mobchatopen
-      }`}
+    <Container
+      h="100vh"
+      w={DEVICE === "Mobile" ? "full" : "25vw"}
+      display={context.openChat ? "none" : "flex"}
+      p="0"
+      flexDirection="column"
       onClick={CloseOptionsInSideBarHeader}
     >
-      <div className={styles.chatListContainer}>
-        <div className={styles.headerdiv}>
-          {context.newPersonAddBtn ? (
-            <SideBarHeader id="new" title="Add People" />
-          ) : (
-            <SideBarHeader title={context.Current_UserName} />
-          )}
-        </div>
-        <nav className={styles.navBar}>
-          <span
-            className={`${!context.newPersonAddBtn && styles.navItemActive} ${
-              styles.navItems
-            }`}
-            onClick={() => context.setnewPersonAddBtn(false)}
+      <Container
+        p={"0"}
+        overflowX={"auto"}
+        css={{ "&::-webkit-scrollbar": { display: "none" } }}
+      >
+        {context.newPersonAddBtn ? (
+          <SideBarHeader id="new" title="Add People" />
+        ) : (
+          <SideBarHeader title={context.Current_UserName} />
+        )}
+        <HStack>
+          <Button
+            onClick={() => {
+              context.setnewPersonAddBtn(false);
+              setMakeGroupBtnToggler(false);
+            }}
+            w="full"
+            colorScheme={context.newPersonAddBtn ? "blue" : "red"}
+            boxShadow="none"
           >
             Chats
-          </span>
-          <span
-            className={`${context.newPersonAddBtn && styles.navItemActive} ${
-              styles.navItems
-            }`}
+          </Button>
+          <Button
             onClick={() => context.setnewPersonAddBtn(true)}
+            w="full"
+            colorScheme={context.newPersonAddBtn ? "red" : "blue"}
+            boxShadow="none"
           >
             Contacts
-          </span>
-        </nav>
+          </Button>
+        </HStack>
         {context.newPersonAddBtn ? (
           <AddChats groupBtnToggler={setMakeGroupBtnToggler} />
         ) : (
-          <div className={styles.chatmodals}>
-            {context.privateChatInit &&
-              context.privateChatInit.map((data) => (
+          <Container p={"0"}>
+            {context.chatInit &&
+              context.chatInit.map((data) => (
                 <ChatModal key={data.ChatID} data={data} />
               ))}
-          </div>
+          </Container>
         )}
-      </div>
-      {
-        context.newPersonAddBtn && makeGroupChatToggler ? (
-          <>
-            <button
-              className={`${classes.bgcolor} ${classes.textcolor} ${styles.makeGroupBtn}`}
-              onClick={makeGroupChat}
-            >
-              Make Group
-            </button>
-            {nameGroupChat && <GetNameForGroup togglevis={setnameGroupChat} />}
-          </>
-        ) : null
-        // <div className={styles.addBtnDiv}>
-        //   <button
-        //     onClick={() => context.setnewPersonAddBtn(true)}
-        //     className={`${styles.addbutton} ${
-        //       context.newPersonAddBtn && styles.displayNoneAddBtn
-        //     } `}
-        //   >
-        //     <AddIcon />
-        //   </button>
-        // </div>
-      }
-    </div>
+      </Container>
+      {context.newPersonAddBtn && makeGroupChatToggler && (
+        <>
+          <Button onClick={makeGroupChat}>Make Group</Button>
+          {nameGroupChat && (
+            <GetNameForGroup
+              togglevis={setnameGroupChat}
+              toggleGroupMakeBtn={setMakeGroupBtnToggler}
+            />
+          )}
+        </>
+      )}
+    </Container>
   );
 }

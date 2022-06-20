@@ -4,8 +4,15 @@ import AppContext from "../GlobalStore/Context";
 import { useNavigate } from "react-router-dom";
 import usePictures from "../Custom_hooks/usePictures";
 
-import styles from "../../styles/SideBarHeader.module.css";
-import classes from "../GlobalStore/GlobalStyles.module.css";
+import {
+  HStack,
+  Heading,
+  Image,
+  Stack,
+  List,
+  ListItem,
+  Button,
+} from "@chakra-ui/react";
 
 import DotIcon from "./DotIcon";
 
@@ -27,7 +34,7 @@ export default function SideBarHeader(props) {
     context.setCurrent_UserData("");
     context.setUsersData("");
     context.setactiveChat(null);
-    context.setprivateChatInit([]);
+    context.setChatInit([]);
     Navigate("/");
   };
   const ShowSettingHandler = () => {
@@ -36,46 +43,54 @@ export default function SideBarHeader(props) {
     context.setDisplayUserSettings(true);
   };
   return (
-    <div className={`${classes.darkerbgcolor} ${styles.main}`}>
-      {/* {props.id === "new" && (
-        <button
-          onClick={() => context.setnewPersonAddBtn(false)}
-          className={styles.backbuttondiv}
-        >
-          <BackIcon />
-        </button>
-      )} */}
-      <div className={styles.imgnamediv}>
-        <img
-          className={styles.userimage}
+    <HStack
+      justifyContent="space-between"
+      p="1"
+      pos="sticky"
+      top="0"
+      bgColor="hsl(230, 21%, 21%)"
+      zIndex="400"
+      boxShadow="sm"
+    >
+      <HStack>
+        <Image
           alt="User profile"
           src={
-            context?.Current_UserData?.[0]?.ProfilePicture
-              ? context?.Current_UserData?.[0]?.ProfilePicture
+            context?.Current_UserData?.ProfilePicture
+              ? context?.Current_UserData?.ProfilePicture
               : Placeholder
           }
+          boxSize="85"
+          borderRadius="100"
         />
 
-        <h1 className={`${classes.textcolor} ${styles.title}`}>
-          {props.title}
-        </h1>
-      </div>
-      <div className={styles.options} onClick={showDropDown}>
+        <Heading size="lg">{props.title}</Heading>
+      </HStack>
+      <Stack onClick={showDropDown} pos="relative">
         <DotIcon />
-        <div
-          className={`${styles.dropdown} ${
-            context.sideBarOptions ? styles.showmenu : null
-          }`}
+
+        <Stack
+          display={context.sideBarOptions ? "block" : "none"}
+          pos="absolute"
+          right="8"
+          top="4"
+          bgColor="facebook.900"
+          // padding="2"
         >
-          <ul className={styles.dropdownlist} id="dropdownmenu">
-            <li onClick={ShowSettingHandler}>Edit Profile</li>
-            <li onClick={SignOut}>Logout</li>
-            {/* <li>Themes</li>
-            <li>Settings</li>
-            <li>Help</li> */}
-          </ul>
-        </div>
-      </div>
-    </div>
+          <List id="dropdownmenu" width="full">
+            <ListItem onClick={ShowSettingHandler}>
+              <Button w={"full"} borderRadius="0" colorScheme="gray">
+                Edit Profile
+              </Button>
+            </ListItem>
+            <ListItem onClick={SignOut}>
+              <Button w="full" borderRadius="0" colorScheme="gray">
+                Logout
+              </Button>
+            </ListItem>
+          </List>
+        </Stack>
+      </Stack>
+    </HStack>
   );
 }

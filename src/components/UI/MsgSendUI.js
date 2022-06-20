@@ -4,12 +4,11 @@ import { db } from "../firebase/firebase";
 
 import AppContext from "../GlobalStore/Context";
 
-import styles from "../../styles/MsgSendUI.module.css";
-import classes from "../GlobalStore/GlobalStyles.module.css";
-
 import GiffIcon from "./GiffIcon";
 import GiffsDiv from "../Comp_Parts/ChatRoom/MsgSendUI/GiffsDiv";
 
+import { Button, HStack, Input, Container } from "@chakra-ui/react";
+// Prop is related to receiving ref for empty div to scroll to down
 export default function MsgSendUI(props) {
   // init
   const context = useContext(AppContext);
@@ -25,7 +24,6 @@ export default function MsgSendUI(props) {
   const SendMsg = (data) => {
     let Message;
     if (data.type === "text") {
-      data.event.preventDefault();
       Message = NewMsgRef.current.value;
       NewMsgRef.current.value = "";
       if (Message === "") {
@@ -78,36 +76,15 @@ export default function MsgSendUI(props) {
     // props.emptydiv.current.scrollIntoView({ smooth: true });
   };
   return (
-    <form
-      onSubmit={(event) => {
-        SendMsg({
-          type: "text",
-          event: event,
-        });
-      }}
-      id="MsgSendUI"
-      className={`${styles.sentmsgform} ${classes.darkerbgcolor} `}
-    >
-      <div id="GifDiv">
-        {context.showGifDiv && (
-          <div className={styles.GifContainer}>
-            <GiffsDiv MsgSendHandler={SendMsg} />
-          </div>
-        )}
-        <div onClick={OpenGif}>
+    <HStack bgColor="hsl(230, 21%, 21%)" w="full">
+      <Container id="GifDiv" p="0" bgColor="blue" w="3vw">
+        {context.showGifDiv && <GiffsDiv MsgSendHandler={SendMsg} />}
+        <Container onClick={OpenGif} p="0">
           <GiffIcon />
-        </div>
-      </div>
-      <input
-        className={`${classes.inputTextColor} ${styles.sentForm}`}
-        placeholder="Type your message.."
-        ref={NewMsgRef}
-      />
-      <button
-        className={`${classes.MsgSentBtnActive}  ${classes.bgcolor} ${classes.textcolor} ${styles.sentBtn}`}
-      >
-        Send
-      </button>
-    </form>
+        </Container>
+      </Container>
+      <Input placeholder="Type your message.." ref={NewMsgRef} w="full" />
+      <Button onClick={() => SendMsg({ type: "text" })}>Send</Button>
+    </HStack>
   );
 }

@@ -36,7 +36,7 @@ export const ContextWrapper = (props) => {
   const [UsersData, setUsersData] = useState();
 
   // Private Chat Inits
-  const [privateChatInit, setprivateChatInit] = useState([]);
+  const [chatInit, setChatInit] = useState([]);
 
   //  Display User Settings
 
@@ -87,8 +87,8 @@ export const ContextWrapper = (props) => {
         newPersonAddBtn,
         setnewPersonAddBtn,
 
-        privateChatInit,
-        setprivateChatInit,
+        chatInit,
+        setChatInit,
 
         groupChatList,
         setgroupChatList,

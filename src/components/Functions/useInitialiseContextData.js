@@ -48,7 +48,7 @@ export default function useInitialiseContextData() {
       // Current logged in user data
       if (CurrentUserData[0]) {
         context.setCurrent_UserName(CurrentUserData[0].NickName);
-        context.setCurrent_UserData(CurrentUserData);
+        context.setCurrent_UserData(CurrentUserData[0]);
       }
     }
 

@@ -1,22 +1,27 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App";
-import reportWebVitals from "./reportWebVitals";
 
 import { BrowserRouter } from "react-router-dom";
 
 import { ContextWrapper } from "./components/GlobalStore/Context";
 
-ReactDOM.render(
+import { ChakraProvider } from "@chakra-ui/react";
+import theme from "./components/GlobalStore/theme";
+
+const container = document.getElementById("root");
+
+const root = createRoot(container);
+
+root.render(
   <React.StrictMode>
     <ContextWrapper>
       <BrowserRouter>
-        <App />
+        <ChakraProvider theme={theme}>
+          <App />
+        </ChakraProvider>
       </BrowserRouter>
     </ContextWrapper>
-  </React.StrictMode>,
-  document.getElementById("root")
+  </React.StrictMode>
 );
-
-reportWebVitals();

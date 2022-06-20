@@ -1,24 +1,31 @@
-import { useRef, useContext } from "react";
+import { useRef, useContext, useState } from "react";
 import { v4 as uuid } from "uuid";
 import { doc, setDoc } from "firebase/firestore";
 import AppContext from "../GlobalStore/Context";
 import { db } from "../firebase/firebase";
 
-import styles from "../../styles/GetNickName.module.css";
+import {
+  Container,
+  FormLabel,
+  Input,
+  Button,
+  VStack,
+  HStack,
+  Heading,
+} from "@chakra-ui/react";
 
-export default function GetNameForGroup(prop) {
+export default function GetNameForGroup({ togglevis, toggleGroupMakeBtn }) {
   // Inits
   const context = useContext(AppContext);
-  const NameRef = useRef();
+  const [groupName, setGroupName] = useState("");
 
-  const SendData = (e) => {
-    e.preventDefault();
-    if (NameRef.current.value === "") return;
-    const ID = uuid();
-    const MsgRef = doc(db, "Group_Chat_init", ID);
+  const SendData = () => {
+    if (groupName === "") return;
     if (context.groupChatList.length === 0) {
       return;
     }
+    const ID = uuid();
+    const MsgRef = doc(db, "Group_Chat_init", ID);
     let NumOfUsers = [context.Current_UserID];
     let Data = {
       User1: {
@@ -36,7 +43,7 @@ export default function GetNameForGroup(prop) {
     }
 
     Data = {
-      ChatName: NameRef.current.value,
+      ChatName: groupName,
       ChatID: ID,
       ChatType: "Group",
       ChatUserID: NumOfUsers,
@@ -44,19 +51,47 @@ export default function GetNameForGroup(prop) {
     };
 
     setDoc(MsgRef, Data);
-    prop.togglevis(false);
-    context.setuserNameActiveChat(NameRef.current.value);
+    togglevis(false);
+    context.setuserNameActiveChat(groupName);
     context.setactiveChat(Data);
     context.setnewPersonAddBtn(false);
+    toggleGroupMakeBtn(false);
   };
   return (
-    <div className={styles.main}>
-      {/* <h1>Enter Group Chat Name:</h1> */}
-      <form onSubmit={SendData}>
-        <label>Enter Group Chat Name: </label>
-        <input min="3" ref={NameRef} />
-        <button>Submit</button>
-      </form>
-    </div>
+    <Container
+      pos="fixed"
+      zIndex="500"
+      maxW="full"
+      h="full"
+      justifyContent="center"
+      centerContent
+    >
+      <VStack
+        borderRadius="3xl"
+        boxShadow="0 0 0 100vmax rgb(0 0 0/ 0.3)"
+        padding="8"
+      >
+        <form onSubmit={SendData}>
+          <VStack alignItems="flex-start" gap="2">
+            <Heading size="xl">Enter Group Chat Name:</Heading>
+
+            <FormLabel>Enter Group Chat Name: </FormLabel>
+            <Input
+              min="3"
+              value={groupName}
+              onChange={(e) => setGroupName(e.target.value)}
+            />
+            <HStack w={"full"}>
+              <Button w={"full"} onClick={SendData}>
+                Submit
+              </Button>
+              <Button w={"full"} onClick={() => togglevis(false)}>
+                Cancel
+              </Button>
+            </HStack>
+          </VStack>
+        </form>
+      </VStack>
+    </Container>
   );
 }

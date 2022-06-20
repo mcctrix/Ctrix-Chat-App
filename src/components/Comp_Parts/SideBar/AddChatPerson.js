@@ -1,13 +1,14 @@
 import { useContext, useState, useEffect } from "react";
 import { v4 as uuid } from "uuid";
 import { isMobile } from "react-device-detect";
-import usePictures from "../../../Custom_hooks/usePictures";
+import usePictures from "../../Custom_hooks/usePictures";
 
-import AppContext from "../../../GlobalStore/Context";
-import styles from "../../../../styles/AddChatPerson.module.css";
+import AppContext from "../../GlobalStore/Context";
 
 import { doc, setDoc } from "firebase/firestore";
-import { db } from "../../../firebase/firebase";
+import { db } from "../../firebase/firebase";
+
+import { HStack, Image, Heading, Checkbox } from "@chakra-ui/react";
 
 export default function AddChatPerson(props) {
   // Inits
@@ -57,7 +58,7 @@ export default function AddChatPerson(props) {
     const MsgRef = doc(db, "Private_Chat_init", ID);
 
     // We filter all the group chat inits
-    const SecPersonNames = context.privateChatInit.filter(
+    const SecPersonNames = context.chatInit.filter(
       (data) => data.ChatType === "DM"
     );
 
@@ -106,23 +107,22 @@ export default function AddChatPerson(props) {
   };
 
   return (
-    <li className={styles.item} onClick={ClickEvent}>
+    <HStack onClick={ClickEvent} padding="3" w="full">
       {props.GroupMode && (
-        <input
+        <Checkbox
           checked={isChecked}
           onChange={() => setisChecked((val) => !val)}
-          className={styles.chkbox}
-          type="checkbox"
+          size="lg"
         />
       )}
-      <img
-        className={styles.userpic}
+      <Image
         src={
           props.user.ProfilePicture ? props.user.ProfilePicture : Placeholder
         }
         alt="user profile"
+        boxSize="12"
       />
-      {props.user.NickName}
-    </li>
+      <Heading size="md">{props.user.NickName}</Heading>
+    </HStack>
   );
 }

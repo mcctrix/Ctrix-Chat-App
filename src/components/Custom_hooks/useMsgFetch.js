@@ -2,15 +2,15 @@ import { useState, useEffect } from "react";
 import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 
-const useMsgFetch = (props) => {
+const useMsgFetch = ({ ChatType, ChatID }) => {
   // Hooks
   const [Messages, setMessages] = useState([]);
 
   useEffect(() => {
-    if (props?.ChatType === "DM") {
+    if (ChatType === "DM") {
       // Private Chat Fetch
       const DMref = query(
-        collection(db, "Messages", "Private_Chats", props.ChatID),
+        collection(db, "Messages", "Private_Chats", ChatID),
         orderBy("createdAt")
         // ,limitToLast(20)
       );
@@ -22,10 +22,10 @@ const useMsgFetch = (props) => {
       });
     }
 
-    if (props?.ChatType === "Group") {
+    if (ChatType === "Group") {
       // Group Chat Fetch
       const DMref = query(
-        collection(db, "Messages", "Group_Chats", props.ChatID),
+        collection(db, "Messages", "Group_Chats", ChatID),
         orderBy("createdAt")
         // ,limitToLast(25)
       );
@@ -38,7 +38,7 @@ const useMsgFetch = (props) => {
     }
 
     // end
-  }, [props.ChatType, props.ChatID]);
+  }, [ChatType, ChatID]);
 
   return [Messages];
 };

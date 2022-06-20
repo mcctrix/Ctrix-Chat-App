@@ -4,11 +4,12 @@ import useDevice from "./Custom_hooks/useDevice";
 
 // UI and styles
 import ChatRoomHeader from "./Comp_Parts/ChatRoom/ChatRoomHeader";
-import styles from "../styles/ChatRoom.module.css";
 
 import AppContext from "./GlobalStore/Context";
 import Message from "./UI/Message";
 import MsgSendUI from "./UI/MsgSendUI";
+
+import { VStack } from "@chakra-ui/react";
 
 export default function ChatRoom() {
   //init
@@ -33,26 +34,35 @@ export default function ChatRoom() {
   };
 
   return (
-    <div
+    <VStack
       id="ChatRoom"
-      className={`${styles.main} ${
-        DEVICE === "Mobile" && !context.openChat && styles.mobchatroom
-      }`}
+      // className={`${styles.main} ${
+      //   DEVICE === "Mobile" && !context.openChat && styles.mobchatroom
+      // }`}
+      display={DEVICE === "Mobile" && !context.openChat ? "none" : "flex"}
+      w="full"
+      h="100vh"
+      spacing={0}
+      bgColor="red"
     >
       <ChatRoomHeader />
 
-      <div
-        className={styles.messagesdiv}
+      <VStack
+        overflowY="scroll"
         id="MessagesDiv"
         onClick={CloseGifDiv}
+        h="full"
+        w="full"
+        alignItems="flex-start"
+        bgColor="hsl(230, 21%, 11%)"
       >
         {context.activeChatData &&
           context.activeChatData.map((data) => (
             <Message key={data.id} data={data} />
           ))}
         <div ref={emptyDivRef}></div>
-      </div>
+      </VStack>
       <MsgSendUI emptydiv={emptyDivRef} />
-    </div>
+    </VStack>
   );
 }

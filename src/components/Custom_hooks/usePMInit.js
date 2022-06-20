@@ -12,32 +12,35 @@ function usePMInit() {
 
   useEffect(() => {
     // Retrieving Private Chatroom details related to current user
-
+    // let ChatInitsFetched;
     onSnapshot(
-      query(PMREF, where("User1.ID", "==", context.Current_UserID)),
+      query(
+        PMREF,
+        where("ChatUserID", "array-contains", context.Current_UserID)
+      ),
       (snapshot) => {
         snapshot.docs.forEach((doc) => {
           const data = doc.data();
           //  Filter Older Version of Chat
-          context.setprivateChatInit((chat) =>
+          context.setChatInit((chat) =>
             chat.filter((arr) => arr.ChatID !== data.ChatID)
           );
-          context.setprivateChatInit((value) => [...value, data]);
+          context.setChatInit((value) => [...value, data]);
         });
       }
     );
-    onSnapshot(
-      query(PMREF, where("User2.ID", "==", context.Current_UserID)),
-      (snapshot) => {
-        snapshot.docs.forEach((doc) => {
-          const data = doc.data();
-          context.setprivateChatInit((chat) =>
-            chat.filter((arr) => arr.ChatID !== data.ChatID)
-          );
-          context.setprivateChatInit((value) => [...value, data]);
-        });
-      }
-    );
+    // onSnapshot(
+    //   query(PMREF, where("User2.ID", "==", context.Current_UserID)),
+    //   (snapshot) => {
+    //     snapshot.docs.forEach((doc) => {
+    //       const data = doc.data();
+    //       context.setChatInit((chat) =>
+    //         chat.filter((arr) => arr.ChatID !== data.ChatID)
+    //       );
+    //       context.setChatInit((value) => [...value, data]);
+    //     });
+    //   }
+    // );
 
     // Group Chat
 
@@ -53,10 +56,10 @@ function usePMInit() {
         snapshot.docs.forEach((doc) => {
           const data = doc.data();
 
-          context.setprivateChatInit((chat) =>
+          context.setChatInit((chat) =>
             chat.filter((arr) => arr.ChatID !== data.ChatID)
           );
-          context.setprivateChatInit((value) => [...value, data]);
+          context.setChatInit((value) => [...value, data]);
         });
       }
     );
