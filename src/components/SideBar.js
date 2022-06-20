@@ -14,7 +14,7 @@ import { Container, HStack, Button } from "@chakra-ui/react";
 
 export default function SideBar() {
   // Inits
-  usePMInit();
+  // usePMInit();
   const DEVICE = useDevice();
   const context = useContext(AppContext);
   // Hooks
@@ -59,7 +59,7 @@ export default function SideBar() {
   return (
     <Container
       h="100vh"
-      w={DEVICE === "Mobile" ? "full" : "25vw"}
+      w={DEVICE === "Mobile" ? "full" : "30vw"}
       display={context.openChat ? "none" : "flex"}
       p="0"
       flexDirection="column"

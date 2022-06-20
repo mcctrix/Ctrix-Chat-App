@@ -53,7 +53,6 @@ export default function useInitialiseContextData() {
     }
 
     // context.setLoading(false);
-
     // eslint-disable-next-line
   }, [loading, db, Current_UserID, allUsersData, error]);
 

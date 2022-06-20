@@ -19,6 +19,7 @@ import {
   VStack,
   Button,
   Heading,
+  Text,
 } from "@chakra-ui/react";
 
 // import styles from "../../styles/GetNickName.module.css";
@@ -123,6 +124,7 @@ export default function UserSettings(props) {
         p="5"
         borderRadius="3xl"
         boxShadow="0 0 0 400vmax rgb(0 0 0 / 0.4)"
+        bgColor="teal.300"
       >
         {props.Firsttime && <h1>Welcome to the Ctrix Chats</h1>}
 
@@ -156,7 +158,7 @@ export default function UserSettings(props) {
                 <Image src={girl2} alt="girl2 avatar" boxSize="16" />
               </Radio>
               <Radio value="other" flexDirection="column">
-                <Heading size="lg">Other</Heading>
+                <Text size="lg">Other</Text>
               </Radio>
             </RadioGroup>
             {SelectedAvatar === "other" && (

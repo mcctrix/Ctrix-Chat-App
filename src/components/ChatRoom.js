@@ -1,4 +1,4 @@
-import { useEffect, useContext, useRef } from "react";
+import { useEffect, useContext, useRef, useLayoutEffect } from "react";
 
 import useDevice from "./Custom_hooks/useDevice";
 
@@ -19,14 +19,19 @@ export default function ChatRoom() {
   // Ref Hooks
   const emptyDivRef = useRef(null);
 
-  useEffect(() => {
-    if (context.activeChatData && emptyDivRef) {
-      setTimeout(() => {
-        emptyDivRef.current.scrollIntoView({ smooth: true });
-      }, 600);
+  // useEffect(() => {
+  // }, [context.activeChatData]);
+
+  useLayoutEffect(() => {
+    if (context?.activeChatData?.length > 0) {
+      if (emptyDivRef) {
+        setTimeout(() => {
+          emptyDivRef.current.scrollIntoView({ smooth: true });
+        }, 600);
+      }
+      context.setLoading(false);
     }
   }, [context.activeChatData]);
-
   const CloseGifDiv = () => {
     if (context.setshowGifDiv) {
       context.setshowGifDiv(false);

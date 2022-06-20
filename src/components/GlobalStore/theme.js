@@ -1,23 +1,16 @@
 import { extendTheme, withDefaultColorScheme } from "@chakra-ui/react";
 
+const config = {
+  initialColorMode: "light",
+  useSystemColorMode: false,
+};
+
 const theme = extendTheme(
   withDefaultColorScheme({
     colorScheme: "teal",
     components: ["Button"],
-  })
-  // {
-  //   colors: {
-  //     brand: {
-  //       100: "#f7fafc",
-  //       // ...
-  //       900: "white",
-  //     },
-  //   },
-  // }
+  }),
+  { config }
 );
 
-// withDefaultVariant({
-//   variant: "ghost",
-//   components: ["Button"],
-// })
 export default theme;

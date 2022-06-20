@@ -12,6 +12,7 @@ import {
   List,
   ListItem,
   Button,
+  useColorMode,
 } from "@chakra-ui/react";
 
 import DotIcon from "./DotIcon";
@@ -19,6 +20,7 @@ import DotIcon from "./DotIcon";
 export default function SideBarHeader(props) {
   // init
   const [Placeholder] = usePictures();
+  const { colorMode, toggleColorMode } = useColorMode();
   const Navigate = useNavigate();
   const context = useContext(AppContext);
   const auth = getAuth();
@@ -76,14 +78,17 @@ export default function SideBarHeader(props) {
         >
           <List id="dropdownmenu" width="full">
             <ListItem onClick={ShowSettingHandler}>
-              <Button w={"full"} borderRadius="0" colorScheme="gray">
+              <Button w={"full"} borderRadius="0">
                 Edit Profile
               </Button>
             </ListItem>
             <ListItem onClick={SignOut}>
-              <Button w="full" borderRadius="0" colorScheme="gray">
+              <Button w="full" borderRadius="0">
                 Logout
               </Button>
+            </ListItem>
+            <ListItem>
+              <Button onClick={() => toggleColorMode()}>Theme mode</Button>
             </ListItem>
           </List>
         </Stack>

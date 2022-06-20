@@ -52,7 +52,6 @@ function usePMInit() {
         where("ChatUserID", "array-contains", context.Current_UserID)
       ),
       (snapshot) => {
-        context.setLoading(false);
         snapshot.docs.forEach((doc) => {
           const data = doc.data();
 
@@ -63,6 +62,7 @@ function usePMInit() {
         });
       }
     );
+    // context.setLoading(false);
 
     // eslint-disable-next-line
   }, [db, context.Current_UserName]);
