@@ -76,8 +76,8 @@ export default function MsgSendUI(props) {
     // props.emptydiv.current.scrollIntoView({ smooth: true });
   };
   return (
-    <HStack bgColor="hsl(230, 21%, 21%)" w="full">
-      <Container id="GifDiv" p="0" bgColor="blue" w="3vw">
+    <HStack w="full">
+      <Container id="GifDiv" p="0" w="3vw">
         {context.showGifDiv && <GiffsDiv MsgSendHandler={SendMsg} />}
         <Container onClick={OpenGif} p="0">
           <GiffIcon />

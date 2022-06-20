@@ -40,7 +40,6 @@ export default function ChatRoom() {
       w="full"
       h="100vh"
       spacing={0}
-      bgColor="red"
     >
       <ChatRoomHeader />
 
@@ -51,7 +50,6 @@ export default function ChatRoom() {
         h="full"
         w="full"
         alignItems="flex-start"
-        bgColor="hsl(230, 21%, 11%)"
       >
         {context.activeChatData &&
           context.activeChatData.map((data) => (

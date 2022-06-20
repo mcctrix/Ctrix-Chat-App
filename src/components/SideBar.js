@@ -63,7 +63,6 @@ export default function SideBar() {
       display={context.openChat ? "none" : "flex"}
       p="0"
       flexDirection="column"
-      // bgColor="hsl(230, 21%, 11%)"
       onClick={CloseOptionsInSideBarHeader}
     >
       <Container

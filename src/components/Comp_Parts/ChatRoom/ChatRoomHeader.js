@@ -34,14 +34,7 @@ export default function ChatRoomHeader() {
   };
 
   return (
-    <HStack
-      bgColor="hsl(230, 21%, 11%)"
-      padding="2"
-      w="full"
-      justifyContent="space-between"
-      boxShadow="md"
-      // className={`${classes.textcolor} ${classes.darkerbgcolor} ${styles.header}`}
-    >
+    <HStack padding="2" w="full" justifyContent="space-between" boxShadow="md">
       <HStack>
         {DEVICE === "Desktop" ? null : (
           <HStack onClick={closeCurrentChat}>

@@ -48,7 +48,6 @@ export default function SideBarHeader(props) {
       p="1"
       pos="sticky"
       top="0"
-      bgColor="hsl(230, 21%, 21%)"
       zIndex="400"
       boxShadow="sm"
     >
@@ -74,8 +73,6 @@ export default function SideBarHeader(props) {
           pos="absolute"
           right="8"
           top="4"
-          bgColor="facebook.900"
-          // padding="2"
         >
           <List id="dropdownmenu" width="full">
             <ListItem onClick={ShowSettingHandler}>

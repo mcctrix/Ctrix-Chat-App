@@ -120,7 +120,6 @@ export default function UserSettings(props) {
       centerContent
     >
       <VStack
-        bgColor="cyan.900"
         p="5"
         borderRadius="3xl"
         boxShadow="0 0 0 400vmax rgb(0 0 0 / 0.4)"
