@@ -1,5 +1,4 @@
 import { useContext, useState } from "react";
-import usePMInit from "./Custom_hooks/usePMInit";
 
 import ChatModal from "./UI/ChatModal";
 import SideBarHeader from "./UI/SideBarHeader";
@@ -14,7 +13,7 @@ import { Container, HStack, Button } from "@chakra-ui/react";
 
 export default function SideBar() {
   // Inits
-  // usePMInit();
+
   const DEVICE = useDevice();
   const context = useContext(AppContext);
   // Hooks

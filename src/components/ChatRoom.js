@@ -1,4 +1,4 @@
-import { useEffect, useContext, useRef, useLayoutEffect } from "react";
+import { useContext, useRef, useLayoutEffect } from "react";
 
 import useDevice from "./Custom_hooks/useDevice";
 
@@ -19,9 +19,6 @@ export default function ChatRoom() {
   // Ref Hooks
   const emptyDivRef = useRef(null);
 
-  // useEffect(() => {
-  // }, [context.activeChatData]);
-
   useLayoutEffect(() => {
     if (context?.activeChatData?.length > 0) {
       if (emptyDivRef) {
@@ -31,7 +28,9 @@ export default function ChatRoom() {
       }
       context.setLoading(false);
     }
+    // eslint-disable-next-line
   }, [context.activeChatData]);
+
   const CloseGifDiv = () => {
     if (context.setshowGifDiv) {
       context.setshowGifDiv(false);

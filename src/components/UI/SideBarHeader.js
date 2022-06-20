@@ -20,7 +20,7 @@ import DotIcon from "./DotIcon";
 export default function SideBarHeader(props) {
   // init
   const [Placeholder] = usePictures();
-  const { colorMode, toggleColorMode } = useColorMode();
+  const { toggleColorMode } = useColorMode();
   const Navigate = useNavigate();
   const context = useContext(AppContext);
   const auth = getAuth();
