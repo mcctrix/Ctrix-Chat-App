@@ -1,24 +1,24 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import AppContext from "../../GlobalStore/Context";
 import useDevice from "../../Custom_hooks/useDevice";
 import usePictures from "../../Custom_hooks/usePictures";
 
 import BackIcon from "../../UI/BackIcon";
-import DotIcon from "../../UI/DotIcon";
-import ChatOptionsDiv from "../../UI/ChatOptionsDiv";
+// import DotIcon from "../../UI/DotIcon";
+// import ChatOptionsDiv from "../../UI/ChatOptionsDiv";
 
 import { HStack, Heading, Image } from "@chakra-ui/react";
 
 export default function ChatRoomHeader() {
   // Init
-  const [ShowOptions, setShowOptions] = useState(false);
+  // const [ShowOptions, setShowOptions] = useState(false);
   const context = useContext(AppContext);
   const [Placeholder] = usePictures();
   const DEVICE = useDevice();
 
-  const ShowOptionHandler = () => {
-    setShowOptions(true);
-  };
+  // const ShowOptionHandler = () => {
+  //   setShowOptions(true);
+  // };
 
   const UserPicObtain =
     context.userNameActiveChat &&
@@ -57,9 +57,9 @@ export default function ChatRoomHeader() {
         <Heading>{context.userNameActiveChat}</Heading>
       </HStack>
       <HStack>
-        <HStack onClick={ShowOptionHandler}>
+        {/* <HStack onClick={ShowOptionHandler}>
           <DotIcon />
-        </HStack>
+        </HStack> */}
         <HStack
         // className={`${styles.Optionsdiv} ${
         //   ShowOptions && styles.DisplayOptions
