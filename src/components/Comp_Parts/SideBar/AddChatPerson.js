@@ -121,6 +121,7 @@ export default function AddChatPerson(props) {
         }
         alt="user profile"
         boxSize="12"
+        borderRadius="50%"
       />
       <Heading size="md">{props.user.NickName}</Heading>
     </HStack>

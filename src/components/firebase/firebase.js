@@ -26,7 +26,7 @@ export const app =
     ? initializeApp(Development_Backend)
     : initializeApp(Production_Backend);
 
-// export const app = initializeApp(Production_Backend);
+// export const app = initializeApp(Development_Backend);
 
 export const storage = getStorage(app);
 export const db = getFirestore(app);

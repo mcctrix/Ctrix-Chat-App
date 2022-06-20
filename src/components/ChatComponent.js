@@ -14,7 +14,7 @@ export default function ChatComponent() {
   const context = useContext(AppContext);
 
   return (
-    <HStack>
+    <HStack spacing="0">
       <SideBar />
       <ChatRoom />
       {!context.Current_UserName && !context.Loading && (

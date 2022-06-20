@@ -75,11 +75,11 @@ export default function ChatModal(props) {
       //   context?.activeChat?.ChatID === props.data.ChatID && classes.activechat
       // }`}
       onClick={makeChatActive}
-      bgColor={
-        context?.activeChat?.ChatID === props.data.ChatID
-          ? "hsl(230, 21%, 21%)"
-          : "#171923"
-      }
+      // bgColor={
+      //   context?.activeChat?.ChatID === props.data.ChatID
+      //     ? "hsl(230, 21%, 21%)"
+      //     : "#171923"
+      // }
     >
       <HStack>
         <Image

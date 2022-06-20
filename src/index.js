@@ -18,7 +18,7 @@ root.render(
   <React.StrictMode>
     <ContextWrapper>
       <BrowserRouter>
-        <ChakraProvider theme={theme}>
+        <ChakraProvider>
           <App />
         </ChakraProvider>
       </BrowserRouter>

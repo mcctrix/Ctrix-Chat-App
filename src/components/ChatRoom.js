@@ -36,9 +36,6 @@ export default function ChatRoom() {
   return (
     <VStack
       id="ChatRoom"
-      // className={`${styles.main} ${
-      //   DEVICE === "Mobile" && !context.openChat && styles.mobchatroom
-      // }`}
       display={DEVICE === "Mobile" && !context.openChat ? "none" : "flex"}
       w="full"
       h="100vh"
