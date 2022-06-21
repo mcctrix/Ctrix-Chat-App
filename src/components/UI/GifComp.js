@@ -15,8 +15,8 @@ export default function GifComp({ GIF }) {
     fetchFunction();
   }, [GIF]);
   return (
-    <Container p="0" width="300px" bgColor="yellow.700">
-      {gif && <Gif gif={gif} width="300px" />}
+    <Container p="0" width={340} bgColor="yellow.700">
+      {gif && <Gif gif={gif} width={340} />}
     </Container>
   );
 }

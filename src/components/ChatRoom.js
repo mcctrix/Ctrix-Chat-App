@@ -54,6 +54,7 @@ export default function ChatRoom() {
         h="full"
         w="full"
         alignItems="flex-start"
+        p="2"
       >
         {context.activeChatData &&
           context.activeChatData.map((data) => (
