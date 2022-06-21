@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { isMobileOnly } from "react-device-detect";
 
-const useDeivce = () => {
+const useDevice = () => {
   // hooks
   const [Mobile, setMobile] = useState();
 
@@ -31,4 +31,4 @@ const useDeivce = () => {
   // }
   return Mobile;
 };
-export default useDeivce;
+export default useDevice;

@@ -7,8 +7,10 @@ import AppContext from "../GlobalStore/Context";
 import GiffIcon from "./GiffIcon";
 import GiffsDiv from "../Comp_Parts/ChatRoom/MsgSendUI/GiffsDiv";
 
-import { Button, HStack, Input, Container } from "@chakra-ui/react";
+import { Button, HStack, Input, Container, Stack } from "@chakra-ui/react";
+
 // Prop is related to receiving ref for empty div to scroll to down
+
 export default function MsgSendUI(props) {
   // init
   const context = useContext(AppContext);
@@ -24,7 +26,7 @@ export default function MsgSendUI(props) {
   const SendMsg = (data) => {
     let Message;
     if (data.type === "text") {
-      data?.event?.target.preventDefault();
+      data.event?.preventDefault();
       Message = NewMsgRef.current.value;
       NewMsgRef.current.value = "";
       if (Message === "") {
@@ -77,25 +79,22 @@ export default function MsgSendUI(props) {
     // props.emptydiv.current.scrollIntoView({ smooth: true });
   };
   return (
-    <HStack w="full">
+    <HStack w="full" padding="1">
       <Container id="GifDiv" p="0" w="3vw">
         {context.showGifDiv && <GiffsDiv MsgSendHandler={SendMsg} />}
         <Container onClick={OpenGif} p="0">
           <GiffIcon />
         </Container>
       </Container>
-      {/* <form
-        onSubmit={(e) => {
-          SendMsg({ type: "text", event: e });
-        }}
-      > */}
-      <Input
-        placeholder="Type your message.."
-        ref={NewMsgRef}
-        w="full"
-        // onSubmitCapture={() => SendMsg({ type: "text" })}
-      />
-      {/* </form> */}
+      <Stack w="full">
+        <form
+          onSubmit={(e) => {
+            SendMsg({ type: "text", event: e });
+          }}
+        >
+          <Input placeholder="Type your message.." ref={NewMsgRef} />
+        </form>
+      </Stack>
       <Button onClick={() => SendMsg({ type: "text" })}>Send</Button>
     </HStack>
   );

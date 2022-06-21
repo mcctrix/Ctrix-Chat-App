@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, FormControl } from "@chakra-ui/react";
+import { Container, VStack } from "@chakra-ui/react";
 
 const FormContainer = ({ children, FormSubmit }) => {
   return (
@@ -12,7 +12,7 @@ const FormContainer = ({ children, FormSubmit }) => {
       justifyContent={"center"}
       centerContent
     >
-      <FormControl
+      <VStack
         padding={"6"}
         bgGradient={" #12c2e9, #c471ed, #f64f59"}
         border={"1px"}
@@ -23,7 +23,7 @@ const FormContainer = ({ children, FormSubmit }) => {
         opacity="0.9"
       >
         {children}
-      </FormControl>
+      </VStack>
     </Container>
   );
 };

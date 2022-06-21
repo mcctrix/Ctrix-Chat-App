@@ -7,17 +7,19 @@ import {
   HStack,
   VStack,
   Image,
-  Heading,
   Text,
   Container,
   useColorMode,
 } from "@chakra-ui/react";
+
+import useDevice from "../Custom_hooks/useDevice";
 
 const Message = (props) => {
   // Init
   const context = useContext(AppContext);
   const [Placeholder] = usePictures();
   const { colorMode } = useColorMode();
+  const DEVICE = useDevice();
 
   const UserObtain =
     context.allUsersData &&
@@ -28,19 +30,12 @@ const Message = (props) => {
     : Placeholder;
   return (
     <VStack
-      // className={`${styles.main} ${
-      //   context.Current_UserID === props.data.Sender && classes.alignright
-      // }`}
       alignSelf={
         context.Current_UserID === props.data.Sender ? "flex-end" : "flex-start"
       }
-      alignItems="center"
-      // bgcolor="red"
+      alignItems="flex-start"
     >
-      {context.Current_UserID !== props.data.Sender && (
-        <Heading size="sm">{UserObtain.NickName}</Heading>
-      )}
-      <HStack>
+      <HStack spacing={DEVICE === "Mobile" ? "1" : "2"}>
         {context.Current_UserID !== props.data.Sender && (
           <Image
             // className={`${styles.senderPhoto} ${styles.leftphoto}`}
@@ -48,45 +43,26 @@ const Message = (props) => {
             src={UserPic}
             boxSize="10"
             borderRadius="50%"
+            alignSelf="flex-end"
+            p="0"
           />
         )}
         {props.data.Message === "Gif" ? (
-          <Gif GIF={props.data.Gif} />
+          <Container>
+            <Gif GIF={props.data.Gif} />
+          </Container>
         ) : (
           <Container
-            // className={`${
-            //   context.Current_UserID === props.data.Sender
-            //     ? classes.msgalignright
-            //     : classes.messageleft
-            // } ${styles.message}`}
             key={props.data.id}
             bgColor={colorMode === "light" ? "facebook.100" : "facebook.800"}
             padding="3"
+            m="0 0 0 16px"
             borderRadius="lg"
           >
-            <Text>
-              {props.data.text}
-              {/* <div className={styles.hovertext}>
-              {context.UsersData &&
-                context?.allUsersData?.find?.(
-                  (data) => data.User_ID === props.data.Sender
-                  )?.NickName}
-                </div> */}
-            </Text>
+            <Text>{props.data.text}</Text>
           </Container>
         )}
       </HStack>
-      {/* {context.Current_UserID === props.data.Sender && (
-        <img
-          className={`${styles.senderPhoto} ${styles.rightphoto}`}
-          alt="User profile"
-          src={
-            context?.Current_UserData?.[0]?.ProfilePicture
-              ? context?.Current_UserData?.[0]?.ProfilePicture
-              : Placeholder
-          }
-        ></img>
-      )} */}
     </VStack>
   );
 };

@@ -15,15 +15,18 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 
+import useDevice from "../Custom_hooks/useDevice";
+
 import DotIcon from "./DotIcon";
 
 export default function SideBarHeader(props) {
   // init
   const [Placeholder] = usePictures();
-  const { toggleColorMode } = useColorMode();
+  const { colorMode, toggleColorMode } = useColorMode();
   const Navigate = useNavigate();
   const context = useContext(AppContext);
   const auth = getAuth();
+  const DEVICE = useDevice();
 
   const showDropDown = () => {
     context.setsideBarOptions((snap) => !snap);
@@ -60,7 +63,7 @@ export default function SideBarHeader(props) {
       top="0"
       zIndex="400"
       boxShadow="sm"
-      bgColor="Background"
+      bgColor={colorMode === "light" ? "facebook.200" : "facebook.900"}
     >
       <HStack>
         <Image
@@ -70,7 +73,7 @@ export default function SideBarHeader(props) {
               ? context?.Current_UserData?.ProfilePicture
               : Placeholder
           }
-          boxSize="85"
+          boxSize={DEVICE === "Mobile" ? "55" : "75"}
           borderRadius="100"
         />
 

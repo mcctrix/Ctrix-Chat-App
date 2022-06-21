@@ -8,7 +8,7 @@ const Loading = () => {
       maxW="full"
       pos="fixed"
       zIndex="600"
-      bgColor="white"
+      bgColor="background"
       centerContent
     >
       <CircularProgress isIndeterminate size="20" />

@@ -45,6 +45,7 @@ const GiffComponent = ({ MsgSendHandler }) => {
       left="5vw"
       zIndex="40"
       overflowY="scroll"
+      css={{ "&::-webkit-scrollbar": { display: "none" } }}
       borderWidth="3px"
     >
       <Grid

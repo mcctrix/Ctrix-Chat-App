@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 import FormContainer from "../components/ChakraComponents/FormContainer";
@@ -11,6 +11,10 @@ import {
   Input,
   Button,
   HStack,
+  FormControl,
+  FormHelperText,
+  FormErrorMessage,
+  Text,
 } from "@chakra-ui/react";
 
 export default function SignUp() {
@@ -19,25 +23,32 @@ export default function SignUp() {
   const Navigate = useNavigate();
 
   // Hooks
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
   const [wrongPasswd, setwrongPasswd] = useState(false);
 
-  // Ref
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  const confirmPasswordRef = useRef();
+  const [invalidData, setInvalidData] = useState(false);
+
+  const passwordValidator = () => {
+    if (password === confirmPassword) {
+      setwrongPasswd(false);
+      return;
+    }
+    setwrongPasswd(true);
+  };
 
   const SignUp = (e) => {
-    e.preventDefault();
-    if (passwordRef.current.value !== confirmPasswordRef.current.value) {
+    e?.preventDefault();
+    if (password !== confirmPassword) {
       setwrongPasswd(true);
       return;
     }
     setwrongPasswd(false);
-    createUserWithEmailAndPassword(
-      auth,
-      emailRef.current.value,
-      confirmPasswordRef.current.value
-    );
+    createUserWithEmailAndPassword(auth, email, confirmPassword).catch(() => {
+      setInvalidData(true);
+    });
   };
 
   const navToSignIn = () => {
@@ -53,36 +64,46 @@ export default function SignUp() {
         <Heading alignSelf={"center"} fontSize={"2xl"}>
           Sign up for new Account
         </Heading>
-        <FormLabel htmlFor="email">Email address</FormLabel>
-        <Input
-          id="email"
-          type="email"
-          // value={userName}
-          // onChange={(e) => setuserName(e.target.value)}
-          fontSize={"2xl"}
-        />
-        <FormLabel htmlFor="password">Password</FormLabel>
-        <Input
-          id="password"
-          type="password"
-          // value={password}
-          // onChange={(e) => setpassword(e.target.value)}
-          fontSize={"2xl"}
-        />
-        <FormLabel htmlFor="CPwd">Confirm Password</FormLabel>
-        <Input
-          id="CPwd"
-          type="password"
-          // value={password}
-          // onChange={(e) => setpassword(e.target.value)}
-          fontSize={"2xl"}
-        />
+        <FormControl>
+          <FormLabel htmlFor="email">Email address</FormLabel>
+          <Input
+            id="email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            fontSize={"2xl"}
+          />
+          <FormHelperText>We never share your email address</FormHelperText>
+        </FormControl>
+        <FormControl>
+          <FormLabel htmlFor="password">Password</FormLabel>
+          <Input
+            id="password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            fontSize={"2xl"}
+            onChangeCapture={() => passwordValidator}
+          />
+          <FormHelperText>Use a Strong Password</FormHelperText>
+        </FormControl>
+        <FormControl isInvalid={wrongPasswd}>
+          <FormLabel htmlFor="CPwd">Confirm Password</FormLabel>
+          <Input
+            id="CPwd"
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            fontSize={"2xl"}
+            onChangeCapture={() => passwordValidator}
+          />
+
+          <FormErrorMessage>Password doesn't match</FormErrorMessage>
+        </FormControl>
+        {invalidData && <Text>Invalid Email or Password</Text>}
         <VStack width={"full"}>
           <HStack w={"full"}>
-            <Button
-              // onClick={SignInWithEmailPassword}
-              w={"full"}
-            >
+            <Button onClick={SignUp} w={"full"}>
               Sign Up
             </Button>
 

@@ -44,10 +44,12 @@ export default function ChatRoomHeader() {
         <Image
           alt="User profile"
           src={UserPic}
-          boxSize="12"
+          boxSize={DEVICE === "Desktop" ? "10" : "12"}
           borderRadius="50%"
         />
-        <Heading>{context.userNameActiveChat}</Heading>
+        <Heading size={DEVICE === "Mobile" ? "lg" : "md"}>
+          {context.userNameActiveChat}
+        </Heading>
       </HStack>
       <HStack>
         {/* <HStack onClick={ShowOptionHandler}>

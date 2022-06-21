@@ -7,7 +7,7 @@ const config = {
 
 const theme = extendTheme(
   withDefaultColorScheme({
-    colorScheme: "teal",
+    colorScheme: "facebook",
     components: ["Button"],
   }),
   { config }

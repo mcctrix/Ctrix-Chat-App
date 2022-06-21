@@ -60,6 +60,7 @@ export default function SideBar() {
       h="100vh"
       w={DEVICE === "Mobile" ? "full" : "30vw"}
       display={context.openChat ? "none" : "flex"}
+      borderRight="1px solid black"
       p="0"
       flexDirection="column"
       onClick={CloseOptionsInSideBarHeader}

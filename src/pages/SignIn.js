@@ -14,6 +14,10 @@ import {
   HStack,
   Heading,
   Button,
+  FormControl,
+  FormErrorMessage,
+  FormHelperText,
+  Text,
 } from "@chakra-ui/react";
 
 import { useNavigate } from "react-router-dom";
@@ -21,8 +25,12 @@ import FormContainer from "../components/ChakraComponents/FormContainer";
 
 export default function Signin() {
   const Navigate = useNavigate();
-  const [userName, setuserName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setpassword] = useState("");
+
+  // Data Vailidation
+  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [Error, setError] = useState(false);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -32,9 +40,11 @@ export default function Signin() {
     });
     // eslint-disable-next-line
   }, [auth]);
+
   const NavToSignUp = () => {
     Navigate("/signup");
   };
+
   const SignInWithGoogle = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
@@ -42,19 +52,24 @@ export default function Signin() {
         console.log("Log in successfully");
       })
       .catch((err) => {
+        setError(true);
         console.log(err);
       });
   };
-  const SignInWithEmailPassword = () => {
-    // e.preventDefault();
-    signInWithEmailAndPassword(auth, userName, password)
+
+  const SignInWithEmailPassword = (e) => {
+    setIsEmailValid(true);
+    e?.preventDefault();
+    signInWithEmailAndPassword(auth, email, password)
       .then(() => {
         console.log("Sign in Successfully");
       })
       .catch((err) => {
+        setError(true);
         console.error("Something went wrong", err);
       });
   };
+
   return (
     <FormContainer FormSubmit={SignInWithEmailPassword}>
       <VStack alignItems={"center"}>
@@ -64,24 +79,44 @@ export default function Signin() {
         <Heading alignSelf={"center"} fontSize={"2xl"}>
           Login into your account
         </Heading>
+        <VStack w="full">
+          <form onSubmit={SignInWithEmailPassword}>
+            <FormControl isInvalid={!isEmailValid}>
+              <FormLabel htmlFor="email">Email address</FormLabel>
+              <Input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                fontSize={"2xl"}
+                onChangeCapture={() => setError(false)}
+              />
+              <FormErrorMessage>Enter Valid Email!</FormErrorMessage>
+            </FormControl>
+            <FormControl>
+              <FormLabel htmlFor="email">Password</FormLabel>
+              <Input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => setpassword(e.target.value)}
+                fontSize={"2xl"}
+                onChangeCapture={() => setError(false)}
+              />
 
-        <FormLabel htmlFor="email">Email address</FormLabel>
-        <Input
-          id="email"
-          type="email"
-          value={userName}
-          onChange={(e) => setuserName(e.target.value)}
-          fontSize={"2xl"}
-        />
-
-        <FormLabel htmlFor="email">Password</FormLabel>
-        <Input
-          id="password"
-          type="password"
-          value={password}
-          onChange={(e) => setpassword(e.target.value)}
-          fontSize={"2xl"}
-        />
+              {!Error && (
+                <FormHelperText>
+                  Never share your password with anyone
+                </FormHelperText>
+              )}
+            </FormControl>
+            {Error && (
+              <Text textAlign="center" color="red">
+                Email or Password is wrong
+              </Text>
+            )}
+          </form>
+        </VStack>
 
         <VStack w={"full"}>
           <HStack w={"full"}>
