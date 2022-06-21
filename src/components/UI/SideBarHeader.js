@@ -36,7 +36,12 @@ export default function SideBarHeader(props) {
     context.setCurrent_UserData("");
     context.setUsersData("");
     context.setactiveChat(null);
+    context.setactiveChatData(null);
     context.setChatInit([]);
+    context.setChatInit([]);
+    context.setLoading(true);
+    context.setChatInit([]);
+
     Navigate("/");
   };
   const ShowSettingHandler = () => {

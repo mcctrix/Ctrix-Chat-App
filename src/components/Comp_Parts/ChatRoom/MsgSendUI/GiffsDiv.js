@@ -39,12 +39,13 @@ const GiffComponent = ({ MsgSendHandler }) => {
     <Container
       p="0"
       pos="absolute"
-      w="50vw"
       h="50vh"
-      bottom="10vh"
+      w="500"
+      bottom="5vh"
       left="5vw"
       zIndex="40"
-      overflow="scroll"
+      overflowY="scroll"
+      borderWidth="3px"
     >
       <Grid
         key={searchKey}
@@ -53,7 +54,9 @@ const GiffComponent = ({ MsgSendHandler }) => {
         columns={1}
         onGifClick={GifClick}
       />
-      <SearchBar />
+      <Container p="0" pos="sticky" bottom="0">
+        <SearchBar />
+      </Container>
     </Container>
   );
 };

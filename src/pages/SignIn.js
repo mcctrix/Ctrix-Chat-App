@@ -64,6 +64,7 @@ export default function Signin() {
         <Heading alignSelf={"center"} fontSize={"2xl"}>
           Login into your account
         </Heading>
+
         <FormLabel htmlFor="email">Email address</FormLabel>
         <Input
           id="email"
@@ -72,6 +73,7 @@ export default function Signin() {
           onChange={(e) => setuserName(e.target.value)}
           fontSize={"2xl"}
         />
+
         <FormLabel htmlFor="email">Password</FormLabel>
         <Input
           id="password"
@@ -80,6 +82,7 @@ export default function Signin() {
           onChange={(e) => setpassword(e.target.value)}
           fontSize={"2xl"}
         />
+
         <VStack w={"full"}>
           <HStack w={"full"}>
             <Button onClick={SignInWithEmailPassword} w={"full"}>

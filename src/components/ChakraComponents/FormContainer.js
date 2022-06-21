@@ -19,6 +19,8 @@ const FormContainer = ({ children, FormSubmit }) => {
         borderRadius={"md"}
         onSubmit={FormSubmit}
         maxW={"lg"}
+        bgColor="Background"
+        opacity="0.9"
       >
         {children}
       </FormControl>
