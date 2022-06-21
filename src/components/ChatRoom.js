@@ -20,7 +20,11 @@ export default function ChatRoom() {
   const emptyDivRef = useRef(null);
 
   useLayoutEffect(() => {
-    if (context?.activeChatData?.length > 0 || context.userNameActiveChat) {
+    if (
+      context?.activeChatData?.length > 0 ||
+      context.userNameActiveChat ||
+      context.Current_UserData
+    ) {
       if (emptyDivRef) {
         setTimeout(() => {
           emptyDivRef.current.scrollIntoView({ smooth: true });
