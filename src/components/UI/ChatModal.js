@@ -53,7 +53,7 @@ export default function ChatModal(props) {
     // Setting Name of Chat
     if (props.data.ChatType === "DM") {
       setChatName(
-        props.data.User1.ID === context.Current_UserID
+        props?.data.User1.ID === context?.Current_UserID
           ? context?.UsersData?.find?.(
               (val) => val.User_ID === props.data.User2.ID
             ).NickName
@@ -70,11 +70,11 @@ export default function ChatModal(props) {
 
   useEffect(() => {
     // Setting active chat messages in a global store
-    if (context.activeChat.ChatID === props.data.ChatID) {
+    if (context?.activeChat?.ChatID === props?.data?.ChatID) {
       context.setactiveChatData([...Messages]);
     }
     // eslint-disable-next-line
-  }, [context.activeChat.ChatID, Messages]);
+  }, [context.activeChat?.ChatID, Messages]);
 
   return (
     <HStack

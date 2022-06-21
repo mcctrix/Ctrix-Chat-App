@@ -29,7 +29,7 @@ export default function Home() {
   return (
     <>
       {context.Loading && <Loading />}
-      {context.Current_UserData && <ChatComponent />}
+      {context.allUsersData && <ChatComponent />}
     </>
   );
 }

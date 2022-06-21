@@ -20,20 +20,16 @@ export default function ChatRoom() {
   const emptyDivRef = useRef(null);
 
   useLayoutEffect(() => {
-    if (
-      context?.activeChatData?.length > 0 ||
-      context.userNameActiveChat ||
-      context.Current_UserData
-    ) {
-      if (emptyDivRef) {
+    if (context?.activeChatData?.length > 0 || context.Current_UserID) {
+      if (emptyDivRef && context?.activeChatData?.length) {
         setTimeout(() => {
-          emptyDivRef.current.scrollIntoView({ smooth: true });
+          emptyDivRef?.current.scrollIntoView({ smooth: true });
         }, 200);
       }
-      context.setLoading(false);
     }
+    context.setLoading(false);
     // eslint-disable-next-line
-  }, [context.activeChatData]);
+  }, [context.activeChatData, context]);
 
   const CloseGifDiv = () => {
     if (context.setshowGifDiv) {
