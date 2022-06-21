@@ -44,6 +44,7 @@ export default function SideBarHeader(props) {
     context.setChatInit([]);
     context.setLoading(true);
     context.setChatInit([]);
+    context.setuserNameActiveChat("");
 
     Navigate("/");
   };

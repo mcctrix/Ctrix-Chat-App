@@ -69,6 +69,7 @@ export default function SideBar() {
         p={"0"}
         overflowX={"auto"}
         css={{ "&::-webkit-scrollbar": { display: "none" } }}
+        h="full"
       >
         {context.newPersonAddBtn ? (
           <SideBarHeader id="new" title="Add People" />
