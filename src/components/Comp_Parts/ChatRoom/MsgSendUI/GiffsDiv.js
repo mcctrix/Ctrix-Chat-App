@@ -11,6 +11,7 @@ import { useContext } from "react";
 import { Grid, SearchBar, SearchContext } from "@giphy/react-components";
 
 import { Container } from "@chakra-ui/react";
+import useDevice from "../../../Custom_hooks/useDevice";
 
 export default function GiffsDiv({ MsgSendHandler }) {
   return (
@@ -23,6 +24,7 @@ export default function GiffsDiv({ MsgSendHandler }) {
 }
 
 const GiffComponent = ({ MsgSendHandler }) => {
+  const DEVICE = useDevice();
   const { fetchGifs, searchKey } = useContext(SearchContext);
   const context = useContext(AppContext);
 
@@ -42,7 +44,7 @@ const GiffComponent = ({ MsgSendHandler }) => {
       h="50vh"
       w="500"
       bottom="5vh"
-      left="5vw"
+      left={DEVICE === "Desktop" ? "5vw" : "0"}
       zIndex="40"
       overflowY="scroll"
       css={{ "&::-webkit-scrollbar": { display: "none" } }}
