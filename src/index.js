@@ -6,8 +6,6 @@ import { ColorModeScript } from "@chakra-ui/react";
 
 import { BrowserRouter } from "react-router-dom";
 
-import { ContextWrapper } from "./components/GlobalStore/Context";
-
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from "./components/GlobalStore/theme";
 
@@ -18,12 +16,11 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-    <ContextWrapper>
-      <BrowserRouter>
-        <ChakraProvider theme={theme}>
-          <App />
-        </ChakraProvider>
-      </BrowserRouter>
-    </ContextWrapper>
+
+    <BrowserRouter>
+      <ChakraProvider theme={theme}>
+        <App />
+      </ChakraProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );
