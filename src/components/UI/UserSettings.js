@@ -21,27 +21,34 @@ import {
   Heading,
   Text,
   useColorMode,
+  CircularProgress,
 } from "@chakra-ui/react";
+import useDevice from "../Custom_hooks/useDevice";
 
 export default function UserSettings(props) {
   // Initialise
   const [, boy, boy2, girl, girl2] = usePictures();
   const { colorMode } = useColorMode();
+  const DEVICE = useDevice();
 
   const context = useContext(AppContext);
 
   const [image, setimage] = useState("");
   const [UserID, setUserID] = useState("");
   const [SelectedAvatar, setSelectedAvatar] = useState("default");
-  const [CustomPicture, setCustomPicture] = useState("");
+  const [CustomPicture, setCustomPicture] = useState();
 
   // Toggler
   const [clickUpload, setclickUpload] = useState(false);
   const [uploadSuccess, setUploadSuccess] = useState(false);
+  const [uploading, setUploading] = useState(false);
 
   // Ref
   const NameRef = useRef(null);
   const UploadRef = useRef(null);
+
+  // Variables
+  const ImageSize = DEVICE === "Desktop" ? "16" : "8";
 
   if (UserID === "") {
     onAuthStateChanged(getAuth(), (user) => {
@@ -51,18 +58,18 @@ export default function UserSettings(props) {
     });
   }
 
-  // const SelectAvatar = (event) => {
-  //   setSelectedAvatar(event.target.value);
-  // };
-
   const UploadFile = () => {
     // e.preventDefault();
     setclickUpload(true);
     if (!image) return;
+    setUploadSuccess(false);
+    setclickUpload(false);
+    setUploading(true);
     const storageRef = ref(storage, `profilepicture/${image.name}`);
     uploadBytesResumable(storageRef, image)
       .then(() => {
         setUploadSuccess(true);
+        setUploading(false);
       })
       .then(() => {
         getDownloadURL(storageRef).then((url) => {
@@ -88,7 +95,7 @@ export default function UserSettings(props) {
         User_ID: UserID,
         NickName:
           NameRef.current.value === ""
-            ? context.Current_UserName
+            ? context.Current_UserData.NickName
             : NameRef.current.value,
         ProfilePicture:
           SelectedAvatar === "default"
@@ -98,17 +105,17 @@ export default function UserSettings(props) {
             : SelectedAvatar,
       });
     }
-    context.setCurrent_UserName(NameRef.current.value);
     context.setCurrent_UserData({
       User_ID: UserID,
       NickName:
         NameRef.current.value === ""
-          ? context.Current_UserName
+          ? context.Current_UserData.NickName
           : NameRef.current.value,
       ProfilePicture:
         SelectedAvatar === "other" ? CustomPicture : SelectedAvatar,
     });
     context.setDisplayUserSettings(false);
+    context.setFirstTimeLogin(false);
   };
   return (
     <Container
@@ -122,6 +129,7 @@ export default function UserSettings(props) {
     >
       <VStack
         p="5"
+        w={DEVICE === "Mobile" ? "100vw" : "initial"}
         borderRadius="3xl"
         boxShadow="0 0 0 400vmax rgb(0 0 0 / 0.4)"
         bgColor={colorMode === "dark" ? "facebook.900" : "facebook.200"}
@@ -146,16 +154,16 @@ export default function UserSettings(props) {
               // defaultValue={boy}
             >
               <Radio value={boy} flexDirection="column">
-                <Image src={boy} alt="boy avatar" boxSize="16" />
+                <Image src={boy} alt="boy avatar" boxSize={ImageSize} />
               </Radio>
               <Radio value={boy2} flexDirection="column">
-                <Image src={boy2} alt="boy2 avatar" boxSize="16" />
+                <Image src={boy2} alt="boy2 avatar" boxSize={ImageSize} />
               </Radio>
               <Radio value={girl} flexDirection="column">
-                <Image src={girl} alt="girl avatar" boxSize="16" />
+                <Image src={girl} alt="girl avatar" boxSize={ImageSize} />
               </Radio>
               <Radio value={girl2} flexDirection="column">
-                <Image src={girl2} alt="girl2 avatar" boxSize="16" />
+                <Image src={girl2} alt="girl2 avatar" boxSize={ImageSize} />
               </Radio>
               <Radio value="other" flexDirection="column">
                 <Text size="lg">Other</Text>
@@ -174,6 +182,7 @@ export default function UserSettings(props) {
                 {uploadSuccess && (
                   <Heading size="sm">Uploaded Successfully</Heading>
                 )}
+                {uploading && <CircularProgress isIndeterminate size="10" />}
                 {clickUpload && !uploadSuccess && (
                   <Heading size="sm">
                     Click upload to upload your picture.
@@ -181,6 +190,7 @@ export default function UserSettings(props) {
                 )}
               </HStack>
             )}
+
             <HStack>
               <Button type="submit">Submit</Button>
               {!props.Firsttime && (

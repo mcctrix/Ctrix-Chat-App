@@ -19,9 +19,9 @@ export default function AddChatPerson(props) {
   const [isChecked, setisChecked] = useState(false);
 
   useEffect(() => {
-    // For group chat
+    // For group chat adding user id in list to make group chat later on
     if (isChecked) {
-      context.setgroupChatList((list) => {
+      context.setNewGroupChatUserList((list) => {
         if (list?.length > 0) {
           return [
             ...list,
@@ -38,8 +38,8 @@ export default function AddChatPerson(props) {
       });
     }
     if (!isChecked) {
-      if (context.groupChatList.length > 0) {
-        context.setgroupChatList((list) =>
+      if (context.newGroupChatUserList.length > 0) {
+        context.setNewGroupChatUserList((list) =>
           list.filter((val) => {
             if (val.ID === props.user.User_ID) {
               return false;
@@ -79,14 +79,15 @@ export default function AddChatPerson(props) {
       )
     ) {
       const Chat = SecPersonNames[IfChatExist];
+      console.log(props);
 
       if (isMobile) {
         context.setopenChat(true);
       }
 
-      context.setuserNameActiveChat(props.user.NickName);
-      context.setnewPersonAddBtn(false);
-      context.setactiveChat(Chat);
+      context.setActivePrivateChatOtherUserData(props.user);
+      context.setNewPersonAddBtn(false);
+      context.setActiveChatInit(Chat);
       return;
     }
 
@@ -102,9 +103,9 @@ export default function AddChatPerson(props) {
     if (isMobile) {
       context.setopenChat(true);
     }
-    context.setnewPersonAddBtn(false);
-    context.setuserNameActiveChat(props.user.NickName);
-    context.setactiveChat(DATA);
+    context.setNewPersonAddBtn(false);
+    context.setActivePrivateChatOtherUserData(props.user);
+    context.setActiveChatInit(DATA);
   };
 
   return (

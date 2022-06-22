@@ -1,4 +1,4 @@
-import { useRef, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { v4 as uuid } from "uuid";
 import { doc, setDoc } from "firebase/firestore";
 import AppContext from "../GlobalStore/Context";
@@ -21,7 +21,7 @@ export default function GetNameForGroup({ togglevis, toggleGroupMakeBtn }) {
 
   const SendData = () => {
     if (groupName === "") return;
-    if (context.groupChatList.length === 0) {
+    if (context.newGroupChatUserList.length === 0) {
       return;
     }
     const ID = uuid();
@@ -32,14 +32,14 @@ export default function GetNameForGroup({ togglevis, toggleGroupMakeBtn }) {
         ID: context.Current_UserID,
       },
     };
-    for (const user in context.groupChatList) {
+    for (const user in context.newGroupChatUserList) {
       Data = {
         ...Data,
         ["User" + (parseInt(user) + 2)]: {
-          ID: context.groupChatList[user].ID,
+          ID: context.newGroupChatUserList[user].ID,
         },
       };
-      NumOfUsers.push(context.groupChatList[user].ID);
+      NumOfUsers.push(context.newGroupChatUserList[user].ID);
     }
 
     Data = {
@@ -52,9 +52,9 @@ export default function GetNameForGroup({ togglevis, toggleGroupMakeBtn }) {
 
     setDoc(MsgRef, Data);
     togglevis(false);
-    context.setuserNameActiveChat(groupName);
-    context.setactiveChat(Data);
-    context.setnewPersonAddBtn(false);
+    context.setActivePrivateChatOtherUserData(groupName);
+    context.setActiveChatInit(Data);
+    context.setNewPersonAddBtn(false);
     toggleGroupMakeBtn(false);
   };
   return (

@@ -8,12 +8,14 @@ import GiffIcon from "./GiffIcon";
 import GiffsDiv from "../Comp_Parts/ChatRoom/MsgSendUI/GiffsDiv";
 
 import { Button, HStack, Input, Container, Stack } from "@chakra-ui/react";
+import useDevice from "../Custom_hooks/useDevice";
 
 // Prop is related to receiving ref for empty div to scroll to down
 
 export default function MsgSendUI(props) {
   // init
   const context = useContext(AppContext);
+  const DEVICE = useDevice();
 
   // hooks
   const NewMsgRef = useRef();
@@ -35,28 +37,28 @@ export default function MsgSendUI(props) {
     }
     const id = Date.now().toString();
     let LocRef;
-    if (context.activeChat.ChatType === "DM") {
+    if (context.activeChatInit.ChatType === "DM") {
       LocRef = doc(
         db,
         "Messages",
         "Private_Chats",
-        context.activeChat.ChatID,
+        context.activeChatInit.ChatID,
         id
       );
     }
-    if (context.activeChat.ChatType === "Group") {
+    if (context.activeChatInit.ChatType === "Group") {
       LocRef = doc(
         db,
         "Messages",
         "Group_Chats",
-        context.activeChat.ChatID,
+        context.activeChatInit.ChatID,
         id
       );
     }
     //
 
     const MsgObj = {
-      ChatID: context.activeChat.ChatID,
+      ChatID: context.activeChatInit.ChatID,
       id: id,
       Sender: context.Current_UserID,
       createdAt: serverTimestamp(),
@@ -80,7 +82,7 @@ export default function MsgSendUI(props) {
   };
   return (
     <HStack w="full" padding="1">
-      <Container id="GifDiv" p="0" w="3vw">
+      <Container id="GifDiv" p="0" w={DEVICE === "Mobile" ? "10vw" : "2vw"}>
         {context.showGifDiv && <GiffsDiv MsgSendHandler={SendMsg} />}
         <Container onClick={OpenGif} p="0">
           <GiffIcon />

@@ -8,13 +8,13 @@ import useInitialiseContextData from "../components/Functions/useInitialiseConte
 import Loading from "../components/UI/Loading";
 
 import AppContext from "../components/GlobalStore/Context";
-import usePMInit from "../components/Custom_hooks/usePMInit";
+import useChatInitt from "../components/Custom_hooks/useChatInit";
 
 export default function Home() {
   // init
   const context = useContext(AppContext);
   useInitialiseContextData();
-  usePMInit();
+  useChatInitt();
 
   const Navigate = useNavigate();
   const auth = getAuth();

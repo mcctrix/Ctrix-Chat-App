@@ -21,27 +21,27 @@ export default function SideBar() {
   const [makeGroupChatToggler, setMakeGroupBtnToggler] = useState(false);
 
   // Setting first chat as Active Chat
-  if (
-    !context.activeChat &&
-    context.chatInit.length > 0 &&
-    context.UsersData.length > 0
-  ) {
-    context.setactiveChat(context.chatInit[0]);
-    if (context.chatInit[0].ChatType === "Group") {
-      context.setuserNameActiveChat(context.chatInit[0].ChatName);
-    }
-    if (context.chatInit[0].ChatType === "DM") {
-      context.setuserNameActiveChat(
-        context.Current_UserID === context.chatInit[0].User1.ID
-          ? context.UsersData?.find?.(
-              (val) => val.User_ID === context.chatInit[0].User2.ID
-            ).NickName
-          : context.UsersData?.find?.(
-              (val) => val.User_ID === context.chatInit[0].User1.ID
-            ).NickName
-      );
-    }
-  }
+  // if (
+  //   !context.activeChatInit &&
+  //   context.chatInit.length > 0 &&
+  //   context.UsersData.length > 0
+  // ) {
+  //   context.setActiveChatInit(context.chatInit[0]);
+  //   if (context.chatInit[0].ChatType === "Group") {
+  //     context.setActivePrivateChatOtherUserData(context.chatInit[0].ChatName);
+  //   }
+  //   if (context.chatInit[0].ChatType === "DM") {
+  //     context.setActivePrivateChatOtherUserData(
+  //       context.Current_UserID === context.chatInit[0].User1.ID
+  //         ? context.UsersData?.find?.(
+  //             (val) => val.User_ID === context.chatInit[0].User2.ID
+  //           ).NickName
+  //         : context.UsersData?.find?.(
+  //             (val) => val.User_ID === context.chatInit[0].User1.ID
+  //           ).NickName
+  //     );
+  //   }
+  // }
 
   const CloseOptionsInSideBarHeader = (event) => {
     window.addEventListener("mouseup", () => {
@@ -51,7 +51,7 @@ export default function SideBar() {
     });
   };
   const makeGroupChat = () => {
-    if (context.groupChatList.length === 0) return;
+    if (context.newGroupChatUserList.length === 0) return;
     setnameGroupChat(true);
   };
 
@@ -61,6 +61,7 @@ export default function SideBar() {
       w={DEVICE === "Mobile" ? "full" : "30vw"}
       display={context.openChat ? "none" : "flex"}
       borderRight="1px solid black"
+      m="0"
       p="0"
       flexDirection="column"
       onClick={CloseOptionsInSideBarHeader}
@@ -74,12 +75,12 @@ export default function SideBar() {
         {context.newPersonAddBtn ? (
           <SideBarHeader id="new" title="Add People" />
         ) : (
-          <SideBarHeader title={context.Current_UserName} />
+          <SideBarHeader title={context.Current_UserData?.NickName} />
         )}
         <HStack>
           <Button
             onClick={() => {
-              context.setnewPersonAddBtn(false);
+              context.setNewPersonAddBtn(false);
               setMakeGroupBtnToggler(false);
             }}
             w="full"
@@ -89,7 +90,7 @@ export default function SideBar() {
             Chats
           </Button>
           <Button
-            onClick={() => context.setnewPersonAddBtn(true)}
+            onClick={() => context.setNewPersonAddBtn(true)}
             w="full"
             colorScheme={context.newPersonAddBtn ? "red" : "blue"}
             boxShadow="none"
@@ -101,7 +102,7 @@ export default function SideBar() {
           <AddChats groupBtnToggler={setMakeGroupBtnToggler} />
         ) : (
           <Container p={"0"}>
-            {context.chatInit &&
+            {context.chatInit?.length > 0 &&
               context.chatInit.map((data) => (
                 <ChatModal key={data.ChatID} data={data} />
               ))}

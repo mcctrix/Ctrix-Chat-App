@@ -5,7 +5,7 @@ import { db } from "../firebase/firebase";
 
 import AppContext from "../GlobalStore/Context";
 
-function usePMInit() {
+function useChatInit() {
   const context = useContext(AppContext);
   // Ref
   const PMREF = collection(db, "Private_Chat_init");
@@ -60,13 +60,13 @@ function usePMInit() {
           );
           context.setChatInit((value) => [...value, data]);
         });
+        context.setLoading(false);
       }
     );
-    // context.setLoading(false);
 
     // eslint-disable-next-line
-  }, [db, context.Current_UserName]);
+  }, [db, context.Current_UserData]);
   return null;
 }
 
-export default usePMInit;
+export default useChatInit;

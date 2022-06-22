@@ -34,17 +34,17 @@ export default function SideBarHeader(props) {
 
   const SignOut = () => {
     signOut(auth);
-    context.setCurrent_UserID("");
-    context.setCurrent_UserName("");
-    context.setCurrent_UserData("");
-    context.setUsersData("");
-    context.setactiveChat(null);
-    context.setactiveChatData(null);
-    context.setChatInit([]);
+    context.setCurrent_UserID(null);
+    context.setCurrent_UserData(undefined);
+    // context.setUsersData(undefined);
+    context.setActiveChatInit(undefined);
+    context.setActiveChatInitMessages(undefined);
+    context.setActiveChatInit(undefined);
     context.setChatInit([]);
     context.setLoading(true);
-    context.setChatInit([]);
-    context.setuserNameActiveChat("");
+    context.setNewPersonAddBtn(false);
+
+    context.setActivePrivateChatOtherUserData("");
 
     Navigate("/");
   };

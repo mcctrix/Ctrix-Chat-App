@@ -15,11 +15,11 @@
   color: #e4e6eb;
 }
 /* Chat Modal */
-.activechat {
+.activeChatInit {
   background-color: rgb(61, 63, 68);
   color: #2f3031;
 }
-.activeChatHeader {
+.activeChatInitHeader {
   background-color: rgb(18, 153, 41);
   width: 20px;
   height: 20px;

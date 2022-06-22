@@ -19,24 +19,28 @@ export default function ChatRoomHeader() {
   // const ShowOptionHandler = () => {
   //   setShowOptions(true);
   // };
+  const headerName =
+    context.activeChatInit.ChatType === "Group"
+      ? context.activeChatInit.ChatName
+      : context.activePrivateChatOtherUserData.NickName;
 
   const UserPicObtain =
-    context.userNameActiveChat &&
+    context.activePrivateChatOtherUserData &&
     context?.allUsersData?.find?.(
-      (data) => data.NickName === context.userNameActiveChat
+      (data) => data.NickName === context.activePrivateChatOtherUserData
     )?.ProfilePicture;
 
   const UserPic = UserPicObtain ? UserPicObtain : Placeholder;
 
   const closeCurrentChat = () => {
     context.setopenChat(false);
-    context.setactiveChat("");
+    context.setActiveChatInit(undefined);
   };
 
   return (
     <HStack padding="2" w="full" justifyContent="space-between" boxShadow="md">
       <HStack>
-        {DEVICE === "Desktop" ? null : (
+        {DEVICE === "Mobile" && (
           <HStack onClick={closeCurrentChat}>
             <BackIcon />
           </HStack>
@@ -47,9 +51,7 @@ export default function ChatRoomHeader() {
           boxSize={DEVICE === "Desktop" ? "10" : "12"}
           borderRadius="50%"
         />
-        <Heading size={DEVICE === "Mobile" ? "lg" : "md"}>
-          {context.userNameActiveChat}
-        </Heading>
+        <Heading size={DEVICE === "Mobile" ? "lg" : "md"}>{headerName}</Heading>
       </HStack>
       <HStack>
         {/* <HStack onClick={ShowOptionHandler}>

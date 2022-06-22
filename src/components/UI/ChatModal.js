@@ -23,69 +23,76 @@ export default function ChatModal(props) {
   const { colorMode } = useColorMode();
 
   // Hooks
-  const [ChatName, setChatName] = useState("");
+  const [otherPersonData, setOtherPersonData] = useState();
 
   const UserPicObtain =
-    ChatName &&
-    context?.allUsersData?.find?.((data) => data.NickName === ChatName)
-      ?.ProfilePicture;
+    otherPersonData &&
+    context.allUsersData?.find?.(
+      (data) => data.User_ID === otherPersonData.User_ID
+    )?.ProfilePicture;
 
   const UserPic = UserPicObtain ? UserPicObtain : Placeholder;
+  const chatModalName =
+    props.data.ChatType === "Group"
+      ? props.data.ChatName
+      : otherPersonData?.NickName;
 
   const makeChatActive = () => {
     if (DEVICE === "Mobile") {
       context.setopenChat(true);
     }
+    if (props.data.ChatType === "DM") {
+      context.setActivePrivateChatOtherUserData(() => {
+        return props.data.User1.ID === context.Current_UserID
+          ? context.UsersData.find((val) => val.User_ID === props.data.User2.ID)
+          : context.UsersData.find(
+              (val) => val.User_ID === props.data.User1.ID
+            );
+      });
+    }
+    if (props.data.ChatType === "Group") {
+      context.setActivePrivateChatOtherUserData(undefined);
+    }
     context.setshowGifDiv(false);
-    context.setuserNameActiveChat(() => {
-      if (props.data.ChatType === "Group") {
-        return props.data.ChatName;
-      }
-      return props.data.User1.ID === context.Current_UserID
-        ? context.UsersData.find((val) => val.User_ID === props.data.User2.ID)
-            .NickName
-        : context.UsersData.find((val) => val.User_ID === props.data.User1.ID)
-            .NickName;
-    });
-    context.setactiveChat(props.data);
+    context.setActiveChatInit(props.data);
   };
   useEffect(() => {
     // Setting Name of Chat
     if (props.data.ChatType === "DM") {
-      setChatName(
+      setOtherPersonData(
         props?.data.User1.ID === context?.Current_UserID
           ? context?.UsersData?.find?.(
               (val) => val.User_ID === props.data.User2.ID
-            ).NickName
+            )
           : context?.UsersData?.find?.(
               (val) => val.User_ID === props.data.User1.ID
-            ).NickName
+            )
       );
     }
     if (props.data.ChatType === "Group") {
-      setChatName(props.data.ChatName);
+      setOtherPersonData(props.data.otherPersonData);
     }
     // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     // Setting active chat messages in a global store
-    if (context?.activeChat?.ChatID === props?.data?.ChatID) {
-      context.setactiveChatData([...Messages]);
+    if (context?.activeChatInit?.ChatID === props?.data?.ChatID) {
+      context.setActiveChatInitMessages([...Messages]);
     }
     // eslint-disable-next-line
-  }, [context.activeChat?.ChatID, Messages]);
+  }, [context.activeChatInit?.ChatID, Messages]);
 
   return (
     <HStack
       padding="1"
       // className={`${styles.main} ${
-      //   context?.activeChat?.ChatID === props.data.ChatID && classes.activechat
+      //   context?.activeChatInit?.ChatID === props.data.ChatID && classes.activeChatInit
       // }`}
       onClick={makeChatActive}
       // bgColor="inherit"
       bgColor={
-        context?.activeChat?.ChatID === props.data.ChatID
+        context?.activeChatInit?.ChatID === props.data.ChatID
           ? colorMode === "dark"
             ? "hsl(230, 21%, 21%)"
             : "blackAlpha.100"
@@ -103,13 +110,13 @@ export default function ChatModal(props) {
         {/* Active Chat Symbol */}
         {/* <div
           className={`${
-            context?.activeChat?.ChatID === props.data.ChatID &&
-            classes.activeChatHeader
+            context?.activeChatInit?.ChatID === props.data.ChatID &&
+            classes.activeChatInitHeader
           }`}
         ></div> */}
       </HStack>
       <VStack alignItems="flex-start">
-        <Heading size="md">{ChatName}</Heading>
+        <Heading size="md">{chatModalName}</Heading>
         {Messages?.[Messages?.length - 1]?.Message === "Gif" ? (
           <Text>Gif</Text>
         ) : (

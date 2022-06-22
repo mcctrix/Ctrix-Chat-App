@@ -20,16 +20,15 @@ export default function ChatRoom() {
   const emptyDivRef = useRef(null);
 
   useLayoutEffect(() => {
-    if (context?.activeChatData?.length > 0 || context.Current_UserID) {
-      if (emptyDivRef && context?.activeChatData?.length) {
+    if (context?.activeChatInitMessages?.length > 0) {
+      if (emptyDivRef) {
         setTimeout(() => {
-          emptyDivRef?.current.scrollIntoView({ smooth: true });
-        }, 200);
+          emptyDivRef?.current?.scrollIntoView({ smooth: true });
+        }, 100);
       }
     }
-    context.setLoading(false);
     // eslint-disable-next-line
-  }, [context.activeChatData, context]);
+  }, [context.activeChatInitMessages, context]);
 
   const CloseGifDiv = () => {
     if (context.setshowGifDiv) {
@@ -41,7 +40,7 @@ export default function ChatRoom() {
     <VStack
       id="ChatRoom"
       display={DEVICE === "Mobile" && !context.openChat ? "none" : "flex"}
-      w="full"
+      w={DEVICE === "Desktop" ? "85vw" : "full"}
       h="100vh"
       spacing={0}
     >
@@ -56,8 +55,8 @@ export default function ChatRoom() {
         alignItems="flex-start"
         p="2"
       >
-        {context.activeChatData &&
-          context.activeChatData.map((data) => (
+        {context.activeChatInitMessages &&
+          context.activeChatInitMessages.map((data) => (
             <Message key={data.id} data={data} />
           ))}
         <div ref={emptyDivRef}></div>
