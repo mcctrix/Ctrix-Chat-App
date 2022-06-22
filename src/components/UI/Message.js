@@ -48,7 +48,7 @@ const Message = (props) => {
           />
         )}
         {props.data.Message === "Gif" ? (
-          <Container>
+          <Container padding="3">
             <Gif GIF={props.data.Gif} />
           </Container>
         ) : (
