@@ -37,12 +37,14 @@ const GiffComponent = ({ MsgSendHandler }) => {
     context.setshowGifDiv(false);
   };
 
+  const gifWidth = DEVICE === "Desktop" ? "450" : "320";
+
   return (
     <Container
       p="0"
       pos="absolute"
       h="50vh"
-      w="500"
+      width={gifWidth}
       bottom="5vh"
       left={DEVICE === "Desktop" ? "5vw" : "0"}
       zIndex="40"
@@ -53,7 +55,7 @@ const GiffComponent = ({ MsgSendHandler }) => {
       <Grid
         key={searchKey}
         fetchGifs={fetchGifs}
-        width={500}
+        width={gifWidth}
         columns={1}
         onGifClick={GifClick}
       />
