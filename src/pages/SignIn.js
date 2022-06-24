@@ -6,31 +6,20 @@ import {
 } from "firebase/auth";
 import { auth } from "../components/firebase/firebase";
 import LoginInIcon from "../components/UI/LogInIcon";
-import { useState, useEffect } from "react";
-import {
-  FormLabel,
-  Input,
-  VStack,
-  HStack,
-  Heading,
-  Button,
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  Text,
-} from "@chakra-ui/react";
+import { useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
 import FormContainer from "../components/ChakraComponents/FormContainer";
 
+import { Button, VStack, HStack, useColorMode } from "@chakra-ui/react";
+
+import YupValidation, { initialValues } from "../components/Form/YupSignIn";
+import TextField from "../components/Form/TextField";
+import { Formik, Form } from "formik";
+
 export default function Signin() {
   const Navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setpassword] = useState("");
-
-  // Data Vailidation
-  const [isEmailValid, setIsEmailValid] = useState(true);
-  const [Error, setError] = useState(false);
+  const { colorMode } = useColorMode();
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -52,86 +41,67 @@ export default function Signin() {
         console.log("Log in successfully");
       })
       .catch((err) => {
-        setError(true);
         console.log(err);
       });
   };
 
-  const SignInWithEmailPassword = (e) => {
-    setIsEmailValid(true);
-    e?.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
+  const SignInWithEmailPassword = (values, actions) => {
+    signInWithEmailAndPassword(auth, values.email, values.password)
       .then(() => {
+        actions.setSubmitting(false);
         console.log("Sign in Successfully");
       })
       .catch((err) => {
-        setError(true);
+        actions.setSubmitting(false);
         console.error("Something went wrong", err);
       });
   };
 
   return (
-    <FormContainer FormSubmit={SignInWithEmailPassword}>
-      <VStack alignItems={"center"}>
-        <LoginInIcon />
-      </VStack>
-      <VStack spacing={"2"} alignItems="flex-start">
-        <Heading alignSelf={"center"} fontSize={"2xl"}>
-          Login into your account
-        </Heading>
-        <VStack w="full">
-          <form onSubmit={SignInWithEmailPassword}>
-            <FormControl isInvalid={!isEmailValid}>
-              <FormLabel htmlFor="email">Email address</FormLabel>
-              <Input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                fontSize={"2xl"}
-                onChangeCapture={() => setError(false)}
-              />
-              <FormErrorMessage>Enter Valid Email!</FormErrorMessage>
-            </FormControl>
-            <FormControl>
-              <FormLabel htmlFor="email">Password</FormLabel>
-              <Input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setpassword(e.target.value)}
-                fontSize={"2xl"}
-                onChangeCapture={() => setError(false)}
-              />
+    <FormContainer Icon={LoginInIcon} title="Sign in for an account!">
+      <Formik
+        initialValues={initialValues}
+        validationSchema={YupValidation}
+        onSubmit={SignInWithEmailPassword}
+      >
+        {(props) => (
+          <Form>
+            <TextField
+              name="email"
+              type="email"
+              title="Email"
+              YupValidation={YupValidation}
+            />
+            <TextField
+              name="password"
+              type="password"
+              title="Password"
+              YupValidation={YupValidation}
+            />
 
-              {!Error && (
-                <FormHelperText>
-                  Never share your password with anyone
-                </FormHelperText>
-              )}
-            </FormControl>
-            {Error && (
-              <Text textAlign="center" color="red">
-                Email or Password is wrong
-              </Text>
-            )}
-          </form>
-        </VStack>
-
-        <VStack w={"full"}>
-          <HStack w={"full"}>
-            <Button onClick={SignInWithEmailPassword} w={"full"}>
-              Log In
-            </Button>
-            <Button onClick={NavToSignUp} w={"full"}>
-              Sign Up
-            </Button>
-          </HStack>
-          <Button onClick={SignInWithGoogle} w={"full"}>
-            Sign in with Google
-          </Button>
-        </VStack>
-      </VStack>
+            <VStack w={"full"} marginTop="2">
+              <HStack w={"full"}>
+                <Button type="submit" isLoading={props.isSubmitting} w={"full"}>
+                  Log In
+                </Button>
+                <Button
+                  type="reset"
+                  w="full"
+                  bgColor={colorMode === "light" ? "red.700" : "red.400"}
+                >
+                  Reset
+                </Button>
+              </HStack>
+            </VStack>
+          </Form>
+        )}
+      </Formik>
+      <Button onClick={NavToSignUp} w={"full"}>
+        Sign Up
+      </Button>
+      <Button onClick={SignInWithGoogle} w={"full"}>
+        Sign in with Google
+      </Button>
     </FormContainer>
   );
 }

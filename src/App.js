@@ -10,7 +10,7 @@ import SignUp from "./pages/SignUp";
 
 export default function App() {
   return (
-    <div>
+    <>
       <Routes>
         <Route path="/" element={<Navigate replace to="signin" />} />
         <Route
@@ -24,6 +24,6 @@ export default function App() {
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<SignUp />} />
       </Routes>
-    </div>
+    </>
   );
 }
