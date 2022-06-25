@@ -115,6 +115,7 @@ export default function SideBarHeader(props) {
                 w="full"
                 borderRadius="0"
                 border={colorMode === "dark" && "1px solid black"}
+                padding="5"
               >
                 {colorMode === "dark" ? (
                   <BsFillSunFill size={50} />
