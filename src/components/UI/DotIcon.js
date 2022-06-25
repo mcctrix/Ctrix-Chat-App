@@ -1,7 +1,9 @@
 import { IconContext } from "react-icons";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { useColorMode } from "@chakra-ui/react";
 
 export default function DotIcon() {
+  const { colorMode } = useColorMode();
   const divStyle = {
     cursor: "pointer",
   };
@@ -9,8 +11,9 @@ export default function DotIcon() {
     <IconContext.Provider
       value={{
         style: {
-          color: "rgb(255, 255, 255)",
-          fontSize: "1.6rem",
+          color: colorMode === "dark" ? "rgb(255, 255, 255)" : "rgb(0,0,0)",
+
+          fontSize: "1.55em",
         },
       }}
     >

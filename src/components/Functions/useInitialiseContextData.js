@@ -41,19 +41,20 @@ export default function useInitialiseContextData() {
       const allUserDataExceptCurrentUser = allUsersData.filter(
         (user) => user.User_ID !== Current_UserID
       );
+      if (!CurrentUserData[0]?.NickName) {
+        context.setFirstTimeLogin(true);
+      }
       // All users data
       context.setallUserData(allUsersData);
       // User Data Except current user
       context.setUsersData(allUserDataExceptCurrentUser);
       // Current logged in user data
       if (CurrentUserData[0]) {
-        context.setCurrent_UserName(CurrentUserData[0].NickName);
-        context.setCurrent_UserData(CurrentUserData);
+        context.setCurrent_UserData(CurrentUserData[0]);
       }
     }
 
     // context.setLoading(false);
-
     // eslint-disable-next-line
   }, [loading, db, Current_UserID, allUsersData, error]);
 

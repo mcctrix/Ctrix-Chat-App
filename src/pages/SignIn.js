@@ -1,21 +1,25 @@
 import {
   GoogleAuthProvider,
   signInWithPopup,
-  getAuth,
   signInWithEmailAndPassword,
   onAuthStateChanged,
 } from "firebase/auth";
-import styles from "../styles/SignIn.module.css";
+import { auth } from "../components/firebase/firebase";
 import LoginInIcon from "../components/UI/LogInIcon";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
+import FormContainer from "../components/ChakraComponents/FormContainer";
+
+import { Button, VStack, HStack, useColorMode } from "@chakra-ui/react";
+
+import YupValidation, { initialValues } from "../components/Form/YupSignIn";
+import TextField from "../components/Form/TextField";
+import { Formik, Form } from "formik";
 
 export default function Signin() {
   const Navigate = useNavigate();
-  const [userName, setuserName] = useState("");
-  const [password, setpassword] = useState("");
-  const auth = getAuth();
+  const { colorMode } = useColorMode();
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -25,9 +29,11 @@ export default function Signin() {
     });
     // eslint-disable-next-line
   }, [auth]);
+
   const NavToSignUp = () => {
     Navigate("/signup");
   };
+
   const SignInWithGoogle = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
@@ -38,42 +44,64 @@ export default function Signin() {
         console.log(err);
       });
   };
-  const SignInWithEmailPassword = (e) => {
-    e.preventDefault();
-    signInWithEmailAndPassword(auth, userName, password);
+
+  const SignInWithEmailPassword = (values, actions) => {
+    signInWithEmailAndPassword(auth, values.email, values.password)
+      .then(() => {
+        actions.setSubmitting(false);
+        console.log("Sign in Successfully");
+      })
+      .catch((err) => {
+        actions.setSubmitting(false);
+        console.error("Something went wrong", err);
+      });
   };
+
   return (
-    <div className={styles.main}>
-      <div className={styles.formdiv}>
-        <form className={styles.form} onSubmit={SignInWithEmailPassword}>
-          <LoginInIcon />
-          <h1>Login into your account</h1>
-          <input
-            className={styles.inputfield}
-            name="name"
-            placeholder="Username"
-            onChange={(e) => setuserName(e.target.value)}
-            value={userName}
-            required
-          />
-          <input
-            className={styles.inputfield}
-            name="password"
-            placeholder="Password"
-            required
-            onChange={(e) => setpassword(e.target.value)}
-            value={password}
-            type="password"
-          />
-          <button className={styles.subbtn}>Log In</button>
-        </form>
-        <button className={styles.subbtn} onClick={NavToSignUp}>
-          Sign Up
-        </button>
-        <button className={styles.googlelogin} onClick={SignInWithGoogle}>
-          Sign in with Google
-        </button>
-      </div>
-    </div>
+    <FormContainer Icon={LoginInIcon} title="Sign in for an account!">
+      <Formik
+        initialValues={initialValues}
+        validationSchema={YupValidation}
+        onSubmit={SignInWithEmailPassword}
+      >
+        {(props) => (
+          <Form>
+            <TextField
+              name="email"
+              type="email"
+              title="Email"
+              YupValidation={YupValidation}
+            />
+            <TextField
+              name="password"
+              type="password"
+              title="Password"
+              YupValidation={YupValidation}
+            />
+
+            <VStack w={"full"} marginTop="2">
+              <HStack w={"full"}>
+                <Button type="submit" isLoading={props.isSubmitting} w={"full"}>
+                  Log In
+                </Button>
+                <Button
+                  type="reset"
+                  w="full"
+                  bgColor={colorMode === "light" ? "red.700" : "red.400"}
+                >
+                  Reset
+                </Button>
+              </HStack>
+            </VStack>
+          </Form>
+        )}
+      </Formik>
+      <Button onClick={NavToSignUp} w={"full"}>
+        Sign Up
+      </Button>
+      <Button onClick={SignInWithGoogle} w={"full"}>
+        Sign in with Google
+      </Button>
+    </FormContainer>
   );
 }

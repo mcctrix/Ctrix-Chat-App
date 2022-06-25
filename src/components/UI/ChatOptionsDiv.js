@@ -1,4 +1,4 @@
-import { useEffect, useContext, useState } from "react/";
+import { useEffect, useContext, useState } from "react";
 import AppContext from "../GlobalStore/Context";
 import BackIcon from "./BackIcon";
 import usePictures from "../Custom_hooks/usePictures";
@@ -10,7 +10,7 @@ export default function ChatOptionsDiv(props) {
   const context = useContext(AppContext);
   const [UserList, setUserList] = useState();
   useEffect(() => {
-    const DATA = context?.activeChat?.ChatUserID?.map((ID) =>
+    const DATA = context.activeChatInit?.ChatUserID?.map((ID) =>
       context.allUsersData.filter((data) => {
         return data.User_ID === ID ? true : false;
       })
@@ -18,7 +18,7 @@ export default function ChatOptionsDiv(props) {
 
     setUserList(DATA);
     // eslint-disable-next-line
-  }, [context.activeChat]);
+  }, [context.activeChatInit]);
   const BackButton = () => {
     props.setVisibility(false);
   };

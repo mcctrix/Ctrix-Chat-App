@@ -1,22 +1,26 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
+import { createRoot } from "react-dom/client";
 import App from "./App";
-import reportWebVitals from "./reportWebVitals";
+
+import { ColorModeScript } from "@chakra-ui/react";
 
 import { BrowserRouter } from "react-router-dom";
 
-import { ContextWrapper } from "./components/GlobalStore/Context";
+import { ChakraProvider } from "@chakra-ui/react";
+import theme from "./components/GlobalStore/theme";
 
-ReactDOM.render(
+const container = document.getElementById("root");
+
+const root = createRoot(container);
+
+root.render(
   <React.StrictMode>
-    <ContextWrapper>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ContextWrapper>
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+    <ColorModeScript initialColorMode={theme.config.initialColorMode} />
 
-reportWebVitals();
+    <BrowserRouter>
+      <ChakraProvider theme={theme}>
+        <App />
+      </ChakraProvider>
+    </BrowserRouter>
+  </React.StrictMode>
+);

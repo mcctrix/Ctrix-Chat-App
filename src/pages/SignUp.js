@@ -1,34 +1,39 @@
 import { useNavigate } from "react-router-dom";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
-import styles from "../styles/SignIn.module.css";
+import FormContainer from "../components/ChakraComponents/FormContainer";
+
+import {
+  VStack,
+  Heading,
+  FormLabel,
+  Input,
+  Button,
+  HStack,
+  FormControl,
+  FormHelperText,
+  FormErrorMessage,
+  Text,
+} from "@chakra-ui/react";
+
+import TextField from "../components/Form/TextField";
+import { Formik, Form } from "formik";
+import YupValidation, { initialValues } from "../components/Form/YupSignUp";
 
 export default function SignUp() {
   // Init
   const auth = getAuth();
   const Navigate = useNavigate();
 
-  // Hooks
-  const [wrongPasswd, setwrongPasswd] = useState(false);
-
-  // Ref
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  const confirmPasswordRef = useRef();
-
-  const SignUp = (e) => {
-    e.preventDefault();
-    if (passwordRef.current.value !== confirmPasswordRef.current.value) {
-      setwrongPasswd(true);
-      return;
-    }
-    setwrongPasswd(false);
-    createUserWithEmailAndPassword(
-      auth,
-      emailRef.current.value,
-      confirmPasswordRef.current.value
-    );
+  const SignUp = (values, actions) => {
+    createUserWithEmailAndPassword(auth, values.email, values.confirmPassword)
+      .then(() => {
+        actions.isSubmitting(false);
+      })
+      .catch(() => {
+        actions.isSubmitting(false);
+      });
   };
 
   const navToSignIn = () => {
@@ -36,55 +41,49 @@ export default function SignUp() {
   };
 
   return (
-    <div className={styles.main}>
-      <div className={styles.formdiv}>
-        <form className={styles.form} onSubmit={SignUp}>
-          <h1>Sign up for Account</h1>
-
-          <input
-            name="email"
-            className={styles.inputfield}
-            type="email"
-            placeholder="Email"
-            minLength="5"
-            ref={emailRef}
-            required
-          />
-          <div>
-            <input
+    <FormContainer title="Sign up for an account!">
+      <Formik
+        initialValues={initialValues}
+        validationSchema={YupValidation}
+        onSubmit={SignUp}
+      >
+        {(props) => (
+          <Form>
+            <TextField
+              name="email"
+              type="email"
+              title="Email"
+              YupValidation={YupValidation}
+            />
+            <TextField
               name="password"
-              placeholder="Password"
-              required
               type="password"
-              ref={passwordRef}
-              minLength="6"
-              className={styles.inputfield}
+              title="Password"
+              YupValidation={YupValidation}
             />
-            {wrongPasswd && (
-              <p className={styles.warning}>Please Check your Password</p>
-            )}
-          </div>
-          <div>
-            <input
-              name="confirm password"
-              placeholder="Confirm Password"
+            <TextField
+              name="confirmPassword"
               type="password"
-              minLength="6"
-              ref={confirmPasswordRef}
-              required
-              className={styles.inputfield}
+              title="Confirm Password"
+              YupValidation={YupValidation}
             />
 
-            {wrongPasswd && (
-              <p className={styles.warning}>Please Check your Password</p>
-            )}
-          </div>
-          <button className={styles.subbtn}>Sign Up</button>
-        </form>
-        <button className={styles.subbtn} onClick={navToSignIn}>
-          Log In
-        </button>
-      </div>
-    </div>
+            <VStack w={"full"} marginTop="2">
+              <HStack w={"full"}>
+                <Button type="submit" isLoading={props.isSubmitting} w={"full"}>
+                  Sign Up
+                </Button>
+                <Button type="reset" w="full" bgColor="red.800">
+                  Reset
+                </Button>
+              </HStack>
+            </VStack>
+          </Form>
+        )}
+      </Formik>
+      <Button onClick={navToSignIn} w={"full"}>
+        Sign In
+      </Button>
+    </FormContainer>
   );
 }

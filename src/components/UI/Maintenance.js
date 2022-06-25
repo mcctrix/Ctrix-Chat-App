@@ -1,5 +1,9 @@
-import styles from "../../styles/Maintenance.module.css";
+import { Heading, Container } from "@chakra-ui/react";
 
 export default function Maintenance() {
-  return <div className={styles.main}> Maintenance Break</div>;
+  return (
+    <Container centerContent h="100vh">
+      <Heading size="lg">Maintenance Break</Heading>
+    </Container>
+  );
 }

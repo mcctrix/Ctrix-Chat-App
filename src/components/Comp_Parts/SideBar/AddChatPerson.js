@@ -1,13 +1,14 @@
 import { useContext, useState, useEffect } from "react";
 import { v4 as uuid } from "uuid";
 import { isMobile } from "react-device-detect";
-import usePictures from "../../../Custom_hooks/usePictures";
+import usePictures from "../../Custom_hooks/usePictures";
 
-import AppContext from "../../../GlobalStore/Context";
-import styles from "../../../../styles/AddChatPerson.module.css";
+import AppContext from "../../GlobalStore/Context";
 
 import { doc, setDoc } from "firebase/firestore";
-import { db } from "../../../firebase/firebase";
+import { db } from "../../firebase/firebase";
+
+import { HStack, Image, Heading, Checkbox } from "@chakra-ui/react";
 
 export default function AddChatPerson(props) {
   // Inits
@@ -18,9 +19,9 @@ export default function AddChatPerson(props) {
   const [isChecked, setisChecked] = useState(false);
 
   useEffect(() => {
-    // For group chat
+    // For group chat adding user id in list to make group chat later on
     if (isChecked) {
-      context.setgroupChatList((list) => {
+      context.setNewGroupChatUserList((list) => {
         if (list?.length > 0) {
           return [
             ...list,
@@ -37,8 +38,8 @@ export default function AddChatPerson(props) {
       });
     }
     if (!isChecked) {
-      if (context.groupChatList.length > 0) {
-        context.setgroupChatList((list) =>
+      if (context.newGroupChatUserList.length > 0) {
+        context.setNewGroupChatUserList((list) =>
           list.filter((val) => {
             if (val.ID === props.user.User_ID) {
               return false;
@@ -53,11 +54,12 @@ export default function AddChatPerson(props) {
 
   const ClickEvent = async () => {
     if (props.GroupMode) return;
+
     const ID = uuid();
     const MsgRef = doc(db, "Private_Chat_init", ID);
 
     // We filter all the group chat inits
-    const SecPersonNames = context.privateChatInit.filter(
+    const SecPersonNames = context.chatInit.filter(
       (data) => data.ChatType === "DM"
     );
 
@@ -77,14 +79,15 @@ export default function AddChatPerson(props) {
       )
     ) {
       const Chat = SecPersonNames[IfChatExist];
+      console.log(props);
 
       if (isMobile) {
         context.setopenChat(true);
       }
 
-      context.setuserNameActiveChat(props.user.NickName);
-      context.setnewPersonAddBtn(false);
-      context.setactiveChat(Chat);
+      context.setActivePrivateChatOtherUserData(props.user);
+      context.setNewPersonAddBtn(false);
+      context.setActiveChatInit(Chat);
       return;
     }
 
@@ -100,29 +103,29 @@ export default function AddChatPerson(props) {
     if (isMobile) {
       context.setopenChat(true);
     }
-    context.setnewPersonAddBtn(false);
-    context.setuserNameActiveChat(props.user.NickName);
-    context.setactiveChat(DATA);
+    context.setNewPersonAddBtn(false);
+    context.setActivePrivateChatOtherUserData(props.user);
+    context.setActiveChatInit(DATA);
   };
 
   return (
-    <li className={styles.item} onClick={ClickEvent}>
+    <HStack onClick={ClickEvent} padding="3" w="full">
       {props.GroupMode && (
-        <input
+        <Checkbox
           checked={isChecked}
           onChange={() => setisChecked((val) => !val)}
-          className={styles.chkbox}
-          type="checkbox"
+          size="lg"
         />
       )}
-      <img
-        className={styles.userpic}
+      <Image
         src={
           props.user.ProfilePicture ? props.user.ProfilePicture : Placeholder
         }
         alt="user profile"
+        boxSize="12"
+        borderRadius="50%"
       />
-      {props.user.NickName}
-    </li>
+      <Heading size="md">{props.user.NickName}</Heading>
+    </HStack>
   );
 }

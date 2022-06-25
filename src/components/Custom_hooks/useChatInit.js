@@ -5,39 +5,42 @@ import { db } from "../firebase/firebase";
 
 import AppContext from "../GlobalStore/Context";
 
-function usePMInit() {
+function useChatInit() {
   const context = useContext(AppContext);
   // Ref
   const PMREF = collection(db, "Private_Chat_init");
 
   useEffect(() => {
     // Retrieving Private Chatroom details related to current user
-
+    // let ChatInitsFetched;
     onSnapshot(
-      query(PMREF, where("User1.ID", "==", context.Current_UserID)),
+      query(
+        PMREF,
+        where("ChatUserID", "array-contains", context.Current_UserID)
+      ),
       (snapshot) => {
         snapshot.docs.forEach((doc) => {
           const data = doc.data();
           //  Filter Older Version of Chat
-          context.setprivateChatInit((chat) =>
+          context.setChatInit((chat) =>
             chat.filter((arr) => arr.ChatID !== data.ChatID)
           );
-          context.setprivateChatInit((value) => [...value, data]);
+          context.setChatInit((value) => [...value, data]);
         });
       }
     );
-    onSnapshot(
-      query(PMREF, where("User2.ID", "==", context.Current_UserID)),
-      (snapshot) => {
-        snapshot.docs.forEach((doc) => {
-          const data = doc.data();
-          context.setprivateChatInit((chat) =>
-            chat.filter((arr) => arr.ChatID !== data.ChatID)
-          );
-          context.setprivateChatInit((value) => [...value, data]);
-        });
-      }
-    );
+    // onSnapshot(
+    //   query(PMREF, where("User2.ID", "==", context.Current_UserID)),
+    //   (snapshot) => {
+    //     snapshot.docs.forEach((doc) => {
+    //       const data = doc.data();
+    //       context.setChatInit((chat) =>
+    //         chat.filter((arr) => arr.ChatID !== data.ChatID)
+    //       );
+    //       context.setChatInit((value) => [...value, data]);
+    //     });
+    //   }
+    // );
 
     // Group Chat
 
@@ -49,21 +52,21 @@ function usePMInit() {
         where("ChatUserID", "array-contains", context.Current_UserID)
       ),
       (snapshot) => {
-        context.setLoading(false);
         snapshot.docs.forEach((doc) => {
           const data = doc.data();
 
-          context.setprivateChatInit((chat) =>
+          context.setChatInit((chat) =>
             chat.filter((arr) => arr.ChatID !== data.ChatID)
           );
-          context.setprivateChatInit((value) => [...value, data]);
+          context.setChatInit((value) => [...value, data]);
         });
+        context.setLoading(false);
       }
     );
 
     // eslint-disable-next-line
-  }, [db, context.Current_UserName]);
+  }, [db, context.Current_UserData]);
   return null;
 }
 
-export default usePMInit;
+export default useChatInit;
