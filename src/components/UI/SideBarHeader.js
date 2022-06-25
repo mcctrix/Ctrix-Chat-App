@@ -14,6 +14,7 @@ import {
   Button,
   useColorMode,
 } from "@chakra-ui/react";
+import { BsFillMoonFill, BsFillSunFill } from "react-icons/bs";
 
 import useDevice from "../Custom_hooks/useDevice";
 
@@ -91,17 +92,36 @@ export default function SideBarHeader(props) {
         >
           <List id="dropdownmenu" width="full">
             <ListItem onClick={ShowSettingHandler}>
-              <Button w={"full"} borderRadius="0">
+              <Button
+                w={"full"}
+                borderRadius="0"
+                border={colorMode === "dark" && "1px solid black"}
+              >
                 Edit Profile
               </Button>
             </ListItem>
             <ListItem onClick={SignOut}>
-              <Button w="full" borderRadius="0">
+              <Button
+                w="full"
+                borderRadius="0"
+                border={colorMode === "dark" && "1px solid black"}
+              >
                 Logout
               </Button>
             </ListItem>
             <ListItem>
-              <Button onClick={changeTheme}>Theme mode</Button>
+              <Button
+                onClick={changeTheme}
+                w="full"
+                borderRadius="0"
+                border={colorMode === "dark" && "1px solid black"}
+              >
+                {colorMode === "dark" ? (
+                  <BsFillSunFill size={50} />
+                ) : (
+                  <BsFillMoonFill size={40} />
+                )}
+              </Button>
             </ListItem>
           </List>
         </Stack>

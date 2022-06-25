@@ -17,7 +17,7 @@ export default function ChatComponent() {
   const DEVICE = useDevice();
 
   if (context.firstTimeLogin && !context.Loading) {
-    return <UserSettings Firsttime={true} />;
+    return <UserSettings firstTime={true} />;
   }
 
   return (
@@ -28,7 +28,7 @@ export default function ChatComponent() {
       )}
       {context.activeChatInit && <ChatRoom />}
 
-      {context.DisplayUserSettings && <UserSettings />}
+      {context.DisplayUserSettings && <UserSettings firstTime={false} />}
     </HStack>
   );
 }

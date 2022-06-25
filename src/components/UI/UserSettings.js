@@ -33,9 +33,12 @@ export default function UserSettings(props) {
 
   const context = useContext(AppContext);
 
+  const [inputName, setInputName] = useState("");
   const [image, setimage] = useState("");
   const [UserID, setUserID] = useState("");
-  const [SelectedAvatar, setSelectedAvatar] = useState("default");
+  const [SelectedAvatar, setSelectedAvatar] = useState(() =>
+    props.firstTime ? boy : "default"
+  );
   const [CustomPicture, setCustomPicture] = useState();
 
   // Toggler
@@ -44,7 +47,6 @@ export default function UserSettings(props) {
   const [uploading, setUploading] = useState(false);
 
   // Ref
-  const NameRef = useRef(null);
   const UploadRef = useRef(null);
 
   // Variables
@@ -90,27 +92,39 @@ export default function UserSettings(props) {
     if (!uploadSuccess && SelectedAvatar === "other") {
       return;
     }
-    if (NameRef) {
+    if (SelectedAvatar === "default" && inputName === "") {
+      context.setDisplayUserSettings(false);
+      context.setFirstTimeLogin(false);
+      return;
+    }
+    let ProfilePicture;
+    if (props.firstTime) {
+      ProfilePicture =
+        SelectedAvatar === "other" ? CustomPicture : SelectedAvatar;
+    }
+    if (!props.firstTime) {
+      if (SelectedAvatar !== "default") {
+        ProfilePicture = SelectedAvatar;
+      }
+      if (SelectedAvatar === "other") {
+        ProfilePicture = CustomPicture;
+      }
+      if (SelectedAvatar === "default") {
+        ProfilePicture = context.Current_UserData.ProfilePicture;
+      }
+    }
+    if (inputName) {
       setDoc(doc(db, "User_Data", UserID), {
         User_ID: UserID,
         NickName:
-          NameRef.current.value === ""
-            ? context.Current_UserData.NickName
-            : NameRef.current.value,
-        ProfilePicture:
-          SelectedAvatar === "default"
-            ? context.Current_UserData.ProfilePicture
-            : SelectedAvatar === "other"
-            ? CustomPicture
-            : SelectedAvatar,
+          inputName === "" ? context.Current_UserData.NickName : inputName,
+        ProfilePicture: ProfilePicture,
       });
     }
     context.setCurrent_UserData({
       User_ID: UserID,
       NickName:
-        NameRef.current.value === ""
-          ? context.Current_UserData.NickName
-          : NameRef.current.value,
+        inputName === "" ? context.Current_UserData.NickName : inputName,
       ProfilePicture:
         SelectedAvatar === "other" ? CustomPicture : SelectedAvatar,
     });
@@ -134,25 +148,35 @@ export default function UserSettings(props) {
         boxShadow="0 0 0 400vmax rgb(0 0 0 / 0.4)"
         bgColor={colorMode === "dark" ? "facebook.900" : "facebook.200"}
       >
-        {props.Firsttime && <h1>Welcome to the Ctrix Chats</h1>}
+        {props.firstTime && <h1>Welcome to the Ctrix Chats</h1>}
 
         <form onSubmit={SendData}>
           <VStack spacing="6">
-            {props.Firsttime ? (
+            {props.firstTime ? (
               <FormLabel>Enter Your nickname: </FormLabel>
             ) : (
               <FormLabel>
-                Enter Your nickname, if you want to change it:{" "}
+                Enter Your nickname, if you want to change it:
               </FormLabel>
             )}
-            <Input min="4" ref={NameRef} required={props.Firsttime} />
+            <Input
+              min="4"
+              onChange={(e) => setInputName(e.target.value)}
+              value={inputName}
+              required={props.firstTime}
+            />
             <FormLabel>Choose Avatar for your profile: </FormLabel>
             <RadioGroup
               onChange={setSelectedAvatar}
-              // value={SelectAvatar}
+              value={SelectedAvatar}
               size="lg"
-              // defaultValue={boy}
+              defaultValue={props.firstTime ? boy : null}
             >
+              {!props.firstTime && (
+                <Radio value="default" flexDirection="column">
+                  No Change
+                </Radio>
+              )}
               <Radio value={boy} flexDirection="column">
                 <Image src={boy} alt="boy avatar" boxSize={ImageSize} />
               </Radio>
@@ -193,7 +217,7 @@ export default function UserSettings(props) {
 
             <HStack>
               <Button type="submit">Submit</Button>
-              {!props.Firsttime && (
+              {!props.firstTime && (
                 <Button onClick={CancelSettings}>Cancel</Button>
               )}
             </HStack>

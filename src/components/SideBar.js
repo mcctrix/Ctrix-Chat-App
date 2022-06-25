@@ -84,7 +84,7 @@ export default function SideBar() {
               setMakeGroupBtnToggler(false);
             }}
             w="full"
-            colorScheme={context.newPersonAddBtn ? "blue" : "red"}
+            colorScheme={!context.newPersonAddBtn ? "red" : "telegram"}
             boxShadow="none"
           >
             Chats
@@ -92,7 +92,7 @@ export default function SideBar() {
           <Button
             onClick={() => context.setNewPersonAddBtn(true)}
             w="full"
-            colorScheme={context.newPersonAddBtn ? "red" : "blue"}
+            colorScheme={context.newPersonAddBtn ? "red" : "telegram"}
             boxShadow="none"
           >
             Contacts
