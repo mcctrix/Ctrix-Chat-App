@@ -66,6 +66,8 @@ export default function SideBarHeader(props) {
       zIndex="400"
       boxShadow="sm"
       bgColor={colorMode === "light" ? "facebook.200" : "facebook.900"}
+      transition="background-color 2000ms easer"
+      transitionDuration="2000ms"
     >
       <HStack>
         <Image
@@ -118,12 +120,12 @@ export default function SideBarHeader(props) {
                 w="full"
                 borderRadius="0"
                 border={colorMode === "dark" && "1px solid black"}
-                padding="5"
+                padding={DEVICE === "Mobile" ? "8" : "5"}
               >
                 {colorMode === "dark" ? (
                   <BsFillSunFill size={50} />
                 ) : (
-                  <BsFillMoonFill size={40} />
+                  <BsFillMoonFill size="40" />
                 )}
               </Button>
             </ListItem>

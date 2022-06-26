@@ -7,7 +7,7 @@ import BackIcon from "../../UI/BackIcon";
 // import DotIcon from "../../UI/DotIcon";
 // import ChatOptionsDiv from "../../UI/ChatOptionsDiv";
 
-import { HStack, Heading, Image } from "@chakra-ui/react";
+import { HStack, Heading, Image, useColorMode } from "@chakra-ui/react";
 
 export default function ChatRoomHeader() {
   // Init
@@ -15,6 +15,7 @@ export default function ChatRoomHeader() {
   const context = useContext(AppContext);
   const [Placeholder] = usePictures();
   const DEVICE = useDevice();
+  const { colorMode } = useColorMode();
 
   // const ShowOptionHandler = () => {
   //   setShowOptions(true);
@@ -38,7 +39,15 @@ export default function ChatRoomHeader() {
   };
 
   return (
-    <HStack padding="2" w="full" justifyContent="space-between" boxShadow="md">
+    <HStack
+      padding="2"
+      w="full"
+      justifyContent="space-between"
+      boxShadow="md"
+      position="sticky"
+      top="0"
+      bgColor={colorMode === "light" ? "facebook.200" : "facebook.900"}
+    >
       <HStack>
         {DEVICE === "Mobile" && (
           <HStack onClick={closeCurrentChat}>

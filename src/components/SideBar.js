@@ -63,21 +63,15 @@ export default function SideBar() {
       borderRight="1px solid black"
       m="0"
       p="0"
-      flexDirection="column"
       onClick={CloseOptionsInSideBarHeader}
     >
-      <Container
-        p={"0"}
-        overflowX={"auto"}
-        css={{ "&::-webkit-scrollbar": { display: "none" } }}
-        h="full"
-      >
+      <Container p={"0"} overflowY={"hidden"}>
         {context.newPersonAddBtn ? (
           <SideBarHeader id="new" title="Add People" />
         ) : (
           <SideBarHeader title={context.Current_UserData?.NickName} />
         )}
-        <HStack>
+        <HStack pos="sticky" top={DEVICE === "Desltop" ? "9vh" : "6vh"}>
           <Button
             onClick={() => {
               context.setNewPersonAddBtn(false);
@@ -99,9 +93,21 @@ export default function SideBar() {
           </Button>
         </HStack>
         {context.newPersonAddBtn ? (
-          <AddChats groupBtnToggler={setMakeGroupBtnToggler} />
+          <Container
+            p={"0"}
+            h="85%"
+            overflowY={"scroll"}
+            css={{ "&::-webkit-scrollbar": { display: "none" } }}
+          >
+            <AddChats groupBtnToggler={setMakeGroupBtnToggler} />
+          </Container>
         ) : (
-          <Container p={"0"}>
+          <Container
+            p={"0"}
+            h="85%"
+            overflowY={"scroll"}
+            css={{ "&::-webkit-scrollbar": { display: "none" } }}
+          >
             {context.chatInit?.length > 0 &&
               context.chatInit.map((data) => (
                 <ChatModal key={data.ChatID} data={data} />

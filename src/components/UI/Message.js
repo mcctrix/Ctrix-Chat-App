@@ -49,7 +49,7 @@ const Message = (props) => {
           />
         )}
         {props.data.Message === "Gif" ? (
-          <Container padding="3" userSelect="none">
+          <Container padding="3" userSelect="none" zIndex={-1}>
             <Gif GIF={props.data.Gif} />
           </Container>
         ) : (
@@ -60,7 +60,7 @@ const Message = (props) => {
             m="0 0 0 16px"
             borderRadius="lg"
           >
-            <Text userSelect="none">{props.data.text}</Text>
+            <Text>{props.data.text}</Text>
           </Container>
         )}
       </HStack>

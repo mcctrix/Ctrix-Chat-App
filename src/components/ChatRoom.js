@@ -18,15 +18,20 @@ export default function ChatRoom() {
 
   // Ref Hooks
   const emptyDivRef = useRef(null);
+  const MsgDiv = useRef(null);
 
   useLayoutEffect(() => {
     if (context?.activeChatInitMessages?.length > 0) {
+      if (MsgDiv) {
+        console.log(MsgDiv);
+      }
       if (emptyDivRef) {
         setTimeout(() => {
           emptyDivRef?.current?.scrollIntoView({ smooth: true });
         }, 100);
       }
     }
+    // window.scrollTo(0, document.body.scrollHeight);
     // eslint-disable-next-line
   }, [context.activeChatInitMessages, context]);
 
@@ -54,6 +59,7 @@ export default function ChatRoom() {
         w="full"
         alignItems="flex-start"
         p="2"
+        ref={MsgDiv}
       >
         {context.activeChatInitMessages &&
           context.activeChatInitMessages.map((data) => (
