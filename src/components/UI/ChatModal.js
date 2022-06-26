@@ -106,6 +106,7 @@ export default function ChatModal(props) {
           boxSize="14"
           borderRadius="50%"
           loading="lazy"
+          userSelect="none"
         />
         {/* Active Chat Symbol */}
         {/* <div
@@ -116,11 +117,15 @@ export default function ChatModal(props) {
         ></div> */}
       </HStack>
       <VStack alignItems="flex-start">
-        <Heading size="md">{chatModalName}</Heading>
+        <Heading size="md" userSelect="none">
+          {chatModalName}
+        </Heading>
         {Messages?.[Messages?.length - 1]?.Message === "Gif" ? (
-          <Text>Gif</Text>
+          <Text userSelect="none">Gif</Text>
         ) : (
-          <Text>{Messages?.[Messages?.length - 1]?.text.substring(0, 25)}</Text>
+          <Text userSelect="none">
+            {Messages?.[Messages?.length - 1]?.text.substring(0, 25)}
+          </Text>
         )}
       </VStack>
       {/* <div className={styles.emptydiv}></div> */}

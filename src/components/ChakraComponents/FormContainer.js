@@ -1,7 +1,5 @@
 import React from "react";
 import { Container, VStack, Heading } from "@chakra-ui/react";
-import { Formik, Form } from "formik";
-import { Button } from "@chakra-ui/react";
 
 const FormContainer = ({ children, title, Icon }) => {
   return (

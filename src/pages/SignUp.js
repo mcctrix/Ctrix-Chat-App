@@ -1,21 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 import FormContainer from "../components/ChakraComponents/FormContainer";
 
-import {
-  VStack,
-  Heading,
-  FormLabel,
-  Input,
-  Button,
-  HStack,
-  FormControl,
-  FormHelperText,
-  FormErrorMessage,
-  Text,
-} from "@chakra-ui/react";
+import { VStack, Button, HStack } from "@chakra-ui/react";
 
 import TextField from "../components/Form/TextField";
 import { Formik, Form } from "formik";

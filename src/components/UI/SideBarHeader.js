@@ -77,9 +77,12 @@ export default function SideBarHeader(props) {
           }
           boxSize={DEVICE === "Mobile" ? "55" : "75"}
           borderRadius="100"
+          userSelect="none"
         />
 
-        <Heading size="lg">{props.title}</Heading>
+        <Heading size="lg" userSelect="none">
+          {props.title}
+        </Heading>
       </HStack>
       <Stack onClick={showDropDown} pos="relative">
         <DotIcon />

@@ -50,8 +50,11 @@ export default function ChatRoomHeader() {
           src={UserPic}
           boxSize={DEVICE === "Desktop" ? "10" : "12"}
           borderRadius="50%"
+          userSelect="none"
         />
-        <Heading size={DEVICE === "Mobile" ? "lg" : "md"}>{headerName}</Heading>
+        <Heading size={DEVICE === "Mobile" ? "lg" : "md"} userSelect="none">
+          {headerName}
+        </Heading>
       </HStack>
       <HStack>
         {/* <HStack onClick={ShowOptionHandler}>
