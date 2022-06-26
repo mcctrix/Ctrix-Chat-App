@@ -10,7 +10,14 @@ const theme = extendTheme(
     colorScheme: "facebook",
     components: ["Button"],
   }),
-  { config }
+  { config },
+  {
+    colors: {
+      brand: {
+        800: "green",
+      },
+    },
+  }
 );
 
 export default theme;

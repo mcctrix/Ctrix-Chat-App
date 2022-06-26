@@ -18,11 +18,7 @@ export default function GifComp({ GIF }) {
     fetchFunction();
   }, [GIF]);
   return (
-    <Container
-      p="0"
-      width={DEVICE === "Mobile" ? 200 : 300}
-      bgColor="yellow.700"
-    >
+    <Container p="0" width={DEVICE === "Mobile" ? 200 : 300}>
       {gif && <Gif gif={gif} width={DEVICE === "Mobile" ? 200 : 300} />}
     </Container>
   );
