@@ -16,7 +16,6 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-
     <BrowserRouter>
       <ChakraProvider theme={theme}>
         <App />

@@ -64,6 +64,7 @@ export default function SideBar() {
       m="0"
       p="0"
       onClick={CloseOptionsInSideBarHeader}
+      // bgColor={"brand.secondary"}
     >
       <Container p={"0"} overflowY={"hidden"}>
         {context.newPersonAddBtn ? (

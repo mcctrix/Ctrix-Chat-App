@@ -96,7 +96,7 @@ export default function ChatModal(props) {
           ? colorMode === "dark"
             ? "hsl(230, 21%, 21%)"
             : "blackAlpha.100"
-          : "inherit"
+          : "initial"
       }
     >
       <HStack>

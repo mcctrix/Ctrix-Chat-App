@@ -49,18 +49,29 @@ const Message = (props) => {
           />
         )}
         {props.data.Message === "Gif" ? (
-          <Container padding="3" userSelect="none" zIndex={-1}>
+          <Container padding="3" userSelect="none">
             <Gif GIF={props.data.Gif} />
           </Container>
         ) : (
           <Container
             key={props.data.id}
-            bgColor={colorMode === "light" ? "facebook.100" : "facebook.800"}
+            // bgColor={colorMode === "light" ? "facebook.100" : "facebook.800"}
+            bgColor={
+              context.Current_UserID === props.data.Sender
+                ? colorMode === "light"
+                  ? "cyan.700"
+                  : "cyan.100"
+                : colorMode === "light"
+                ? "facebook.700"
+                : "facebook.100"
+            }
             padding="3"
             m="0 0 0 16px"
             borderRadius="lg"
           >
-            <Text>{props.data.text}</Text>
+            <Text color={colorMode === "light" ? "white" : "black"}>
+              {props.data.text}
+            </Text>
           </Container>
         )}
       </HStack>

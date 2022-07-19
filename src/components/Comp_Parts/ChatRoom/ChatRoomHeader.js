@@ -25,13 +25,15 @@ export default function ChatRoomHeader() {
       ? context.activeChatInit.ChatName
       : context.activePrivateChatOtherUserData.NickName;
 
-  const UserPicObtain =
-    context.activePrivateChatOtherUserData &&
-    context?.allUsersData?.find?.(
-      (data) => data.NickName === context.activePrivateChatOtherUserData
-    )?.ProfilePicture;
+  // const UserPicObtain =
+  //   context.activePrivateChatOtherUserData &&
+  //   context?.allUsersData?.find?.(
+  //     (data) => data.NickName === context.activePrivateChatOtherUserData
+  //   )?.ProfilePicture;
+  // console.log(UserPicObtain);
+  // console.log(context.activePrivateChatOtherUserData);
 
-  const UserPic = UserPicObtain ? UserPicObtain : Placeholder;
+  // const UserPic = UserPicObtain ? UserPicObtain : Placeholder;
 
   const closeCurrentChat = () => {
     context.setopenChat(false);
@@ -47,6 +49,7 @@ export default function ChatRoomHeader() {
       position="sticky"
       top="0"
       bgColor={colorMode === "light" ? "facebook.200" : "facebook.900"}
+      // bgColor={"brand.secondary"}
     >
       <HStack>
         {DEVICE === "Mobile" && (
@@ -56,7 +59,11 @@ export default function ChatRoomHeader() {
         )}
         <Image
           alt="User profile"
-          src={UserPic}
+          src={
+            context.activePrivateChatOtherUserData
+              ? context.activePrivateChatOtherUserData.ProfilePicture
+              : Placeholder
+          }
           boxSize={DEVICE === "Desktop" ? "10" : "12"}
           borderRadius="50%"
           userSelect="none"
