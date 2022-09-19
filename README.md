@@ -1,2 +1,2 @@
-Ctrix Chat App Version 0.0.1
+Ctrix Chat App Version 1.0.0
 React App
