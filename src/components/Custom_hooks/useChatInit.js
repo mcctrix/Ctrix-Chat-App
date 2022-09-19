@@ -11,7 +11,7 @@ function useChatInit() {
   const PMREF = collection(db, "Private_Chat_init");
 
   useEffect(() => {
-    // Retrieving Private Chatroom details related to current user
+    // Retrieving Private Chatroom details or chat initiase information related to current user
     // let ChatInitsFetched;
     onSnapshot(
       query(

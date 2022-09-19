@@ -4,8 +4,6 @@ import useDevice from "../../Custom_hooks/useDevice";
 import usePictures from "../../Custom_hooks/usePictures";
 
 import BackIcon from "../../UI/BackIcon";
-// import DotIcon from "../../UI/DotIcon";
-// import ChatOptionsDiv from "../../UI/ChatOptionsDiv";
 
 import { HStack, Heading, Image, useColorMode } from "@chakra-ui/react";
 

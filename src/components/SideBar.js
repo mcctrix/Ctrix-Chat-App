@@ -58,21 +58,29 @@ export default function SideBar() {
   return (
     <Container
       h="100vh"
-      w={DEVICE === "Mobile" ? "full" : "30vw"}
+      w={DEVICE === "Mobile" ? "full" : "25vw"}
+      // For Mobile making Sidebar disappear so only chat room can be seen on the screen
       display={context.openChat ? "none" : "flex"}
+      flexDirection="column"
       borderRight="1px solid black"
       m="0"
       p="0"
+      pos="relative"
       onClick={CloseOptionsInSideBarHeader}
-      // bgColor={"brand.secondary"}
     >
+      {/* SideBar Head */}
       <Container p={"0"} overflowY={"hidden"}>
         {context.newPersonAddBtn ? (
           <SideBarHeader id="new" title="Add People" />
         ) : (
           <SideBarHeader title={context.Current_UserData?.NickName} />
         )}
-        <HStack pos="sticky" top={DEVICE === "Desltop" ? "9vh" : "6vh"}>
+        {/* Chats and Contacts button stack */}
+        <HStack
+          pos="sticky"
+          top={DEVICE === "Desktop" ? "9vh" : "6vh"}
+          marginY="1"
+        >
           <Button
             onClick={() => {
               context.setNewPersonAddBtn(false);
@@ -118,7 +126,14 @@ export default function SideBar() {
       </Container>
       {context.newPersonAddBtn && makeGroupChatToggler && (
         <>
-          <Button onClick={makeGroupChat}>Make Group</Button>
+          <Button
+            pos="absolute"
+            bottom="0"
+            width="100%"
+            onClick={makeGroupChat}
+          >
+            Make Group
+          </Button>
           {nameGroupChat && (
             <GetNameForGroup
               togglevis={setnameGroupChat}

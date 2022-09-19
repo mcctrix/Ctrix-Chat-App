@@ -18,7 +18,7 @@ const FormContainer = ({ children, title, Icon }) => {
         border={"1px"}
         borderRadius={"md"}
         maxW={"lg"}
-        bgColor="Background"
+        bgColor="background"
         opacity="0.9"
       >
         {Icon && (
