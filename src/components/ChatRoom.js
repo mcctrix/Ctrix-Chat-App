@@ -48,6 +48,7 @@ export default function ChatRoom() {
       w={DEVICE === "Desktop" ? "85vw" : "full"}
       h="100vh"
       spacing={0}
+      backgroundColor="brand.chatBackground"
     >
       <ChatRoomHeader />
 

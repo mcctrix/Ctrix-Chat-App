@@ -65,7 +65,7 @@ export default function SideBarHeader(props) {
       top="0"
       zIndex="400"
       boxShadow="sm"
-      bgColor={colorMode === "light" ? "facebook.200" : "facebook.900"}
+      bgColor={colorMode === "light" ? "brand.chatHeader" : "brand.chatHeader"}
       // bgColor={"brand.secondary"}
       // transition="background-color 2000ms easer"
       // transitionDuration="2000ms"
@@ -115,7 +115,7 @@ export default function SideBarHeader(props) {
                 Logout
               </Button>
             </ListItem>
-            <ListItem>
+            {/* <ListItem>
               <Button
                 onClick={changeTheme}
                 w="full"
@@ -129,7 +129,7 @@ export default function SideBarHeader(props) {
                   <BsFillMoonFill size="40" />
                 )}
               </Button>
-            </ListItem>
+            </ListItem> */}
           </List>
         </Stack>
       </Stack>

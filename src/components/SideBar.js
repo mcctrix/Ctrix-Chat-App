@@ -67,6 +67,7 @@ export default function SideBar() {
       p="0"
       pos="relative"
       onClick={CloseOptionsInSideBarHeader}
+      backgroundColor="brand.sideBarBackground"
     >
       {/* SideBar Head */}
       <Container p={"0"} overflowY={"hidden"}>

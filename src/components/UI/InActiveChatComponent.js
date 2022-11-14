@@ -11,6 +11,7 @@ const InActiveChatComponent = () => {
       // paddingTop="30vh"
       justifyContent="center"
       centerContent
+      backgroundColor="brand.chatBackground"
     >
       <Heading size="2xl">Welcome to Ctrix Chats</Heading>
       <Text>Select one of the chats</Text>

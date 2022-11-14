@@ -103,7 +103,7 @@ export default function MsgSendUI(props) {
           <Input placeholder="Type your message.." ref={NewMsgRef} />
         </form>
       </Stack>
-      <Button onClick={() => SendMsg({ type: "text" })}>Send</Button>
+      <Button onClick={() => SendMsg({ type: "text" })} bgColor="brand.telegramBtn" color="white">Send</Button>
     </HStack>
   );
 }

@@ -21,7 +21,7 @@ export default function ChatComponent() {
   }
 
   return (
-    <HStack spacing="0">
+    <HStack spacing="0" bgColor="brand.secondary">
       <SideBar />
       {context.activeChatInit === undefined && DEVICE === "Desktop" && (
         <InActiveChatComponent />

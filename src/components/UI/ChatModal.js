@@ -94,7 +94,7 @@ export default function ChatModal(props) {
       bgColor={
         context?.activeChatInit?.ChatID === props.data.ChatID
           ? colorMode === "dark"
-            ? "hsl(230, 21%, 21%)"
+            ? "brand.sideBarActiveChatBg"
             : "blackAlpha.100"
           : "initial"
       }

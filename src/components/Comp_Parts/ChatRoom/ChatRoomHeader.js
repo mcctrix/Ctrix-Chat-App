@@ -46,7 +46,7 @@ export default function ChatRoomHeader() {
       boxShadow="md"
       position="sticky"
       top="0"
-      bgColor={colorMode === "light" ? "facebook.200" : "facebook.900"}
+      bgColor={colorMode === "light" ? "brand.chatHeader" : "brand.chatHeader"}
       // bgColor={"brand.secondary"}
     >
       <HStack>

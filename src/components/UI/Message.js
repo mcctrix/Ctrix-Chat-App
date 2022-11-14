@@ -55,21 +55,22 @@ const Message = (props) => {
         ) : (
           <Container
             key={props.data.id}
-            // bgColor={colorMode === "light" ? "facebook.100" : "facebook.800"}
             bgColor={
               context.Current_UserID === props.data.Sender
                 ? colorMode === "light"
                   ? "cyan.700"
-                  : "cyan.100"
+                  : "brand.currentUserMessageBg"
                 : colorMode === "light"
                 ? "facebook.700"
-                : "facebook.100"
+                : "brand.otherUserMessageBg"
             }
             padding="3"
             m="0 0 0 16px"
             borderRadius="lg"
           >
-            <Text color={colorMode === "light" ? "white" : "black"}>
+            <Text color={context.Current_UserID === props.data.Sender
+                ? "brand.currentUserMessageTextColor"
+                : "brand.otherUserMessageTextColor"}>
               {props.data.text}
             </Text>
           </Container>
