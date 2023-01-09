@@ -5,7 +5,7 @@ import { db } from "../firebase/firebase";
 import AppContext from "../GlobalStore/Context";
 
 import GiffIcon from "./icons/GiffIcon";
-import GiffsDiv from "../Comp_Parts/ChatRoom/MsgSendUI/GiffsDiv";
+import GiffsDiv from "./GiffsDiv";
 
 import { Button, HStack, Input, Container, Stack } from "@chakra-ui/react";
 import useDevice from "../Custom_hooks/useDevice";

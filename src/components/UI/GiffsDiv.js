@@ -6,12 +6,12 @@ import { SearchContextManager } from "@giphy/react-components";
 //
 //
 
-import AppContext from "../../../GlobalStore/Context";
+import AppContext from "../GlobalStore/Context";
 import { useContext } from "react";
 import { Grid, SearchBar, SearchContext } from "@giphy/react-components";
 
 import { Container } from "@chakra-ui/react";
-import useDevice from "../../../Custom_hooks/useDevice";
+import useDevice from "../Custom_hooks/useDevice";
 
 export default function GiffsDiv({ MsgSendHandler }) {
   return (

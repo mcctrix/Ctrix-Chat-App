@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import AppContext from "../GlobalStore/Context";
 import usePictures from "../Custom_hooks/usePictures";
-import Gif from "./GifComp";
 
 import {
   HStack,
@@ -13,6 +12,10 @@ import {
 } from "@chakra-ui/react";
 
 import useDevice from "../Custom_hooks/useDevice";
+
+import { useState, useEffect } from "react";
+import { GiphyFetch } from "@giphy/js-fetch-api";
+import { Gif } from "@giphy/react-components";
 
 const Message = (props) => {
   // Init
@@ -50,7 +53,7 @@ const Message = (props) => {
         )}
         {props.data.Message === "Gif" ? (
           <Container padding="3" userSelect="none">
-            <Gif GIF={props.data.Gif} />
+            <GifComp GIF={props.data.Gif} />
           </Container>
         ) : (
           <Container
@@ -68,15 +71,37 @@ const Message = (props) => {
             m="0 0 0 16px"
             borderRadius="lg"
           >
-            <Text color={context.Current_UserID === props.data.Sender
-                ? "brand.currentUserMessageTextColor"
-                : "brand.otherUserMessageTextColor"}>
+            <Text
+              color={
+                context.Current_UserID === props.data.Sender
+                  ? "brand.currentUserMessageTextColor"
+                  : "brand.otherUserMessageTextColor"
+              }
+            >
               {props.data.text}
             </Text>
           </Container>
         )}
       </HStack>
     </VStack>
+  );
+};
+
+const GifComp = ({ GIF }) => {
+  const DEVICE = useDevice();
+  const [gif, setGif] = useState(null);
+  useEffect(() => {
+    const giphyF = new GiphyFetch(process.env.REACT_APP_GIPHY_API_KEY);
+    const fetchFunction = async () => {
+      const { data } = await giphyF.gif(GIF);
+      setGif(data);
+    };
+    fetchFunction();
+  }, [GIF]);
+  return (
+    <Container p="0" width={DEVICE === "Mobile" ? 200 : 300}>
+      {gif && <Gif gif={gif} width={DEVICE === "Mobile" ? 200 : 300} />}
+    </Container>
   );
 };
 
