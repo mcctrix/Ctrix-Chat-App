@@ -7,8 +7,7 @@ import UserSettings from "../components/UI/UserSettings";
 import ChatRoom from "./ChatRoom";
 import SideBar from "./SideBar";
 
-import { HStack } from "@chakra-ui/react";
-import InActiveChatComponent from "./UI/InActiveChatComponent";
+import { Container, Heading, Text, HStack } from "@chakra-ui/react";
 import useDevice from "./Custom_hooks/useDevice";
 
 export default function ChatComponent() {
@@ -32,3 +31,22 @@ export default function ChatComponent() {
     </HStack>
   );
 }
+
+const InActiveChatComponent = () => {
+  return (
+    <Container
+      maxW="full"
+      w="85vw"
+      h="100vh"
+      m="0"
+      p="0"
+      // paddingTop="30vh"
+      justifyContent="center"
+      centerContent
+      backgroundColor="brand.chatBackground"
+    >
+      <Heading size="2xl">Welcome to Ctrix Chats</Heading>
+      <Text>Select one of the chats</Text>
+    </Container>
+  );
+};
