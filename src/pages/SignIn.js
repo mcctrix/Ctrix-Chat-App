@@ -5,7 +5,7 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import { auth } from "../components/firebase/firebase";
-import LoginInIcon from "../components/UI/LogInIcon";
+import LoginInIcon from "../components/UI/icons/LogInIcon";
 import { useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";

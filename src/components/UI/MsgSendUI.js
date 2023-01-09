@@ -4,7 +4,7 @@ import { db } from "../firebase/firebase";
 
 import AppContext from "../GlobalStore/Context";
 
-import GiffIcon from "./GiffIcon";
+import GiffIcon from "./icons/GiffIcon";
 import GiffsDiv from "../Comp_Parts/ChatRoom/MsgSendUI/GiffsDiv";
 
 import { Button, HStack, Input, Container, Stack } from "@chakra-ui/react";
@@ -103,7 +103,13 @@ export default function MsgSendUI(props) {
           <Input placeholder="Type your message.." ref={NewMsgRef} />
         </form>
       </Stack>
-      <Button onClick={() => SendMsg({ type: "text" })} bgColor="brand.telegramBtn" color="white">Send</Button>
+      <Button
+        onClick={() => SendMsg({ type: "text" })}
+        bgColor="brand.telegramBtn"
+        color="white"
+      >
+        Send
+      </Button>
     </HStack>
   );
 }

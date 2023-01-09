@@ -3,7 +3,7 @@ import AppContext from "../../GlobalStore/Context";
 import useDevice from "../../Custom_hooks/useDevice";
 import usePictures from "../../Custom_hooks/usePictures";
 
-import BackIcon from "../../UI/BackIcon";
+import BackIcon from "../../UI/icons/BackIcon";
 
 import { HStack, Heading, Image, useColorMode } from "@chakra-ui/react";
 

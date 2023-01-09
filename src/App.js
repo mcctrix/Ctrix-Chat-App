@@ -1,4 +1,5 @@
 import Signin from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 
 import Home from "./pages/Home";
 
@@ -6,7 +7,6 @@ import { ContextWrapper } from "./components/GlobalStore/Context";
 
 // Hooks
 import { Route, Routes, Navigate } from "react-router-dom";
-import SignUp from "./pages/SignUp";
 
 export default function App() {
   return (

@@ -20,29 +20,6 @@ export default function SideBar() {
   const [nameGroupChat, setnameGroupChat] = useState(false);
   const [makeGroupChatToggler, setMakeGroupBtnToggler] = useState(false);
 
-  // Setting first chat as Active Chat
-  // if (
-  //   !context.activeChatInit &&
-  //   context.chatInit.length > 0 &&
-  //   context.UsersData.length > 0
-  // ) {
-  //   context.setActiveChatInit(context.chatInit[0]);
-  //   if (context.chatInit[0].ChatType === "Group") {
-  //     context.setActivePrivateChatOtherUserData(context.chatInit[0].ChatName);
-  //   }
-  //   if (context.chatInit[0].ChatType === "DM") {
-  //     context.setActivePrivateChatOtherUserData(
-  //       context.Current_UserID === context.chatInit[0].User1.ID
-  //         ? context.UsersData?.find?.(
-  //             (val) => val.User_ID === context.chatInit[0].User2.ID
-  //           ).NickName
-  //         : context.UsersData?.find?.(
-  //             (val) => val.User_ID === context.chatInit[0].User1.ID
-  //           ).NickName
-  //     );
-  //   }
-  // }
-
   const CloseOptionsInSideBarHeader = (event) => {
     window.addEventListener("mouseup", () => {
       if (event.target !== "dropdownmenu") {

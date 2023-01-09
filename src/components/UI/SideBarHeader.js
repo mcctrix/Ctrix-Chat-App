@@ -14,16 +14,19 @@ import {
   Button,
   useColorMode,
 } from "@chakra-ui/react";
-import { BsFillMoonFill, BsFillSunFill } from "react-icons/bs";
+// import { BsFillMoonFill, BsFillSunFill } from "react-icons/bs";
 
 import useDevice from "../Custom_hooks/useDevice";
 
-import DotIcon from "./DotIcon";
+import DotIcon from "./icons/DotIcon";
 
 export default function SideBarHeader(props) {
   // init
   const [Placeholder] = usePictures();
-  const { colorMode, toggleColorMode } = useColorMode();
+  const {
+    colorMode,
+    // , toggleColorMode
+  } = useColorMode();
   const Navigate = useNavigate();
   const context = useContext(AppContext);
   const auth = getAuth();
@@ -53,10 +56,10 @@ export default function SideBarHeader(props) {
     context.setsideBarOptions((snap) => !snap);
     context.setDisplayUserSettings(true);
   };
-  const changeTheme = () => {
-    context.setsideBarOptions((snap) => !snap);
-    toggleColorMode();
-  };
+  // const changeTheme = () => {
+  //   context.setsideBarOptions((snap) => !snap);
+  //   toggleColorMode();
+  // };
   return (
     <HStack
       justifyContent="space-between"
