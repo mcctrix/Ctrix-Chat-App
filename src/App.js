@@ -5,7 +5,6 @@ import Home from "./pages/Home";
 
 import { ContextWrapper } from "./components/GlobalStore/Context";
 
-// Hooks
 import { Route, Routes, Navigate } from "react-router-dom";
 
 export default function App() {
